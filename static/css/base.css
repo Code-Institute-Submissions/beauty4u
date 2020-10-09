@@ -1,0 +1,57 @@
+/* 
+Base CSS File 
+
+Index
+1. General styling 
+2. Home page 
+
+
+*/
+
+/* 1. General Styling ------- */ 
+
+html {
+height: 100%;
+}
+
+body {
+font-family: Lato;
+}
+
+.text-black {
+    color: #000 !important;
+}
+
+/* 2. Home Page ------- */ 
+
+.contain-hero {
+background: url('/media/hero-img.jpg') no-repeat center center;
+background-size: cover;
+min-height: calc(80vh - 164px);
+}
+
+.shop-now-btn {
+background-color: #000;
+color: #fff;
+}
+
+
+@media (min-width: 1200px) {
+    .container {
+      min-width: 85%;
+    }
+  }
+@media(min-width: 992px) {
+
+.fixed-top-desktop-only {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 19999;
+}   
+
+.header-container {    
+padding-top: 164px;
+}
+}
