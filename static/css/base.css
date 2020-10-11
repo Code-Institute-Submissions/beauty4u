@@ -5,7 +5,7 @@ Index
 1. General styling 
 2. Nav Links
 3. Home page 
-
+4. Products 
 
 */
 
@@ -67,6 +67,38 @@ margin-top: 100px;
 .contain-hero-content {
 margin-top: 15vh;
 }
+
+
+/* 4. Products ------------- */
+
+.product-image {
+min-height: 200px;
+max-height: 200px;
+min-width: 200px;
+max-width: 200px;
+}
+.product-title {
+font-weight: bold;
+min-height: 80px;
+}
+
+.price-tag {
+color: #F89799;
+}
+
+.add-to-cart-button {
+height: 30px;
+width: 50%;
+margin: 0 auto;
+background-color: #F89799;
+color: #fff;
+line-height: 30px;
+}
+
+
+
+
+
 
 
 
