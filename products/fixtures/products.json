@@ -1,0 +1,143 @@
+[{
+  "pk": 1,
+  "model": "products.product",
+  "fields": {
+    "sku": "pp1",
+    "name": "Arizona Original Bootcut Jeans",
+    "description": "Bootcut jeans in our just-right original fit are comfortable and look great too.  5-pocket style sits below waist straight fit through seat and thigh bootcut leg 18\" leg opening cotton washable imported extended sizes and washes available online only",
+    "price": 53.99,
+    "category": 6,
+    "rating": 4.6,
+    "image_url": "http://s7d9.scene7.com/is/image/JCPenney/DP0709201205510679M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp",
+    "image": "DP0709201205510679M.jpg"
+  }
+},
+{
+  "pk": 2,
+  "model": "products.product",
+  "fields": {
+    "sku": "pp2",
+    "name": "Arizona Original Bootcut Jeans",
+    "description": "Bootcut jeans in our just-right original fit are comfortable and look great too.  5-pocket style sits below waist straight fit through seat and thigh bootcut leg 18\" leg opening cotton washable imported extended sizes and washes available online only",
+    "price": 53.99,
+    "category": 6,
+    "rating": 4.6,
+    "image_url": "http://s7d9.scene7.com/is/image/JCPenney/DP0709201205510679M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp",
+    "image": "DP0709201205510679M.jpg"
+  }
+},
+
+{
+  "pk": 3,
+  "model": "products.product",
+  "fields": {
+    "sku": "pp3",
+    "name": "Arizona Original Bootcut Jeans",
+    "description": "Bootcut jeans in our just-right original fit are comfortable and look great too.  5-pocket style sits below waist straight fit through seat and thigh bootcut leg 18\" leg opening cotton washable imported extended sizes and washes available online only",
+    "price": 53.99,
+    "category": 6,
+    "rating": 4.6,
+    "image_url": "http://s7d9.scene7.com/is/image/JCPenney/DP0709201205510679M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp",
+    "image": "DP0709201205510679M.jpg"
+  }
+},
+{
+  "pk": 4,
+  "model": "products.product",
+  "fields": {
+    "sku": "pp4",
+    "name": "Arizona Original Bootcut Jeans",
+    "description": "Bootcut jeans in our just-right original fit are comfortable and look great too.  5-pocket style sits below waist straight fit through seat and thigh bootcut leg 18\" leg opening cotton washable imported extended sizes and washes available online only",
+    "price": 53.99,
+    "category": 6,
+    "rating": 4.6,
+    "image_url": "http://s7d9.scene7.com/is/image/JCPenney/DP0709201205510679M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp",
+    "image": "DP0709201205510679M.jpg"
+  }
+},
+{
+  "pk": 5,
+  "model": "products.product",
+  "fields": {
+    "sku": "pp5",
+    "name": "Arizona Original Bootcut Jeans",
+    "description": "Bootcut jeans in our just-right original fit are comfortable and look great too.  5-pocket style sits below waist straight fit through seat and thigh bootcut leg 18\" leg opening cotton washable imported extended sizes and washes available online only",
+    "price": 53.99,
+    "category": 6,
+    "rating": 4.6,
+    "image_url": "http://s7d9.scene7.com/is/image/JCPenney/DP0709201205510679M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp",
+    "image": "DP0709201205510679M.jpg"
+  }
+},
+{
+  "pk": 6,
+  "model": "products.product",
+  "fields": {
+    "sku": "pp6",
+    "name": "Arizona Original Bootcut Jeans",
+    "description": "Bootcut jeans in our just-right original fit are comfortable and look great too.  5-pocket style sits below waist straight fit through seat and thigh bootcut leg 18\" leg opening cotton washable imported extended sizes and washes available online only",
+    "price": 53.99,
+    "category": 6,
+    "rating": 4.6,
+    "image_url": "http://s7d9.scene7.com/is/image/JCPenney/DP0709201205510679M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp",
+    "image": "DP0709201205510679M.jpg"
+  }
+},
+{
+  "pk": 7,
+  "model": "products.product",
+  "fields": {
+    "sku": "pp7",
+    "name": "Arizona Original Bootcut Jeans",
+    "description": "Bootcut jeans in our just-right original fit are comfortable and look great too.  5-pocket style sits below waist straight fit through seat and thigh bootcut leg 18\" leg opening cotton washable imported extended sizes and washes available online only",
+    "price": 53.99,
+    "category": 6,
+    "rating": 4.6,
+    "image_url": "http://s7d9.scene7.com/is/image/JCPenney/DP0709201205510679M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp",
+    "image": "DP0709201205510679M.jpg"
+  }
+},
+{
+  "pk": 8,
+  "model": "products.product",
+  "fields": {
+    "sku": "pp8",
+    "name": "Arizona Original Bootcut Jeans",
+    "description": "Bootcut jeans in our just-right original fit are comfortable and look great too.  5-pocket style sits below waist straight fit through seat and thigh bootcut leg 18\" leg opening cotton washable imported extended sizes and washes available online only",
+    "price": 53.99,
+    "category": 6,
+    "rating": 4.6,
+    "image_url": "http://s7d9.scene7.com/is/image/JCPenney/DP0709201205510679M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp",
+    "image": "DP0709201205510679M.jpg"
+  }
+},
+{
+  "pk": 9,
+  "model": "products.product",
+  "fields": {
+    "sku": "pp9",
+    "name": "Arizona Original Bootcut Jeans",
+    "description": "Bootcut jeans in our just-right original fit are comfortable and look great too.  5-pocket style sits below waist straight fit through seat and thigh bootcut leg 18\" leg opening cotton washable imported extended sizes and washes available online only",
+    "price": 53.99,
+    "category": 6,
+    "rating": 4.6,
+    "image_url": "http://s7d9.scene7.com/is/image/JCPenney/DP0709201205510679M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp",
+    "image": "DP0709201205510679M.jpg"
+  }
+},
+{
+  "pk": 10,
+  "model": "products.product",
+  "fields": {
+    "sku": "pp10",
+    "name": "Arizona Original Bootcut Jeans",
+    "description": "Bootcut jeans in our just-right original fit are comfortable and look great too.  5-pocket style sits below waist straight fit through seat and thigh bootcut leg 18\" leg opening cotton washable imported extended sizes and washes available online only",
+    "price": 53.99,
+    "category": 6,
+    "rating": 4.6,
+    "image_url": "http://s7d9.scene7.com/is/image/JCPenney/DP0709201205510679M.tif?hei=380&amp;wid=380&op_usm=.4,.8,0,0&resmode=sharp2&op_usm=1.5,.8,0,0&resmode=sharp",
+    "image": "DP0709201205510679M.jpg"
+  }
+},
+
+]

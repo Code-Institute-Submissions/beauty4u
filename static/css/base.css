@@ -3,7 +3,8 @@ Base CSS File
 
 Index
 1. General styling 
-2. Home page 
+2. Nav Links
+3. Home page 
 
 
 */
@@ -16,24 +17,57 @@ height: 100%;
 
 body {
 font-family: Lato;
+height: 100%;
 }
 
 .text-black {
     color: #000 !important;
+
 }
 
-/* 2. Home Page ------- */ 
+.text-white {
+color:#fff;
+}
+
+
+/* 2. Nav  ------- */ 
+
+.nav-link{ 
+    color: #000 !important;
+    font-weight: bold !important;
+}
+
+.booking-btn {
+background-color: #F89799;
+color: #fff !important;
+}
+
+
+.brand-color {
+color: #F89799 !important;
+}
+/* 3. Home Page ------- */ 
 
 .contain-hero {
-background: url('/media/hero-img.jpg') no-repeat center center;
+background: url('/media/hero-image.jpg') no-repeat center center;
 background-size: cover;
-min-height: calc(80vh - 164px);
+min-width: 100vw;
+height: 50vh;
 }
 
 .shop-now-btn {
-background-color: #000;
-color: #fff;
+background-color: #fff;
+color: #000;
 }
+
+.header-container {    
+margin-top: 100px;
+}
+
+.contain-hero-content {
+margin-top: 15vh;
+}
+
 
 
 @media (min-width: 1200px) {
@@ -54,4 +88,9 @@ z-index: 19999;
 .header-container {    
 padding-top: 164px;
 }
+
+.header-container {    
+    margin-top: 0;
+    }
+
 }
