@@ -96,7 +96,10 @@ line-height: 30px;
 }
 
 
+.message-container {
+margin-top: 164px !important;
 
+}
 
 
 
@@ -116,6 +119,8 @@ left: 0;
 right: 0;
 z-index: 19999;
 }   
+
+
 
 .header-container {    
 padding-top: 164px;

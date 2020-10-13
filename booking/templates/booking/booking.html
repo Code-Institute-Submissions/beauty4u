@@ -10,5 +10,24 @@
 {% endblock %}
 
 {% block content %}
-<p class="text-center">MAKE A BOOKING HERE</p>
+<!--If the user has upcoming bookings-->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+        <h3>Upcoming Bookings ({{ bookings|length}})</h3>
+        <hr/>
+        <!--Check if the user has any bookings against there user name-->
+        {% if bookings %}
+        {% for booking in bookings %}
+        {{ booking.customer_name }}
+        {{ booking.service }}
+        {{ booking.time }}
+        <hr/>
+        {% endfor %}
+        {% else %}
+        <p>You have no upcoming bookings</p>
+        {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -32,10 +32,10 @@ class Bookings(models.Model):
     class Meta:
         verbose_name_plural = "Bookings"
 
-    customer_name = models.CharField(max_length=254)
-    booking_made = models.DateTimeField(auto_now=True) 
-    service = models.CharField(max_length=254)
-    time = models.CharField(max_length=254)
+    username = models.CharField(max_length=254, null=True, blank=True)
+    customer_name = models.CharField(max_length=254, null=True, blank=True)
+    service = models.CharField(max_length=254, null=True, blank=True)
+    time = models.CharField(max_length=254, null=True, blank=True)
     
     
     def __str__(self):
