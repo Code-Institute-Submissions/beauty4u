@@ -30,4 +30,41 @@
         </div>
     </div>
 </div>
+
+<!--Booking Widget-->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+        <h3>Make A Booking</h3>
+        <hr/>
+      
+        </div>
+ </div>
+ <div class="row">
+<div class="col-4 border-right">
+    <div><h3>Categories</h3></div>
+    <ul class="list-unstyled">
+        {% for category in categories %}
+        <a href="?service_type={{ forloop.counter }}"><li class="p-3 booking-list-item">{{ category.name }}</li></a>
+        {% endfor %}
+    </ul>
+</div>
+<div class="col-4 border-right">
+    <div><h3>List of Services</h3></div>
+    <ul class="list-unstyled">
+        {% for service in services %}
+        <a href="?service={{ forloop.counter }}"><li class="p-3 booking-list-item">{{ service.name }}</li></a>
+        {% endfor %}
+    </ul>
+</div>
+<div class="col-4">Preferred Time</div>
+ </div>
+<!--Request Booking-->
+<div class="row">
+<div class="col-12 mt-5 text-center">
+<div class="ml-auto request-a-booking-btn">Request Booking</div>    
+</div>
+</div>
+
+</div>
 {% endblock %}

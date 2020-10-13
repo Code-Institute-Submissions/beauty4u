@@ -6,6 +6,7 @@ Index
 2. Nav Links
 3. Home page 
 4. Products 
+5. Booking
 
 */
 
@@ -13,6 +14,11 @@ Index
 
 html {
 height: 100%;
+}
+
+a, a:hover{
+  color: inherit;
+  text-decoration: none;
 }
 
 body {
@@ -29,6 +35,10 @@ height: 100%;
 color:#fff;
 }
 
+.border-right  {
+
+  border-right: 1px solid grey;
+}
 
 /* 2. Nav  ------- */ 
 
@@ -95,14 +105,23 @@ color: #fff;
 line-height: 30px;
 }
 
+/* 5. Booking ------- */
 
-.message-container {
-margin-top: 164px !important;
-
+.booking-list-item {
+  border: 1px solid grey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-align: center;
 }
 
-
-
+.request-a-booking-btn {
+height: 60px;
+width: 200px;
+background-color: #F89799;
+line-height: 60px;
+color: #fff;
+}
 
 
 @media (min-width: 1200px) {
