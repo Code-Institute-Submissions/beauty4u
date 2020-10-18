@@ -129,24 +129,60 @@ background-color: blue;
 min-width: 100vw;
 margin: 0;
 padding: 0;
-height: 80px;
+height: 8vh;
 }
 
 .request-a-booking-btn {
   position: absolute;
   top: 10px;
   right: 30px;
-height: 60px;
+height: 6vh;
 width: 200px;
 background-color: #F89799;
-line-height: 60px;
+line-height: 6vh;
 color: #fff;
 }
 
 .contain-booking-details {
 color: #fff !important;
 font-size: 2em;
-line-height: 80px;
+line-height: 6vh;
+}
+
+
+.heading-card {
+background-color: #F89799;
+color: #fff;
+}
+
+.category-card {
+margin-top: 20px;
+
+}
+
+.contain-services {
+border-radius: 5px;
+}
+
+.circle-select-service {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  border: 1px solid lightgrey;
+  vertical-align: middle;
+}
+
+.service-name, .service-price {
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.service-price {
+float: right;
+}
+
+.service-item-selected {
+background-color: #F89799;
 }
 
 

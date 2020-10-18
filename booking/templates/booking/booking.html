@@ -3,68 +3,73 @@
 
 {% block page_header %}
 <div class="container header-container">
-<div class="row">
-<div class="col"></div>
-</div>
+    <div class="row">
+        <div class="col"></div>
+    </div>
 </div>
 {% endblock %}
 
 {% block content %}
-<!--If the user has upcoming bookings-->
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-12">
-        <h3>Upcoming Bookings ({{ bookings|length}})</h3>
-        <hr/>
-        <!--Check if the user has any bookings against there user name-->
-        {% if bookings %}
-        {% for booking in bookings %}
-        {{ booking.customer_name }}
-        {{ booking.service }}
-        {{ booking.time }}
-        <hr/>
-        {% endfor %}
-        {% else %}
-        <p>You have no upcoming bookings</p>
-        {% endif %}
-        </div>
-    </div>
-</div>
-
 <!--Booking Widget-->
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
-        <h3>Make A Booking</h3>
-        <hr/>
-      
+            <h3>Make A Booking</h3>
+            <hr />
         </div>
- </div>
- <div class="row">
-<div class="col-4 border-right">
-    <div><h3>Categories</h3></div>
-    <ul class="list-unstyled">
-        {% for category in categories %}
-        <li class="p-3 booking-list-item">{{ category.name }}</li>
-        {% endfor %}
-    </ul>
-</div>
-<div class="col-4 border-right">
-    <div><h3>List of Services</h3></div>
-    <ul class="list-unstyled">
-        {% for service in services %}
-        <li class="p-3 booking-list-item">{{ service.name }}</li>
-        {% endfor %}
-    </ul>
-</div>
-<div class="col-4">Preferred Time</div>
- </div>
-<!--Request Booking Fixed Bottom-->
-<div class="row request-fixed-bar">
-<div class="col-12 text-center">
-<div class="ml-auto request-a-booking-btn">Request Booking</div>    
-</div>
-</div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-9">
+            {% for category in categories %}
+            <h4 class="mt-5 mb-3">{{ category }}</h4>
+            <div class="contain-services shadow">
+                           {% for service in services %}
+                            {% ifequal service.serviceCategory|stringformat:"s" category.name|stringformat:"s" %} 
+                            <!-- Output Service -->
+                            <div class="col-12 pt-3 pb-3"><div class="circle-select-service d-inline-block"></div><span class="service-name ml-3">{{ service.name }}</span>
+                            <span class="d-inline-block service-price">€{{ service.price }}</span>
+                            </div>
+                            <hr class="p-0 m-0"/>
+                            {% endifequal %}
+                           
+                            {% endfor %}    
+
+                </div>
+              {% endfor %}
+          
+        </div>
+
+
+
+        <div class="col-3 d-none d-lg-block"> 
+            <div class="card" style="width: 18rem;">
+                <div class="card-body heading-card pb-0">
+                  <h5 class="card-title text-center">Upcoming Bookings ({{ bookings|length}})</h5>
+                 
+                </div>
+                <div class="card-body pt-0 pb-0">
+                    <ul class="list-group list-group-flush ">
+                        {% if bookings %}
+                        {% for booking in bookings %}
+                        <li class="list-group-item"> {{ booking.service }}
+                            - {{ booking.time }}</li>
+                        {% endfor %}
+                        {% else %}
+                        <li class="list-group-item">You have no upcoming bookings</li>
+                        {% endif %}                       
+                      </ul>
+                </div>
+              </div> 
+        </div>
+
+    </div>
+
+    <!--Request Booking Fixed Bottom-->
+    <div class="row request-fixed-bar">
+        <div class="col-12 text-center">
+            <div class="ml-auto request-a-booking-btn">Request Booking</div>
+        </div>
+    </div>
 
 </div>
 {% endblock %}

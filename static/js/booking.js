@@ -1,4 +1,4 @@
-$(".booking-list-item").click(function(){
-$(this).toggleClass("booking-list-item-selected");
-});
+$(".circle-select-service").click(function() {
+$(this).toggleClass("service-item-selected");
 
+});
