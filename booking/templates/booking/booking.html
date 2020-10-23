@@ -26,7 +26,7 @@
                            {% for service in services %}
                             {% ifequal service.serviceCategory|stringformat:"s" category.name|stringformat:"s" %} 
                             <!-- Output Service -->
-                            <div class="col-12 pt-3 pb-3"><div class="circle-select-service d-inline-block"></div><span class="service-name ml-3">{{ service.name }}</span>
+                            <div class="col-12 pt-3 pb-3 select-service"><div class="circle-select-service d-inline-block"></div><span class="service-name ml-3">{{ service.name }}</span>
                             <span class="d-inline-block service-price">€{{ service.price }}</span>
                             </div>
                             <hr class="p-0 m-0"/>
@@ -65,8 +65,10 @@
     </div>
 
     <!--Request Booking Fixed Bottom-->
-    <div class="row request-fixed-bar">
+    <div class="row request-fixed-bar d-none">
         <div class="col-12 text-center">
+            <!--Insert selected services-->
+            <div class="mr-auto display-selected-services"></div>
             <div class="ml-auto request-a-booking-btn">Request Booking</div>
         </div>
     </div>

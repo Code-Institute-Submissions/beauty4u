@@ -183,6 +183,7 @@ float: right;
 
 .service-item-selected {
 background-color: #F89799;
+border: none ;
 }
 
 
