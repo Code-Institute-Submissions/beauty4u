@@ -121,6 +121,8 @@ line-height: 30px;
 background-color: lightgrey;
 }
 
+
+/* Mobile Fixed Bar */
 .request-fixed-bar {
 position: fixed;
 bottom: 0;
@@ -131,6 +133,7 @@ margin: 0;
 padding: 0;
 height: 8vh;
 }
+
 
 .request-a-booking-btn {
   position: absolute;
@@ -148,6 +151,19 @@ color: #fff !important;
 font-size: 2em;
 line-height: 6vh;
 }
+
+
+/* Fixed Popup Desktop */
+.fixed-popup-desktop {
+position: fixed;
+bottom: 0;
+right: 40px;
+min-height: 150px;
+width: 200px;
+color: #000;
+border-radius: 5px;
+}
+
 
 
 .heading-card {
