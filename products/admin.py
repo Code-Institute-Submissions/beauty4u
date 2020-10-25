@@ -31,6 +31,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class BrandAdmin(admin.ModelAdmin):
     list_display = (
         'brand',
+        'logo',
     )
 
 

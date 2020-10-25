@@ -13,16 +13,18 @@
 {% block content %}
 <div class="container mt-5">
 <!--Sory by Brand-->
-<div class="row">
-<div class="col-6">
+<div class="row pl-2 pl-2 ">
+<div class="col-12">
     <!--List of all brands-->
-    <h2>Brands</h2>
-    <ul class="list-group list-group-horizontal">
+    <h2 class="toggle-brand-dropdown">Brands <i class="fas fa-sort-down"></i></h2>
+    <div class="contain-brand-list d-none">
+    <ul class="list-group list-group-horizontal brand-list">
         <!--Some logic here to output brands-->
         {% for brands in brandList %}
-        <a href="{% url 'products' %}?brand={{ brands.id }}"><li class="list-group-item">{{ brands.brand }}</li></a>
+    <a href="{% url 'products' %}?brand={{ brands.id }}"><li class="list-group-item m-2">{% if brands.logo %}<img src="/media/{{ brands.logo }}" alt="brands.brand" class="brand-list-logo">{% else %}{{ brands.brand }}{% endif %}</li></a>
         {% endfor %}
       </ul>
+    </div>
 </div>
 <div class="col-6">
     <h2>All Products</h2>
@@ -39,6 +41,23 @@
         <a href="{% url 'products' %}?sort=rating">
         <li class="list-inline-item">By Rating</li></a>
       </ul>
+</div>
+</div>
+<!--Output sorting title-->
+<div class="row mt-4">
+<div class="col-12 text-center">
+ <h3>
+        {% if selectedBrand != 'None' %}
+        {% for name in selectedBrand %}
+        <h3><strong>{{ name.brand }} </strong>- <span class="light-gray"> {{ products|length }} products</span></h3>
+        {% endfor %}
+        {% endif %}
+        {% if query %}
+        <h5>Showing results for: {{ query }}</h5>
+        <h6 class="light-gray">{{ products|length }} items found</h6>
+        {% endif %}
+
+ </h3>   
 </div>
 </div>
 <div class="row">
@@ -63,4 +82,10 @@
 </div>
 </div>
 
+{% endblock %}
+
+
+<!--Load JQuery for navigation-->
+{% block postloadjs %}
+<script src="{% static 'js/product-nav.js' %}"></script>
 {% endblock %}

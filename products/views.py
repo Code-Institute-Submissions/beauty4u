@@ -12,26 +12,26 @@ def all_products(request):
     brand = None
     sort = None
     direction = None
-    sortkey = None
+    selectedBrand = None
+ 
    
 
     if request.GET:
-
         if 'sort' in request.GET:
-            sort = request.GET['sort']
+            sortkey = request.GET['sort']
+            sort = sortkey
             if sort == "price":
                 sortkey = 'price'
             if sort == "rating":
                 sortkey = 'rating'    
                 sortkey = f'-{sortkey}'
                 # By Default - sort by lowest to highest
-        if 'direction' in request.GET:
-            direction = request.GET['direction']
-            if direction == "dsc":
-                sortkey = f'-{sortkey}'
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == "dsc":
+                    sortkey = f'-{sortkey}'
 
-        products = products.order_by(sortkey)
-
+            products = products.order_by(sortkey)
 
 
         if 'brand' in request.GET:
@@ -40,6 +40,7 @@ def all_products(request):
                 messages.error(request, "Nothing Found!")
                 return redirect(reverse('products'))
             products = products.filter(brand_id__in=brand)
+            selectedBrand = brandList.filter(id=brand)
 
         if 'q' in request.GET:
             query = request.GET['q']
@@ -53,8 +54,10 @@ def all_products(request):
 
     context = {
         'products': products,
-        'search_term': query,
+        'query': query,
         'brandList': brandList,
+        'brand': brand, #Output brand selected to top of page
+        'selectedBrand': selectedBrand,
     }
 
     return render(request, 'products/products.html',context)

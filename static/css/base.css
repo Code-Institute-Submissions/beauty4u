@@ -35,6 +35,10 @@ height: 100%;
 color:#fff;
 }
 
+.light-gray {
+color: lightgray;
+}
+
 .border-right  {
 
   border-right: 1px solid grey;
@@ -107,6 +111,15 @@ margin: 0 auto;
 background-color: #F89799;
 color: #fff;
 line-height: 30px;
+}
+
+.brand-list {
+overflow-x: scroll;
+}
+
+.brand-list-logo {
+height: 100px;
+width: 150px;
 }
 
 /* 5. Booking ------- */

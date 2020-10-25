@@ -18,6 +18,8 @@ class Category(models.Model):
 
 class Brand(models.Model):
     brand = models.CharField(max_length=254) # Must provide a name 
+    logo_url = models.URLField(max_length=1024, null=True, blank=True)
+    logo = models.ImageField(null=True, blank=True)
     def __str__ (self):
         return self.brand
 
