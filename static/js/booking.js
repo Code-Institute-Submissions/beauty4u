@@ -1,8 +1,9 @@
 let tempArray = []; // Array to store all the service booking items selected
 let storeCost = 0;
+let displayArray = []
 let selected = ""; // Stores the clicked item value
 let check; // 1 or 0 depending if item has been selected 
-let displayArray = JSON.parse(sessionStorage.getItem("services"));
+displayArray = JSON.parse(sessionStorage.getItem("services"));
 let sessionCost =  parseFloat(JSON.parse(sessionStorage.getItem("storedCost")));
 
 // Check if there is a cost stored - if there is update the cost
@@ -60,20 +61,21 @@ for (i=0; i < tempArray.length; i++){
        check  = 0;
        tempArray.splice(i, 1);
        subtractCost(serviceCost);
+       updateServices(tempArray);
    } 
 }
 if (check != 0 ){
     tempArray.push(selected);
     addCost(serviceCost);
+    updateServices(tempArray);
 }
+
 
 // Store new tempArray and Cost in session storage
 sessionStorage.setItem("services", JSON.stringify(tempArray));
 sessionStorage.setItem("storedCost", JSON.stringify(storeCost));
 
-displayArray = sessionStorage.getItem("services");
-console.log(displayArray);
-updateServices(displayArray);
+
 
 
 //Each time they click an item  - check if any items selected and display fixed bottom bar accordingly 
@@ -92,9 +94,15 @@ if (tempArray.length > 0) {
 // A function to update the total cost of all bookings selected
 function updateServices(displayArray){
     // Update the display - Needs to be fixed
-    document.getElementById("contain-selected-services").innerHTML = "<div class='col-12'>" + displayArray + "</div>";
-
-
+    if (displayArray.length > 1 && displayArray[0] != "") {
+        document.getElementById("contain-selected-services").innerHTML = "";
+        for (i = 0; i < displayArray.length; i++) {
+        document.getElementById("contain-selected-services").innerHTML += "<div class='col-12'>" + displayArray[i] + " <hr/></div>";
+        }
+    }
+    else {
+        document.getElementById("contain-selected-services").innerHTML = "<div class='col-12'>" + displayArray + " <hr/></div>";
+    }
 }
 
 function subtractCost (serviceCost) {

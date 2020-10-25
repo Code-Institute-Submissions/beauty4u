@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_title %} Book An Appointment Today{% endblock %}
+
+
 {% block page_header %}
 <div class="container header-container">
     <div class="row">
@@ -68,13 +71,13 @@
     <!--Request Booking Fixed PopUp for Desktop-->
     <div class="fixed-popup-desktop d-sm-none d-md-none d-lg-none shadow">
     <div class="col-12 text-center pt-3">
-    BOOK
+    <strong>BOOK</strong>
     <hr />
     </div>
     <div id="contain-selected-services"></div>
     <div class="col-12 text-right">
-    <hr />
     <h6>Total: €<span class="total-cost">0</span></h6>
+    <div class="continue-cooking-btn">CONTINUE</div>
     </div>
     </div>
 

@@ -162,8 +162,24 @@ min-height: 150px;
 width: 200px;
 color: #000;
 border-radius: 5px;
+z-index: 19999999999999999 !important;
+background-color: #fff;
 }
 
+
+.continue-cooking-btn {
+  height: 40px;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 40px;
+  background-color: #F89799;
+  color: #000;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
 
 
 .heading-card {
