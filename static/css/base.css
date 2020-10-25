@@ -56,6 +56,10 @@ color: #fff !important;
 .brand-color {
 color: #F89799 !important;
 }
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
 /* 3. Home Page ------- */ 
 
 .contain-hero {

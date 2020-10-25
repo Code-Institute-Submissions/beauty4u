@@ -8,6 +8,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'sku',
         'name',
+        'brand',
         'category',
         'size',
         'price',
@@ -28,7 +29,6 @@ class CategoryAdmin(admin.ModelAdmin):
     )
 
 class BrandAdmin(admin.ModelAdmin):
-
     list_display = (
         'brand',
     )

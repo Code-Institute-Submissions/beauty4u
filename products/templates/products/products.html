@@ -12,6 +12,34 @@
 
 {% block content %}
 <div class="container mt-5">
+<!--Sory by Brand-->
+<div class="row">
+<div class="col-6">
+    <!--List of all brands-->
+    <h2>Brands</h2>
+    <ul class="list-group list-group-horizontal">
+        <!--Some logic here to output brands-->
+        {% for brands in brandList %}
+        <a href="{% url 'products' %}?brand={{ brands.id }}"><li class="list-group-item">{{ brands.brand }}</li></a>
+        {% endfor %}
+      </ul>
+</div>
+<div class="col-6">
+    <h2>Sort</h2>
+    <ul class="list-group list-group-horizontal">
+        <li class="list-inline-item dropdown">
+            <!--If by price is cliked, sort by lowest price first (most likely what the user will want if sorting by price)-->
+        <a class="text-black nav-link" href="#" id="sort-price" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        By Price</a>
+        <div class="dropdown-menu border-0" aria-labelledby="sort-price">
+        <!--Use full path to allow for price sorting within brands-->
+        <a href="{{ request.get_full_path }}&sort=price&direction=asc" class="dropdown-item">Low - High</a>
+        <a href="{{ request.get_full_path }}&sort=price&direction=dsc" class="dropdown-item">High - Low</a>
+        </div>
+        </li>
+      </ul>
+</div>
+</div>
 <div class="row">
     {% for items in products %}
     <div class="col-6 col-lg-3 mt-5 pt-4">
@@ -25,6 +53,7 @@
          <a href="{% url 'product_detail' items.id %}">
        <div class="col-12 text-center mt-2 product-title">{{ items.name }}</div>
        </a>
+       <div class="col-12 text-center mt-2"><strong>Brand: <a href="{%url 'products' %}?brand={{ items.brand_id }}">{{ items.brand }}</a></strong></div>
        <div class="col-12 text-center mt-2"><i class="fas fa-tag price-tag"></i> {{ items.price }}</div>
        <div class="col-12 text-center mt-2"><div class="add-to-cart-button">Add To Cart</div></div>
     </div>
