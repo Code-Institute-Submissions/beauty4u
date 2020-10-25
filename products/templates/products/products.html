@@ -25,18 +25,19 @@
       </ul>
 </div>
 <div class="col-6">
-    <h2>Sort</h2>
+    <h2>All Products</h2>
     <ul class="list-group list-group-horizontal">
         <li class="list-inline-item dropdown">
             <!--If by price is cliked, sort by lowest price first (most likely what the user will want if sorting by price)-->
         <a class="text-black nav-link" href="#" id="sort-price" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         By Price</a>
         <div class="dropdown-menu border-0" aria-labelledby="sort-price">
-        <!--Use full path to allow for price sorting within brands-->
-        <a href="{{ request.get_full_path }}&sort=price&direction=asc" class="dropdown-item">Low - High</a>
-        <a href="{{ request.get_full_path }}&sort=price&direction=dsc" class="dropdown-item">High - Low</a>
+        <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">Low - High</a>
+        <a href="{% url 'products' %}?sort=price&direction=dsc" class="dropdown-item">High - Low</a>
         </div>
         </li>
+        <a href="{% url 'products' %}?sort=rating">
+        <li class="list-inline-item">By Rating</li></a>
       </ul>
 </div>
 </div>

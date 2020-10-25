@@ -12,6 +12,8 @@ def all_products(request):
     brand = None
     sort = None
     direction = None
+    sortkey = None
+   
 
     if request.GET:
 
@@ -19,12 +21,18 @@ def all_products(request):
             sort = request.GET['sort']
             if sort == "price":
                 sortkey = 'price'
+            if sort == "rating":
+                sortkey = 'rating'    
+                sortkey = f'-{sortkey}'
                 # By Default - sort by lowest to highest
-            if 'direction' in request.GET:
-                direction = request.GET['direction']
-                if direction == "dsc":
-                    sortkey = f'-{sortkey}'
-            products = products.order_by(sortkey)
+        if 'direction' in request.GET:
+            direction = request.GET['direction']
+            if direction == "dsc":
+                sortkey = f'-{sortkey}'
+
+        products = products.order_by(sortkey)
+
+
 
         if 'brand' in request.GET:
             brand = request.GET['brand']
