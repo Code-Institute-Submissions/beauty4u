@@ -6,7 +6,10 @@ Index
 2. Nav Links
 3. Home page 
 4. Products 
-5. Booking
+5. Cart
+6.
+7.
+8. Booking
 
 */
 
@@ -42,6 +45,11 @@ color: lightgray;
 .border-right  {
 
   border-right: 1px solid grey;
+}
+
+.free-shipping-banner {
+background-color: red;
+color: #fff;
 }
 
 /* 2. Nav  ------- */ 
@@ -122,7 +130,19 @@ height: 100px;
 width: 150px;
 }
 
-/* 5. Booking ------- */
+
+/* 5. Cart ------------- */
+.continue-shopping {
+height: 40px;
+width: 200px;
+background-color: #F89799;
+color: #fff;
+text-align: center;
+line-height: 40px;
+}
+
+
+/* 8. Booking ------- */
 
 .booking-list-item {
   

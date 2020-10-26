@@ -11,4 +11,28 @@
 
 
 {% block content %}
+<div class="container">
+    <!--Page Heading-->
+    <div class="row">
+        <div class="col"> 
+            <hr/>
+            <h2>Your Cart</h2>
+            <hr/>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col">
+    <!--Output cart or message-->
+    {% if cart_items %}
+
+    {% else %}
+    <p>Looks like your cart is empty</p>
+    <a href="{% url 'products' %}">
+    <div class="continue-shopping">Continue Shopping</div>
+    {% endif %}
+
+
+    </div>    
+    </div>
+</div>
 {% endblock %}
