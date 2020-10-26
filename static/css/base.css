@@ -142,6 +142,22 @@ line-height: 40px;
 }
 
 
+.cart_button {
+  height: 40px;
+  width: 200px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+}
+
+.cart-image {
+  min-height: 50px;
+  max-height: 100px;
+  min-width: 50px;
+  max-width: 100px;
+  }
+
 /* 8. Booking ------- */
 
 .booking-list-item {

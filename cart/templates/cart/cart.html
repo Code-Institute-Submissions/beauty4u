@@ -3,9 +3,9 @@
 
 {% block page_header %}
 <div class="container header-container">
-<div class="row">
-<div class="col"></div>
-</div>
+    <div class="row">
+        <div class="col"></div>
+    </div>
 </div>
 {% endblock %}
 
@@ -14,25 +14,91 @@
 <div class="container">
     <!--Page Heading-->
     <div class="row">
-        <div class="col"> 
-            <hr/>
+        <div class="col">
+            <hr />
             <h2>Your Cart</h2>
-            <hr/>
+            <hr />
         </div>
     </div>
     <div class="row">
-    <div class="col">
-    <!--Output cart or message-->
-    {% if cart_items %}
+        <div class="col">
+            <!--Output cart or message-->
+            {% if cart_items %}
+            <div class="table-responsive rounded">
+                <table class="table table-sm table-borderless">
+                    <thread>
+                        <!--Table Headings-->
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col"></th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Subtotal</th>
+                        </tr>
+                    </thread>
 
-    {% else %}
-    <p>Looks like your cart is empty</p>
-    <a href="{% url 'products' %}">
-    <div class="continue-shopping">Continue Shopping</div>
-    {% endif %}
+                {% for item in cart_items %}       
+                <!--Output each item in cart into a table row-->
+                    <tr>
+                    <td class="p-3 w-25">
+                    <img class="img-fliud rounded cart-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                    </td>
+                    <td class="py-3">
+                     <p>{{ item.product.name }}</p>   
+                    </td>
+                    <td class="py-3">
+                        <p>€{{ item.product.price }}</p>   
+                       </td>
+                       <td class="py-3">
+                        <p>{{ item.quantity }}</p>   
+                       </td>
+                       <td class="py-3">
+                        <p>€{{ item.product.price }}</p>   
+                       </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                <td colspan="5" class="text-right">
+                <h3><strong>Subtotal: </strong>€{{ total }}</h3>
+                {% if free_shipping_delta > 0 %}
+                <h3><strong>Shipping: </strong> €{{ shipping }}</h3>
+                <p class="text-upper">Spend another € {{free_shipping_delta }} to qualify for free shipping</p>
+                {% else %}
+                <h3><strong>Shipping: </strong> FREE</h3>
+                {% endif %}
+                <h3><strong>Total: €{{ grand_total }}</strong></h3>
+                </td>
+                 </tr>
+                    <tr>
+                    <td colspan="5" class="py-1 text-right">
+                    <a href="#">
+                    <div class="cart_button text-upper ml-auto">
+                        Continue Shopping
+                    </div></a>
+                    <a href="#">
+                    <div class="cart_button text-upper ml-auto mt-2">
+                       Secure Checkout
+                    </div></a>
+                    </td>
+         
+                </tr>
+                </table>
+
+              
 
 
-    </div>    
+
+            </div>
+
+
+            {% else %}
+            <p>Looks like your cart is empty</p>
+            <a href="{% url 'products' %}">
+                <div class="continue-shopping">Continue Shopping</div>
+                {% endif %}
+
+
+        </div>
     </div>
 </div>
 {% endblock %}
