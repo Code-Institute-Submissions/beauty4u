@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('home.urls')), #include all home urls
     path('products/', include('products.urls')), #include products
     path('booking/', include('booking.urls')),
+    path('cart/', include('cart.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
