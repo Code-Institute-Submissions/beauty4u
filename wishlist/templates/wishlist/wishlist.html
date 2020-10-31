@@ -11,7 +11,16 @@
 
 
 {% block content %}
-<div class="contain-wishlist mt-5">
-<h2>Your wishlist here</h2>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <hr />
+            <h2>Your Wishlist</h2>
+            <hr />
+           {% for item in wishlist_items %} 
+           {{ item }}
+           {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}

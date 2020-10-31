@@ -53,6 +53,12 @@ background-color: red;
 color: #fff;
 }
 
+
+button, input[type="submit"] {
+background: none !important;
+border: none !important;
+}
+
 /* 2. Nav  ------- */ 
 
 .nav-link{ 
