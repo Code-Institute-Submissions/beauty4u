@@ -28,6 +28,8 @@ def adjust_cart(request, item_id):
     # quantity = int(request.POST.get('quantity'))
     cart = request.session.get('cart', {})
 
+    #Just deletes item from cart for now - Need to add functionality to adjust quantity 
+
     del cart[item_id]
 
     request.session['cart'] = cart
