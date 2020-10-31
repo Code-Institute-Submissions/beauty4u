@@ -55,6 +55,13 @@
                        <td class="py-3">
                         <p>€{{ item.product.price }}</p>   
                        </td>
+                       <td class="py-3">
+                        <p>
+                        <form action="{% url 'adjust_cart' item.product.id %}" method="POST" class="form">
+                            {% csrf_token %}
+                        <button type="submit"><i class="fas fa-times"></i> </button>
+                        </form> 
+                       </td>
                     </tr>
                 {% endfor %}
                 <tr>
@@ -83,11 +90,6 @@
          
                 </tr>
                 </table>
-
-              
-
-
-
             </div>
 
 
