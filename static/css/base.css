@@ -43,6 +43,14 @@ color:#fff;
 color: lightgray;
 }
 
+.bg-black {
+background-color: #000;
+}
+
+.bg-highlight {
+background-color: #EEF200 !important;
+}
+
 .border-right  {
 
   border-right: 1px solid grey;
@@ -51,6 +59,7 @@ color: lightgray;
 .free-shipping-banner {
 background-color: red;
 color: #fff;
+height: 40px;
 }
 
 
@@ -81,16 +90,66 @@ color: #F89799 !important;
 }
 
 .contain-mobile-icon-menu {
-font-size: 14px !important;
+font-size: 18px !important;
 }
 
+
+.navbar-toggler-icon {
+background: url('/media/toggler.svg') !important;
+height: 20px;
+width: 20px;
+color: #000 !important;
+}
 
 @media (max-width: 370px) {
 
   .contain-mobile-icon-menu {
-    font-size: 12px !important;
+    font-size: 18px !important;
     }
 }
+
+
+/* Mobile menu */
+
+.container-mobile-menu {
+height: calc(100vh - 80px);
+width: 100vw;
+background-color: #fff;
+overflow-x: hidden;
+overflow-y: hidden;
+display: none;
+
+}
+
+.subtitle {
+font-size: 10px;
+}
+
+.mobile-menu-items-list li{
+margin-left: 10px;
+}
+
+.inner-menu {
+display: none;
+}
+
+.red-dot {
+height: 8px;
+width: 8px;
+border-radius: 50%;
+background-color: red;
+display: inline-block;
+margin: 0;
+padding: 0;
+}
+
+.wishlist-logo 
+{
+  font-size: 14px;
+}
+
+
+
 
 
 /* 3. Home Page ------- */ 
@@ -120,10 +179,23 @@ margin-top: 15vh;
 
 .product-image {
 min-height: 150px;
-max-height: 150px;
+max-height:150px;
 min-width: 150px;
 max-width: 150px;
 }
+
+@media (min-width: 992px) {
+  .product-image {
+    min-height: 150px;
+    max-height: 150px;
+    min-width: 150px;
+    max-width: 150px;
+    }
+}
+
+
+
+
 .product-title {
 font-weight: bold;
 min-height: 80px;
@@ -137,7 +209,7 @@ color: #F89799;
 height: 30px;
 width: 50%;
 margin: 0 auto;
-background-color: #F89799;
+background-color: #F89799 !important;
 color: #fff;
 line-height: 30px;
 }
@@ -178,6 +250,51 @@ line-height: 40px;
   min-width: 50px;
   max-width: 100px;
   }
+
+
+
+/* Mobile Cart Popout */
+
+.container-mobile-cart {
+  height: calc(100vh - 80px);
+  min-width: 100vw !important;;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  display: none;
+  font-size: 12px;
+  
+  }
+
+
+  .contain-cart-heading {
+  min-height: 5%;
+  max-height: 5%;
+  }
+
+  .contain-mobile-cart-items {
+    min-height: 60%;
+    max-height: 60%;
+
+  }
+
+  .contain-mobile-cart-summary {
+    min-height: 35%;
+    max-height: 35%;
+
+  }
+
+.checkout-popup-cart {
+width: 80%;
+height: 40px;
+background-color: #000 !important;
+color: #fff;
+line-height: 40px;
+text-align: center;
+margin: 0 auto;
+}
+
+
 
 /* 8. Booking ------- */
 

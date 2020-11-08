@@ -74,10 +74,9 @@
        <div class="col-12 text-center mt-2 product-title">{{ items.name }}</div>
        </a>
        <div class="row">
-       <div class="col-6 mt-2 "><i class="fas fa-tag price-tag pl-3"></i> {{ items.price }}
-        <!--Logic to output wishlist icon based on if item is in wishlist-->
-     
-        </div>
+       <div class="col-6 mt-2 lightgrey">
+        {{ items.price }}
+         </div>
         <div class="col-6 mt-2 text-right">
             <!--Logic to output wishlist icon based on if item is in wishlist-->
             <form action="{% url 'add_to_wishlist' items.id %}" method="POST">

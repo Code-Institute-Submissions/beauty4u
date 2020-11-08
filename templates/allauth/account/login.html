@@ -16,6 +16,7 @@
 {% block content %}
 
 <div class="contain-login-form mt-5 pt-4">
+{% include 'includes/branding.html' %}
 <h1>{% trans "Sign In" %}</h1>
 
 {% get_providers as socialaccount_providers %}

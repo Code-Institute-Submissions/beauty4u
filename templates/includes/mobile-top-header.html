@@ -1,59 +1,149 @@
 <div class="contain-mobile-icon-menu">
-<li class="list-inline-item">
-    <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="text-center">
-            <div><i class="fas fa-search"></i></div>
-            <p class="my-0">Search</p>
-        </div>
-    </a>
-    <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
-        <form class="form" method="GET" action="{% url 'products' %}">
-            <div class="input-group w-100">
-                <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
-                <div class="input-group-append">
-                    <button class="form-control form-control btn btn-black border border-black rounded-0" type="submit">
-                        <span class="icon">
-                            <i class="fas fa-search"></i>
-                        </span>
-                    </button>
-                </div>
+    <li class="list-inline-item">
+        <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <div class="text-center">
+                <div><i class="fas fa-search"></i></div>
             </div>
-        </form>
-    </div>
-</li>
-<li class="list-inline-item dropdown">
-    <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="text-center">
-            <div><i class="fas fa-user"></i></div>
-            <p class="my-0">My Account</p>
+        </a>
+        <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
+            <form class="form" method="GET" action="{% url 'products' %}">
+                <div class="input-group w-100">
+                    <input class="form-control border border-black rounded-0" type="text" name="q"
+                        placeholder="Search our site">
+                    <div class="input-group-append">
+                        <button class="form-control form-control btn btn-black border border-black rounded-0"
+                            type="submit">
+                            <span class="icon">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </a>
-    <div class="dropdown-menu border-0" aria-labelledby="user-options">
-        {% if request.user.is_authenticated %}
-            {% if request.user.is_superuser %}
-                <a href="{% url 'account_logout' %}" class="dropdown-item">Product Management</a>
-            {% endif %}
-            <a href="" class="dropdown-item">My Profile</a>
-            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-        {% else %}
-            <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-            <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-        {% endif %}
-    </div>
-</li>
-<li class="list-inline-item">
-    <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none" href="{% url 'view_cart' %}">
-        <div class="text-center">
-            <div><i class="fas fa-shopping-bag"></i></div>
-            <p class="my-0">
-                 <!--Show sub total (not including shipping)-->
-                {% if total %}
-                    €{{ total|floatformat:2 }}
+    </li>
+    <li class="list-inline-item">
+        <a class="text-black nav-link d-block d-lg-none" href="{% url 'view_wishlist' %}">
+            <div class="text-center">
+                {% if wishlist_items %}
+                <i class="far fa-heart"></i>
                 {% else %}
-                    €0.00
+                <i class="far fa-heart"></i>
                 {% endif %}
-            </p>
+            </div>
+        </a>
+    </li>
+    <li class="list-inline-item">
+        <!--For the mobile cart - when clicked display the popout cart-->
+        <div
+            class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none toggle-mobile-cart">
+            <div class="text-center">
+                <div><i class="fas fa-shopping-bag"></i></div>
+            </div>
         </div>
-    </a>
-</li>
+    </li>
+</div>
+
+<!--Mobile Cart Popout-->
+<div class="container-mobile-cart">
+   <div class="col-12 bg-black text-white contain-cart-heading mb-4">
+    <h2 class="text-center mt-5 mb-5">
+        Cart
+    </h2>
+    </div>
+    {% if cart_items %}
+    <div class="contain-mobile-cart-items pl-2 pr-2 ">
+     {% for item in cart_items %}  
+        <div class="row mt-2 mb-2">
+        <div class="col-4">
+            <img class="img-fliud rounded cart-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+        </div>
+        <div class="col-8 my-auto">
+            <p><strong>{{ item.product.name }}</strong></p>
+            <div class="row">
+                <div class="col-6">
+            <p class="light-grey">€{{ item.product.price }}</p>
+            </div>
+            <div class="col-6">
+             Qty: {{ item.quantity }}   
+            </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>  
+    <div class="contain-mobile-cart-summary">
+        <div class="row p-2">
+        <div class="col-6">
+        <p><strong>Total (Exlc. delivery)</strong></p>
+        </div>
+        <div class="col-6 text-right light-grey">
+         €{{ total }}
+        </div>
+        </div>
+        <div class="col-12 bg-highlight text-black text-center m-0 p-0 w-100">
+            {% if free_shipping_delta > 0 %}
+            <p>Spend another € {{free_shipping_delta }} to qualify for free shipping</p>
+            {% else %}
+            <p class="pt-2 pb-2">YOU QUALIFY FOR FREE SHIPPING</hp>
+            {% endif %}
+        </div>
+        <div class="col-12 text-center">
+            <a href="#">
+            <div class="checkout-popup-cart">Checkout</div>
+        </a>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+        Looks like your cart is empty
+    </div>
+    {% endif %}
+</div>
+
+
+<!--Mobile Popout Menu-->
+<div class="container-mobile-menu">
+    <div class="col-12 text-center mt-3">
+        <h2><strong>BEAUTY4U</strong></h2>
+        <p class="subtitle"><i>Beauty By Design</i></p>
+    </div>
+    <ul class="mobile-menu-items-list list-unstyled mt-5">
+        <a href="{% url 'home' %}">
+            <li>
+                Home
+            </li>
+        </a>
+        <hr />
+        <li>
+            <p class="mobile-menu-item"> <i class="pr-2 fas fa-plus"></i>Products</p>
+            <div class="inner-menu">
+                <ul class="list-unstyled ml-5">
+                    <li>All Products</li>
+                    <hr />
+                    <li>Top sellers</li>
+                    <hr />
+                    <li>Special Offers</li>
+                    <hr />
+                    <li>Shop by Brands</li>
+                    <hr />
+                    <li>Shop by Product Type</li>
+                    <hr />
+                </ul>
+
+            </div>
+        </li>
+        <hr />
+        <a href="{% url 'booking' %}">
+            <li>Make a booking</li>
+        </a>
+        <hr />
+        <li>About Us</li>
+        <hr />
+        <li>Gallery</li>
+        <hr />
+        <li>My Account</li>
+        <hr />
+    </ul>
 </div>

@@ -23,6 +23,23 @@ def add_to_cart(request, item_id):
     return redirect(redirect_url)    
 
 
+def add_wishlist_item_to_cart(request, item_id): 
+
+    quantity = 1
+    
+    cart = request.session.get('cart', {})
+
+    if item_id in list(cart.keys()):
+        cart[item_id] += quantity
+
+    else:
+        cart[item_id] = quantity
+
+    request.session['cart'] = cart
+
+    return redirect(reverse('view_cart'))    
+
+
 def adjust_cart(request, item_id):
     """ Adjust items in the cart """
     # quantity = int(request.POST.get('quantity'))

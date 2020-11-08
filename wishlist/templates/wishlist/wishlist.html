@@ -17,10 +17,26 @@
             <hr />
             <h2>Your Wishlist</h2>
             <hr />
-           {% for item in wishlist_items %} 
-           {{ item }}
-           {% endfor %}
         </div>
     </div>
 </div>
+            <div class="row">
+            {% for item in products %}
+            <div class="col-6 col-md-4 text-center mt-2">
+            <img src="/media/{{ item.product.image }}" class="product-image">
+            <h6 class="mt-3">{{ item.product.name }}</h6>
+            <p><i class="fas fa-tag price-tag pr-3"></i>{{ item.product.price }}</p>
+            <p>
+                    <form action="{% url 'add_wishlist_item_to_cart' item.product.id %}" method="POST">
+                    {% csrf_token %}
+                  <button type="submit" class="add-to-cart-button">Add To Cart</button>
+                </form>
+            </p>
+            
+            </div>
+            {% endfor %}
+        </div>
+       
+   
+
 {% endblock %}

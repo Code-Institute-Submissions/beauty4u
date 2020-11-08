@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <clipPath id="clip-custom_1">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="custom_1" data-name="custom – 1" clip-path="url(#clip-custom_1)">
+    <rect width="50" height="50" fill="#fff"/>
+    <path id="heart-regular" d="M33.126,34.328c-4.177-3.533-10.63-3-14.627,1.091-4-4.093-10.45-4.631-14.627-1.091A11.045,11.045,0,0,0,3.107,50.41L15.783,63.4a3.78,3.78,0,0,0,5.434.007L33.892,50.417A11.054,11.054,0,0,0,33.126,34.328ZM31.421,47.96,18.746,60.952a.3.3,0,0,1-.491,0L5.579,47.96A7.529,7.529,0,0,1,6.106,37a7.3,7.3,0,0,1,9.864.763l2.529,2.6,2.529-2.6A7.29,7.29,0,0,1,30.893,37,7.561,7.561,0,0,1,31.421,47.96Z" transform="translate(6 -23.623)"/>
+    <circle id="Ellipse_1" data-name="Ellipse 1" cx="8" cy="8" r="8" transform="translate(25 25)" fill="red"/>
+  </g>
+</svg>
