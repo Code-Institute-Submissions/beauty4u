@@ -63,11 +63,14 @@ def all_products(request):
     return render(request, 'products/products.html',context)
 
 def product_detail (request, product_id):
-    """ A view that returns a single product template """
+    """ A view that returns a single product template - Also renders related products from that brand """
+    products = Product.objects.all()
     product = get_object_or_404(Product, pk=product_id)
+    related_products = products.filter(brand=product.brand)
 
     context = {
         'product': product,
+        'related_products': related_products
 
     }
 

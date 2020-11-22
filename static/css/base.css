@@ -11,6 +11,7 @@ Index
 7.
 8. Booking
 9. Login
+10. Toasts 
 
 */
 
@@ -57,7 +58,7 @@ background-color: #EEF200 !important;
 }
 
 .free-shipping-banner {
-background-color: red;
+background-color: #000;
 color: #fff;
 height: 40px;
 }
@@ -76,13 +77,13 @@ border: none !important;
 }
 
 .booking-btn {
-background-color: #F89799;
+background-color: #000;
 color: #fff !important;
 }
 
 
 .brand-color {
-color: #F89799 !important;
+color: #000 !important;
 }
 
 .dropdown:hover>.dropdown-menu {
@@ -150,15 +151,13 @@ padding: 0;
 
 
 
-
-
 /* 3. Home Page ------- */ 
 
 .contain-hero {
 background: url('/media/hero-image.jpg') no-repeat center center;
 background-size: cover;
 min-width: 100vw;
-height: 50vh;
+height: 75vh;
 }
 
 .shop-now-btn {
@@ -184,6 +183,26 @@ min-width: 150px;
 max-width: 150px;
 }
 
+.product-image-lg {
+  min-height: 300px;
+max-height: 300px;
+min-width: 300px;
+max-width: 300px;
+}
+
+
+.single_add_to_cart_button {
+  height: 40px;
+  width: 200px;
+  background-color: #000000 !important;
+  color: #fff;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+
 @media (min-width: 992px) {
   .product-image {
     min-height: 150px;
@@ -202,14 +221,14 @@ min-height: 80px;
 }
 
 .price-tag {
-color: #F89799;
+color: #000;
 }
 
 .add-to-cart-button {
 height: 30px;
 width: 50%;
 margin: 0 auto;
-background-color: #F89799 !important;
+background-color: #000 !important;
 color: #fff;
 line-height: 30px;
 }
@@ -228,7 +247,7 @@ width: 150px;
 .continue-shopping {
 height: 40px;
 width: 200px;
-background-color: #F89799;
+background-color: #000;
 color: #fff;
 text-align: center;
 line-height: 40px;
@@ -332,7 +351,7 @@ height: 8vh;
   right: 30px;
 height: 6vh;
 width: 200px;
-background-color: #F89799;
+background-color: #000;
 line-height: 6vh;
 color: #fff;
 }
@@ -364,8 +383,8 @@ background-color: #fff;
   margin: 0 auto;
   text-align: center;
   line-height: 40px;
-  background-color: #F89799;
-  color: #000;
+  background-color: #000;
+  color: #fff;
   border-radius: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -374,7 +393,7 @@ background-color: #fff;
 
 
 .heading-card {
-background-color: #F89799;
+background-color: #000;
 color: #fff;
 }
 
@@ -405,8 +424,9 @@ float: right;
 }
 
 .service-item-selected {
-background-color: #F89799;
+background-color: #000;
 border: none ;
+color: #fff;
 }
 
 /* 9. Login ------- */ 
@@ -417,7 +437,14 @@ margin: auto;
 }
 
 
+/* 10. Toasts ---- */ 
 
+.message-container {
+  position: fixed;
+  top: 110px;
+  right: 20px;
+  z-index: 999999999;
+}
 
 
 

@@ -150,7 +150,26 @@ Organise in blocks to extend or replace as necessary
 
       <!--Display Django Messages-->
       {% if messages %}
-      <div class="message-container"></div>
+      <div class="message-container">
+          {% for message in messages %}
+
+        {% with message.level as level %}
+        <!--Error-->    
+        {% if level == 40 %}
+        {% include 'includes/toasts/toast_error.html' %}
+        <!--Warning-->
+        {% elif level == 30 %}
+        {% include 'includes/toasts/toast_warning.html' %}
+        <!--Success-->
+        {% elif level == 25 %}
+        {% include 'includes/toasts/toast_success.html' %}
+        <!--Info-->
+        {% else %}
+        {% include 'includes/toasts/toast_info.html' %}
+        {% endif %}
+          {% endwith %}
+            {% endfor %}
+      </div>
       {% endif %}
    
       <!-- Room for additional header specific to pages that extend the base-->
@@ -165,6 +184,9 @@ Organise in blocks to extend or replace as necessary
       {% block postloadjs %}
       <!--Load jQuery to manage interaction with mobile menu-->
       <script src="{% static 'js/mobile-nav.js' %}"></script>
+      <script type="text/javascript">
+        $('.toast').toast('show');
+        </script>
       {% endblock %}
     <div class="bottom-padding pb-5"></div>
   </body>

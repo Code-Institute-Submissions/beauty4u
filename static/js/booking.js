@@ -93,6 +93,7 @@ if (tempArray.length > 0) {
 
 // A function to update the total cost of all bookings selected
 function updateServices(displayArray){
+    if (displayArray) {
     // Update the display - Needs to be fixed
     if (displayArray.length > 1 && displayArray[0] != "") {
         document.getElementById("contain-selected-services").innerHTML = "";
@@ -103,6 +104,7 @@ function updateServices(displayArray){
     else {
         document.getElementById("contain-selected-services").innerHTML = "<div class='col-12'>" + displayArray + " <hr/></div>";
     }
+}
 }
 
 function subtractCost (serviceCost) {
