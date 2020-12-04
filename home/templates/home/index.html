@@ -21,4 +21,24 @@
 </div>
 </div>
 </div>
+
+<div class="continer mt-3">
+    <div class="row">
+        <div class="col-6">
+        <h2>Opening Hours</h2>
+        <table>
+            <tr>
+                {% for items in hours %}
+              <td>{{ items.day }}</td>  
+              <td>{{ items.openingTime }}  -  {{ items.closingTime }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+ 
+
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}
