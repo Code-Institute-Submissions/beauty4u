@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container mt-5">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12 text-center mb-3">
+           <h3><strong>Current Opening Hours</strong></h3>
+
+        </div>
+        <div class="col-12 text-center">
+            {% for items in hours %}
+            <p>{{ items.day }} : {{ items.openingTime }} - {{ items.closingTime }}</td>
+                {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <h3><strong>Change Opening Hours</h3></strong>
+        </div>
+        <div class="col-12 text-center">
+            <form method="POST" class="input-forms">
+                
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Save" />
+            </form>
+          
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock%}

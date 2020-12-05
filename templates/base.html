@@ -96,7 +96,7 @@ Organise in blocks to extend or replace as necessary
                     {% if request.user.is_authenticated %}
                     {% if request.user.is_superuser %}
                     <li class="list-inline-item">
-                        <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="text-black nav-link" href="{% url 'management' %}">
                             <div class="text-center">
                                 <div class="mb-1"><i class="fas fa-user fa-lg"></i></div>
                                 <p class="my-0">Manage</p>
