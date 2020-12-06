@@ -94,7 +94,7 @@ Organise in blocks to extend or replace as necessary
                     </li>
                     <!--If it's a salon owner - Show option to manage salon-->
                     {% if request.user.is_authenticated %}
-                    {% if request.user.is_superuser %}
+                        {% if request.user.is_superuser %}
                     <li class="list-inline-item">
                         <a class="text-black nav-link" href="{% url 'management' %}">
                             <div class="text-center">
@@ -103,6 +103,7 @@ Organise in blocks to extend or replace as necessary
                             </div>
                         </a>
                     </li>
+                        {% endif %}
                     {% else %}
            
                     <!--My Account-->
@@ -123,7 +124,7 @@ Organise in blocks to extend or replace as necessary
                             {% endif %}
                         </div>
                     </li>
-                    {% endif %}
+                   
                     {% endif %}
                     <!--Shopping Cart-->
                     <li class="list-inline-item">
