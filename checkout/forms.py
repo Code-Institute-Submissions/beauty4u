@@ -3,14 +3,18 @@ from .models import Order
 
 
 class OrderForm(forms.ModelForm):
-    model = Order
-    fields = ('full_name', 'email', 'phone_number',
-              'street_address1', 'street_address2', 
-              'town_or_city', 'postcode', 'county', 'country',)
+    
+    class Meta:
+        model = Order
+        fields = ('full_name', 'email', 'phone_number',
+                'street_address1', 'street_address2', 
+                'town_or_city', 'postcode', 'county', 'country',)
 
     def __init__(self, *args, **kwargs):
         """ Style the form """ 
+
         super().__init__(*args, **kwargs)
+
         placeholders = {
             'full_name': 'Full Name',
             'email': 'Email Address',
@@ -29,7 +33,7 @@ class OrderForm(forms.ModelForm):
                 placeholder = f' {placeholders[field]} *'
             else:
                 placeholder = placeholders[field]
-            self.fields[field].widget.attr['placeholder'] = placeholder
-            self.fields[field].widget.attr['class'] = 'checkout-style-input'
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].widget.attrs['class'] = 'checkout-style-input'
             self.fields[field].label = False
 

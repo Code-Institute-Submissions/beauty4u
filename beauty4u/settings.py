@@ -48,6 +48,10 @@ INSTALLED_APPS = [
     'wishlist',
     'management',
     'checkout',
+
+    #other 
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -61,6 +65,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'beauty4u.urls'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
@@ -80,6 +86,10 @@ TEMPLATES = [
                 'cart.contexts.cart_contents',
                 'wishlist.contexts.wishlist_contents',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                 'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]
