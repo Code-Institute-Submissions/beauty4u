@@ -20,7 +20,7 @@
         <div class="col-12 text-center">
             <form method="POST" class="input-forms">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form| crispy }}
                 <input type="submit" value="Save" />
             </form>
         </div>

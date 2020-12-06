@@ -35,4 +35,31 @@ class addProductForm(forms.ModelForm):
             'sale_price',
             'size', 
             'image',
-        ]         
+        ]        
+
+    def __init__(self, *args, **kwargs):
+            """ Style the form """ 
+
+            super().__init__(*args, **kwargs)
+
+            placeholders = {
+                'category': 'Select Product Category',
+                'brand': 'Select Product Category',
+                'sku': 'Product Sku',
+                'name': 'Product Name',
+                'description': 'Enter Product Description',
+                'price': 'Price',
+                'sale_price': 'Sale Price',
+                'size': 'Size',
+                'image': 'Select Image'
+                }
+
+            self.fields['category'].widget.attrs['autofocus'] = True
+            for field in self.fields:
+                if self.fields[field].required:
+                    placeholder = f' {placeholders[field]} *'
+                else:
+                    placeholder = placeholders[field]
+                self.fields[field].widget.attrs['placeholder'] = placeholder
+                self.fields[field].widget.attrs['class'] = 'add-product-input'
+                self.fields[field].label = False 
