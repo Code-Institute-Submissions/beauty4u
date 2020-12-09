@@ -1,20 +1,39 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages 
+from django.conf import settings
 from .forms import OrderForm
+import stripe
+from cart.contexts import cart_contents
 
 # Create your views here.
 def checkout(request):
+
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
+
     cart = request.session.get('cart', {})
     if not cart:
         messages.error(request, 'Your Cart is empty!')
         return redirect(reverse('products'))
 
+    current_cart = cart_contents(request)
+    total = current_cart['grand_total']   
+    stripe_total = round(total * 100) 
+    stripe.api_key = stripe_secret_key
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_total, 
+        currency = settings.STRIPE_CURRENCY,
+    )
+
+    print(intent)
+
+
     order_form = OrderForm()
     
     context = {
         'order_form': order_form,
-        'stripe_public_key': 'pk_test_51HvQxQDCotthheC02rdpJmnTpjXXAKsH5eXhcHnXqQ3vIguEzhHWT6bg6BkRgmyWoDuOKA9FzI0E4ORhBwd156uV00woEeSYWR',
-        'client_secret': 'test client secret',
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
 
     }
 

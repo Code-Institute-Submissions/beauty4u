@@ -3,12 +3,18 @@
   // Hover to view descriptions of existing attributes.
   "version": "0.2.0",
   "configurations": [
+
       {
             "name": "Python: Current File (Integrated Terminal)",
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "console": "internalConsole"
+            "console": "internalConsole",
+            "env": {
+              "STRIPE_PUBLIC_KEY": "pk_test_51HvQxQDCotthheC02rdpJmnTpjXXAKsH5eXhcHnXqQ3vIguEzhHWT6bg6BkRgmyWoDuOKA9FzI0E4ORhBwd156uV00woEeSYWR",
+              "STRIPE_SECRET_KEY": "sk_test_51HvQxQDCotthheC0ALRmgVm7fHUGwCVuvuBkZjApDm2Afcz3OHt1vGlzcrXWNkFkU6qghveLaQsTMNZKa4vmKdYP00KjDIiq2O"
+            }
         }
+    
   ]
 }
