@@ -7,7 +7,7 @@ Index
 3. Home page 
 4. Products 
 5. Cart
-6.
+6. Checkout
 7.
 8. Booking
 9. Login
@@ -319,6 +319,35 @@ margin: 0 auto;
 }
 
 
+
+/*6. Checkout --- */
+.StripeElement, .checkout-style-input {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 0px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus, .checkout-style-input:focus, .checkout-style-input:active  {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.checkout-style-input::placeholder {
+color: #aab7c4;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
 
 /* 8. Booking ------- */
 
