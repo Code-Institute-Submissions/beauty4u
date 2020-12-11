@@ -25,7 +25,7 @@ class Order(models.Model):
 
     def update_total(self):
         """ Update total each time a new line item is added """
-        self.subtotal = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total_sum']
+        self.subtotal = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total_sum'] or 0
         if self.subtotal < settings.FREE_SHIPPING_THRESHOLD:
             self.delivery_cost = settings.STANDARD_DELIVERY_COST
         else:

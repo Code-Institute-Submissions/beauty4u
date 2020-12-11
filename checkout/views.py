@@ -50,6 +50,7 @@ def checkout(request):
             messages.error(request, 'There was a problem with your order form. Please double check your details')    
 
     else:    
+        #Redirect user back to the shop if their cart is empty
         cart = request.session.get('cart', {})
         if not cart:
             messages.error(request, 'Your Cart is empty!')
