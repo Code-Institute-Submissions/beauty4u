@@ -11,6 +11,7 @@
 
 
 {% block content %}
+
 <div class="container mt-5">
     <!--Page Heading-->
     <div class="row">
@@ -27,7 +28,7 @@
     </div>
     <div class="row">
         <div class="col-12 col-lg-6">
-            <form acton="{% url 'checkout' %}" method='POST' id="payment_form">
+            <form acton="{% url 'checkout' %}" method='POST' id="payment-form">
                 {% csrf_token %}
                 <fieldset class="rounded px-3 mb-5">
                     <legend class="fieldset-label w-auto">Details</legend>
@@ -78,7 +79,7 @@
                     <a href="{% url 'view_cart' %}" class="btn btn-outline-black rounded-0">
                         Adjust Cart
                     </a>
-                    <button id="submit-button" class="btn btn-black rounded-0">
+                    <button type="submit" id="submit-button" class="btn btn-black rounded-0" >
                         <span class="font-weight-bold">Complete Order</span>
                         <span class="icon">
                             <i class="fas fa-lock"></i>
@@ -90,7 +91,11 @@
             </form>
         </div>
     </div>
-
+<div class="processing-payment-overlay">
+    <h1 class="complete-center">
+        <i class="fas fa-spinner fa-spin"></i>
+    </h1>
+</div>
 </div>
 {% endblock %}
 

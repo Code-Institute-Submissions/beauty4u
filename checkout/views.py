@@ -9,7 +9,7 @@ from cart.contexts import cart_contents
 
 # Create your views here.
 def checkout(request):
-
+    
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
@@ -22,6 +22,7 @@ def checkout(request):
             'phone_number': request.POST['phone_number'],
             'street_address1': request.POST['street_address1'],
             'street_address2': request.POST['street_address2'],
+            'town_or_city': request.POST['town_or_city'],
             'county': request.POST['county'],
             'country': request.POST['country'],
             'postcode': request.POST['postcode'],
@@ -44,10 +45,11 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('view_cart'))
 
-            request.session['save_info'] = 'save_info' in request.POST        
+            request.session['save_info'] = 'save_info' in request.POST      
             return redirect(reverse('checkout_success', args=[order.order_number]))    
         else:
-            messages.error(request, 'There was a problem with your order form. Please double check your details')    
+            messages.error(request, f'There was a problem with your order form. Please double check your details')    
+            return redirect(reverse('checkout'))
 
     else:    
         #Redirect user back to the shop if their cart is empty
@@ -66,16 +68,19 @@ def checkout(request):
         )
 
         print(intent)
-
-
         order_form = OrderForm()
+
+    if not stripe_public_key:
+        messages.warning(request, 'Stripe public key is missing. \
+            Did you forget to set it in your environment?')
+      
     
     context = {
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
 
-    }
+        }
 
     return render(request, 'checkout/checkout.html', context)
 
