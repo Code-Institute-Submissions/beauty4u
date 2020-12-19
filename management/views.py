@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from home.models import openHours, aboutUs
+from booking.models import Bookings
+from checkout.models import Order
 from .forms import HoursForm, aboutForm, addProductForm
 from django.contrib import messages
 
@@ -8,7 +10,15 @@ from django.contrib import messages
 
 def manage(request):
     """ A view that returns the index page """
-    return render(request, 'management/index.html')
+    bookings = Bookings.objects.all().order_by('-date')[:5] 
+    orders = Order.objects.all().order_by('-date')[:5]
+
+    context = {
+        'bookings': bookings,
+        'orders': orders
+    }
+
+    return render(request, 'management/dashboard_home.html', context)
 
 def changeHours(request):
 

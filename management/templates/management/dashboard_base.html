@@ -1,0 +1,76 @@
+{% load static %}
+
+<!--
+This is the base dashboard file for the management dash
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block  meta %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% endblock %}
+
+    {% block extra_meta %}
+    {% endblock %}
+
+    {% block corecss %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <!--JQuery UI CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
+    <!--Base CSS-->
+    <link rel="stylesheet" href="{% static 'css/management.css' %}">
+    <!--Stripe-->
+    <script src="https://js.stripe.com/v3/"></script>
+    {% endblock %}
+
+    {% block corejs %}
+    <!--JQuery / Bootstrap-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==" crossorigin="anonymous"></script>    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <!--JQuery UI-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
+
+    {% endblock %}
+
+    {% block extra_js %}
+    {% endblock %}
+
+    <title>Beauty4U | {% block extra_title %}{% endblock %}</title>
+
+  </head>
+  
+<body>
+
+
+<div class="container-fluid top-bar">
+    <div class="row">
+<span class="text-left ml-4 title-text">Management Panel</span>
+<!--Show exit button on desktop-->
+<div class="d-none d-lg-block exit-btn mr-3 text-center ml-auto">EXIT</div>
+<!--Show  button to open menu on mobile -->
+<div class="d-block d-lg-none exit-btn mr-3 text-center ml-auto">MENU</div>
+</div>
+</div>
+
+<div class="nav-bar d-none d-lg-block">
+<ul class="nav-list list-unstyled ml-3">
+<li><i class="fas fa-home mr-3"></i>Overview</li>  
+<hr/>  
+<li><i class="fas fa-shopping-cart mr-3"></i>Shop Manager<span class="expand-icon"><i class="fas fa-angle-down"></i></span></li>  
+<hr/>  
+<li><i class="fas fa-user-clock mr-3"></i></i></i>Online Booking</li>  
+<hr/>
+</ul>    
+</div>
+
+<div class="wrap-content">
+{% block content %}
+{% endblock%}
+</div>
+
+</body>
+</html>
