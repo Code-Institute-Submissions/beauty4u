@@ -5,113 +5,184 @@
 
 {% block content %}
 <div class="container-fluid mt-2">
-<div class="row">
-    <div class="col-12 text-muted">
-        <h3>Beauty4U Overview</h3>
-        <hr/>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 col-md-3 shadow-sm mt-2">
-        <div class="row">
-            <div class="col-4 text-center info-box icon-box"> <i class="fas fa-shopping-cart complete-center"></i></div>
-            <div class="col-8 text-left info-box text-right"><div class="content"><h4>Total Orders</h4><p class="number">7847</p></div></div>
+    <div class="row">
+        <div class="col-12 text-muted">
+            <h3>Beauty4U Overview</h3>
+            <hr />
         </div>
     </div>
-    <div class="col-3 col-12 col-md-3 shadow-sm mt-2">
-         <div class="row">
-            <div class="col-4 text-center info-box icon-box"> <i class="fas fa-euro-sign complete-center"></i></div>
-            <div class="col-8 text-left info-box text-right"><div class="content"><h4>Total Revenue</h4><p class="number">€80,8763</p></div></div>
+    <div class="row">
+        <div class="col-12 col-md-3 shadow-sm mt-2">
+            <div class="row">
+                <div class="col-4 text-center info-box icon-box"> <i class="fas fa-shopping-cart complete-center"></i>
+                </div>
+                <div class="col-8 text-left info-box text-right">
+                    <div class="content">
+                        <h4>Total Orders</h4>
+                        <p class="number">7847</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-12 col-md-3 shadow-sm mt-2">
-        <div class="row">
-            <div class="col-4 text-center info-box icon-box"><i class="fas fa-user-clock complete-center"></i></div>
-            <div class="col-8 text-left info-box text-right"><div class="content"><h4>Total Bookings</h4><p class="number">2343</p></div></div>
+        <div class="col-3 col-12 col-md-3 shadow-sm mt-2">
+            <div class="row">
+                <div class="col-4 text-center info-box icon-box"> <i class="fas fa-euro-sign complete-center"></i></div>
+                <div class="col-8 text-left info-box text-right">
+                    <div class="content">
+                        <h4>Total Revenue</h4>
+                        <p class="number">€80,8763</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-12 col-md-3 shadow-sm mt-2">
-        <div class="row">
-            <div class="col-4 text-center info-box icon-box"> <i class="fas fa-users complete-center"></i></div>
-            <div class="col-8 text-left info-box text-right"><div class="content"><h4>Total Users</h4><p class="number">3002</p></div></div>
+        <div class="col-12 col-md-3 shadow-sm mt-2">
+            <div class="row">
+                <div class="col-4 text-center info-box icon-box"><i class="fas fa-user-clock complete-center"></i></div>
+                <div class="col-8 text-left info-box text-right">
+                    <div class="content">
+                        <h4>Total Bookings</h4>
+                        <p class="number">2343</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="col-12 col-md-3 shadow-sm mt-2">
+            <div class="row">
+                <div class="col-4 text-center info-box icon-box"> <i class="fas fa-users complete-center"></i></div>
+                <div class="col-8 text-left info-box text-right">
+                    <div class="content">
+                        <h4>Total Users</h4>
+                        <p class="number">3002</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-6">
+            <canvas id="myChart"></canvas>
+            
+            <script>
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            label: '# Unique Website Visits',
+                            data: [200, 19, 3, 5, 2, 3, 8],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script>
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid mt-5">
     <div class="row">
         <div class="col-12 text-muted">
-            <h3 class="d-inline-block">Recent Bookings</h3><div class="ml-3 view-btn text-center d-inline-block">VIEW ALL</div>
-            <hr/>
+            <h3 class="d-inline-block">Recent Bookings</h3>
+            <div class="ml-3 view-btn text-center d-inline-block">VIEW ALL</div>
+            <hr />
         </div>
         <!--Output recent bookings-->
-        
+
         <div class="col-12">
             <table class="table">
                 <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Service</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time</th>
-                  </tr>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Service</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {% for booking in bookings %}
-                  <tr>
-                    <td>{{ booking.customer_name }}</td>
-                    <td>{{ booking.service}}</td>
-                    <td>{{ booking.date }}</td>
-                    <td>{{ booking.time }}</td>
-                  </tr>
-                  {% endfor %}
+                    <tr>
+                        <td>{{ booking.customer_name }}</td>
+                        <td>{{ booking.service}}</td>
+                        <td>{{ booking.date }}</td>
+                        <td>{{ booking.time }}</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
-              </table>
-  
-            <hr/>
+            </table>
+
+            <hr />
         </div>
-       
-      
-    
+
+
+
     </div>
 </div>
 
 <div class="container-fluid mt-5">
     <div class="row">
         <div class="col-12 text-muted">
-            <h3 class="d-inline-block">Recent Orders</h3><div class="ml-3 view-btn text-center d-inline-block">VIEW ALL</div>
-            <hr/>
+            <h3 class="d-inline-block">Recent Orders</h3>
+            <div class="ml-3 view-btn text-center d-inline-block">VIEW ALL</div>
+            <hr />
         </div>
         <!--Output recent orders-->
-        
+
         <div class="col-12">
             <table class="table">
                 <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Status</th>
-                  </tr>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Status</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {% for order in orders %}
-                  <tr>
-                    <td>{{ order.full_name }}</td>
-                    <td>{{ order.date }}</td>
-                    <td>{{ order.total }}</td>
-                    <td>Processed</td>
-                  </tr>
-                  {% endfor %}
+                    <tr>
+                        <td>{{ order.full_name }}</td>
+                        <td>{{ order.date }}</td>
+                        <td>{{ order.total }}</td>
+                        <td>Processed</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
-              </table>
-  
-            <hr/>
+            </table>
+
+            <hr />
         </div>
-       
-      
-    
+
+
+
     </div>
 </div>
 

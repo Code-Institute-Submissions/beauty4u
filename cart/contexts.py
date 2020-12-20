@@ -2,6 +2,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from products.models import Product
+import datetime
 
 
 def cart_contents(request):
@@ -36,6 +37,11 @@ def cart_contents(request):
 
     grand_total = shipping + total
 
+
+    #date for copyright included in context to display on all pages
+    now = datetime.datetime.now()
+    currentyear = now.year
+
     context = {
         'cart_items': cart_items,
         'total': total,
@@ -44,6 +50,7 @@ def cart_contents(request):
         'free_shipping_delta': free_shipping_delta,
         'free_shipping_threshold': settings.FREE_SHIPPING_THRESHOLD,
         'grand_total': grand_total,
+        'current_year': currentyear,
 
     }
 

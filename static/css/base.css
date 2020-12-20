@@ -74,6 +74,8 @@ border: none !important;
 background-color: #248f62;
 }
 
+
+
 /* 2. Nav  ------- */ 
 
 .nav-link{ 
@@ -156,18 +158,33 @@ padding: 0;
 
 
 
-/* 3. Home Page ------- */ 
+/* 3. Home Page -  Template 1 ------- */ 
 
 .contain-hero {
-background: url('/media/hero-image.jpg') no-repeat center center;
-background-size: cover;
+  background-image: url(/media/hero1.jpg);
+  background-size: cover;
 min-width: 100vw;
-height: 75vh;
+min-height: 75vh;
+position: relative;
 }
 
-.shop-now-btn {
-background-color: #fff;
-color: #000;
+
+.hero-button {
+ height: 50px;
+ width: 150px;
+ background-color: #000; 
+ line-height: 50px;
+ text-align: center;
+ color: #fff;
+}
+
+.contain-hero-text {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .header-container {    
@@ -178,6 +195,92 @@ margin-top: 100px;
 margin-top: 15vh;
 }
 
+
+.about-photo {
+  width: 60%;
+
+}
+
+.contain-about-text {
+  height: 50vh;
+  position: relative;
+}
+
+.inner-contain-about-text{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  max-width: 50%;
+}
+
+.inner-contain-shop-text{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  max-width: 50%;
+}
+
+.shop-btn {
+  height: 50px;
+  width: 150px;
+  line-height: 50px;
+  background-color: #0A015E;
+  text-align: center;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.book-btn {
+height: 50px;
+width: 150px;
+line-height: 50px;
+background-color: #EA0A90;
+text-align: center;
+border-radius: 5px;
+color: #fff;
+}
+
+
+.opening-hours-table {
+  width: 100%;
+}
+
+.google-maps {
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #21252A;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.google-maps:hover {
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #fff;
+  border: 1px solid #21252A;
+  color: #000;
+  text-align: center;
+  cursor: pointer;
+}
+
+.social-list li{
+  font-size: 30px;
+  margin: 0 auto;
+
+}
+
+.list-group-item {
+  border: none !important;
+}
 
 /* 4. Products ------------- */
 
@@ -547,7 +650,10 @@ right: 0;
 z-index: 19999;
 }   
 
-
+.footer-bar  {
+  color: #fff;
+  background-color: #000;
+}
 
 .header-container {    
 padding-top: 164px;

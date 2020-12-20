@@ -113,6 +113,7 @@ color: green;
     color: #fff;
 }
 
+
 @media(min-width: 992px) {
     .wrap-content {
         margin-left: 320px;

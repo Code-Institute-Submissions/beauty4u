@@ -9,9 +9,12 @@ from django.contrib import messages
 # Create your views here.
 
 def manage(request):
-    """ A view that returns the index page """
+    """ A view that returns the dashboard home page """
     bookings = Bookings.objects.all().order_by('-date')[:5] 
     orders = Order.objects.all().order_by('-date')[:5]
+
+    # Get Unique Website Visits
+
 
     context = {
         'bookings': bookings,
