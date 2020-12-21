@@ -54,12 +54,15 @@ Organise in blocks to extend or replace as necessary
           2. Search Bar
           3. Icons (Booking/Account/Cart)
         -->
-      <header class="container-fluid fixed-top p-0">
+      <header class="container-fluid fixed-top p-0"> 
+       {% if free_shipping_setting == True %}
         <div class="row free-shipping-banner">
             <div class="col text-center pt-2 pb-2">
                 FREE SHIPPING ON ORDERS OVER €{{ free_shipping_threshold }}!
             </div>
         </div>
+        {% endif%}
+        
         <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex pl-2 pr-2">
             <!--Brand Name-->
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
@@ -89,7 +92,7 @@ Organise in blocks to extend or replace as necessary
                             <div class="text-center">
                                 <div class="mb-1"><i class="far fa-calendar-alt fa-lg"></i></div>
                                <p class="my-0">
-                                   Booking
+                                   Booking 
                                 </p>
                             </div>
                         </a>

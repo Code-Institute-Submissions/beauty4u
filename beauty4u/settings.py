@@ -84,6 +84,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'cart.contexts.cart_contents',
+                'management.contexts.setting_contents',
                 'wishlist.contexts.wishlist_contents',
             ],
             'builtins': [
@@ -176,7 +177,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Shipping Variables 
 
-FREE_SHIPPING_THRESHOLD = 50
+
 STANDARD_DELIVERY_COST = 5
 
 #stripe 

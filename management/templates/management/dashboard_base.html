@@ -19,6 +19,7 @@ This is the base dashboard file for the management dash
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <!--JQuery UI CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
     <!--Base CSS-->
@@ -51,7 +52,9 @@ This is the base dashboard file for the management dash
     <div class="row">
 <span class="text-left ml-4 title-text">Management Panel</span>
 <!--Show exit button on desktop-->
+<a href="{% url 'home' %}">
 <div class="d-none d-lg-block exit-btn mr-3 text-center ml-auto">EXIT</div>
+</a>
 <!--Show  button to open menu on mobile -->
 <div class="d-block d-lg-none exit-btn mr-3 text-center ml-auto">MENU</div>
 </div>
@@ -59,11 +62,17 @@ This is the base dashboard file for the management dash
 
 <div class="nav-bar d-none d-lg-block">
 <ul class="nav-list list-unstyled ml-3">
-<li><i class="fas fa-home mr-3"></i>Overview</li>  
+<a href="{% url 'management' %}">
+<li><i class="fas fa-home mr-3"></i>Overview</li> 
+</a>
 <hr/>  
 <li><i class="fas fa-shopping-cart mr-3"></i>Shop Manager<span class="expand-icon"><i class="fas fa-angle-down"></i></span></li>  
+
 <hr/>  
-<li><i class="fas fa-user-clock mr-3"></i></i></i>Online Booking</li>  
+<li><i class="fas fa-user-clock mr-3"></i>Online Booking</li>  
+<hr/>
+<a href="{% url 'settings' %}">
+<li><i class="fas fa-cogs mr-3"></i>Settings</li></a>
 <hr/>
 </ul>    
 </div>
@@ -74,4 +83,7 @@ This is the base dashboard file for the management dash
 </div>
 
 </body>
+<!--Include script to post saved settings data to server-->
+<script src="{% static 'management/js/postsettings.js' %}"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 </html>

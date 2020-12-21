@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from home.models import openHours, aboutUs
+from django.views.decorators.http import require_POST
 from booking.models import Bookings
 from checkout.models import Order
+from management.models import Sitesettings
 from .forms import HoursForm, aboutForm, addProductForm
 from django.contrib import messages
 
@@ -22,6 +24,40 @@ def manage(request):
     }
 
     return render(request, 'management/dashboard_home.html', context)
+
+
+def settings(request):
+
+    settings = Sitesettings.objects.all()
+    
+
+    context = {
+        'settings': settings
+    }
+
+    return render(request, 'management/dashboard_settings.html', context)
+
+@require_POST
+def save_data(request):
+   
+    """ This view will handle Post requests from the settings page """
+    settingName = request.POST.get('settingName')
+    settingValue = request.POST.get('settingValue')
+    settingStatus= request.POST.get('settingStatus')
+
+    setting = get_object_or_404(Sitesettings, name=settingName)
+    if settingValue is not None:
+        setting.value = settingValue
+    
+    if settingStatus is not None:
+         setting.status = settingStatus
+            
+   
+    setting.save()
+    print(f'New Status: { setting.status}')
+
+    return HttpResponse(200)    
+
 
 def changeHours(request):
 
