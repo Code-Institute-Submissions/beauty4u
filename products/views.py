@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
+import random
 from django.db.models import Q
 from .models import Product, Brand, Category
 
@@ -14,7 +15,10 @@ def all_products(request):
     direction = None
     selectedBrand = None
  
-   
+    #Get Featured Products 
+    featured_products = products.filter(featured_product=True)
+
+
 
     if request.GET:
         if 'sort' in request.GET:
@@ -54,10 +58,12 @@ def all_products(request):
 
     context = {
         'products': products,
+        'featured_products': featured_products,
         'query': query,
         'brandList': brandList,
         'brand': brand, #Output brand selected to top of page
         'selectedBrand': selectedBrand,
+
     }
 
     return render(request, 'products/products.html',context)
@@ -71,6 +77,7 @@ def product_detail (request, product_id):
     context = {
         'product': product,
         'related_products': related_products
+       
 
     }
 

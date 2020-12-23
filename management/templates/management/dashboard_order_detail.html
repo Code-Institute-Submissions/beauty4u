@@ -1,0 +1,62 @@
+{% extends 'management/dashboard_base.html' %}
+{% load static %}
+{% block extra_title %} Dashboard {% endblock %}
+
+
+{% block content %}
+<div class="container-fluid mt-5 pt-4">
+  <div class="row">
+    <div class="col-12 text-muted">
+      <h3 class="d-inline-block">Orders</h3>
+      <hr />
+    </div>
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-12">
+      <p><strong>Order Number: </strong>{{ order.order_number }}</p>
+      <p><strong>Customer Name:</strong> {{ order.full_name }}</p>
+      <p><strong>Email:</strong> {{ order.email }}</p>
+      <p><strong>Phone:</strong> {{ order.phone_number }}</p>
+      <p><strong>Shipping Address: </strong><br/>
+      {{ order.street_address1 }}<br/>
+      {{ order.street_address2 }}<br/>
+      {{ order.town_or_city }}<br/>
+      {{ order.county}}<br/>
+      {{ order.country}}<br/>
+      </p>
+      
+      <div class="display_shipping_method mb-5">{{ order.shipping_method }}</div>
+      <table class="table">
+          <thead class="thead-dark">
+              <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Price</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for item in order.lineitems.all %}
+              <tr>
+                  <td>{{ item.product.name }}</td>
+                  <td>€{{ item.product.price }}</td>
+               
+              </tr>
+              {% endfor %}
+              <tr>
+                <td></td>
+                <td><strong>Order Total: </strong>€ {{ order.total }}</td>
+              </tr>
+          </tbody>
+      </table>
+
+      <hr />
+  </div>
+
+
+
+</div>
+
+
+{% endblock %}

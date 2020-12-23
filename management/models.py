@@ -21,8 +21,8 @@ class Staff(models.Model):
     class Meta:
         verbose_name_plural = 'Staff Members'
 
-    name = models.CharField(max_length=250, null=True, blank=True)
-    position = models.CharField(max_length=250, null=True, blank=True)
+    name = models.CharField(max_length=250, null=True, blank=False, unique=True)
+    position = models.CharField(max_length=250, null=True, blank=False)
     available = models.BooleanField(default=True, null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)

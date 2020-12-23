@@ -19,9 +19,7 @@ This is the base dashboard file for the management dash
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <!--JQuery UI CSS-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-toggle/3.6.1/bootstrap4-toggle.min.css" integrity="sha512-EzrsULyNzUc4xnMaqTrB4EpGvudqpetxG/WNjCpG6ZyyAGxeB6OBF9o246+mwx3l/9Cn838iLIcrxpPHTiygAA==" crossorigin="anonymous" />    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
     <!--Base CSS-->
     <link rel="stylesheet" href="{% static 'css/management.css' %}">
     <!--Stripe-->
@@ -46,8 +44,33 @@ This is the base dashboard file for the management dash
 
   </head>
   
+
+  
 <body>
 
+    <!--Display Django Messages-->
+    {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+
+      {% with message.level as level %}
+      <!--Error-->    
+      {% if level == 40 %}
+      {% include 'includes/toasts/toast_error.html' %}
+      <!--Warning-->
+      {% elif level == 30 %}
+      {% include 'includes/toasts/toast_warning.html' %}
+      <!--Success-->
+      {% elif level == 25 %}
+      {% include 'includes/toasts/toast_success.html' %}
+      <!--Info-->
+      {% else %}
+      {% include 'includes/toasts/toast_info.html' %}
+      {% endif %}
+        {% endwith %}
+          {% endfor %}
+    </div>
+    {% endif %}
 
 <div class="container-fluid top-bar">
     <div class="row">
@@ -67,7 +90,15 @@ This is the base dashboard file for the management dash
 <li><i class="fas fa-home mr-3"></i>Overview</li> 
 </a>
 <hr/>  
-<li><i class="fas fa-shopping-cart mr-3"></i>Shop Manager<span class="expand-icon"><i class="fas fa-angle-down"></i></span></li>  
+<li class="expand-menu"><i class="fas fa-shopping-cart mr-3"></i>Shop Manager<span class="expand-icon"><i class="fas fa-angle-down"></i></span></li>
+<ul class="mt-4 ml-5 list-unstyled sub-menu">
+  <a href="{% url 'view_orders' %}"><li>Orders</li></a>
+  <hr/>
+  <li>Manage Products</li>
+  <hr/>
+  <li>Coupons</li>
+  <hr/>
+</ul>
 
 <hr/>  
 <li><i class="fas fa-user-clock mr-3"></i>Online Booking</li>  
@@ -89,7 +120,7 @@ This is the base dashboard file for the management dash
 </body>
 <!--Include script to post saved settings data to server-->
 <script src="{% static 'management/js/postsettings.js' %}"></script>
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap4-toggle/3.6.1/bootstrap4-toggle.min.js" integrity="sha512-bAjB1exAvX02w2izu+Oy4J96kEr1WOkG6nRRlCtOSQ0XujDtmAstq5ytbeIxZKuT9G+KzBmNq5d23D6bkGo8Kg==" crossorigin="anonymous"></script>
  <!--Mobile Nav-->
  <script src="{% static 'js/mobile-nav.js' %}"></script>
 </html>

@@ -1,5 +1,6 @@
 from django import forms 
 from home.models import openHours, aboutUs
+from management.models import Staff
 from products.models import Product
 
 class HoursForm(forms.ModelForm):
@@ -18,7 +19,19 @@ class aboutForm(forms.ModelForm):
         model = aboutUs
         fields = [
             'content',
-        ]        
+        ]  
+
+
+
+class staffForm(forms.ModelForm):
+    """ A form to render model fields for opening time changes """
+    class Meta:
+        model = Staff
+        fields = [
+            'name',
+            'position',
+            'available',
+        ]                
 
 
 class addProductForm(forms.ModelForm):

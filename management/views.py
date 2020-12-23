@@ -2,11 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from home.models import openHours, aboutUs
 from django.views.decorators.http import require_POST
 from booking.models import Bookings
-from checkout.models import Order
+from checkout.models import Order, OrderLineItem
 from management.models import Sitesettings, Staff
-from .forms import HoursForm, aboutForm, addProductForm
+from .forms import HoursForm, aboutForm, addProductForm, staffForm
 from django.contrib import messages
 from decimal import Decimal
+from django.db.models import Q
 
 
 # Create your views here.
@@ -27,11 +28,34 @@ def manage(request):
     return render(request, 'management/dashboard_home.html', context)
 
 
+def view_orders(request):
+    
+    orders = Order.objects.all().order_by('-date')
+
+    context = {
+        'orders': orders,
+    }
+
+    return render(request, 'management/dashboard_orders.html', context)
+
+
+def order_detail(request, order_number2):
+
+    order = get_object_or_404(Order, order_number=order_number2)
+
+    context = {
+        'order': order,
+    }
+    return render(request, 'management/dashboard_order_detail.html', context)
+
+
+
+
+
+
 def settings(request):
 
     settings = Sitesettings.objects.all()
-    
-
     context = {
         'settings': settings
     }
@@ -42,11 +66,20 @@ def settings(request):
 
 def staff(request):
 
+    form = staffForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.info(request, 'Staff Member Added')
+        form = staffForm()
+        
+
     staff = Staff.objects.all()
 
     context = {
-        'staff': staff
+        'staff': staff,
+        'form': form,       
     }
+
 
     return render(request, 'management/dashboard_staff.html', context)    
 
@@ -90,7 +123,7 @@ def update_staff_avail(request):
         setting.available = settingStatus
                 
         setting.save()
-        print(f'New Status: {setting.availability}')
+        print(f'New Status: {setting.available}')
 
         return HttpResponse(status=200)
     
@@ -99,6 +132,12 @@ def update_staff_avail(request):
         return HttpResponse(content=e, status=400)
 
 
+@require_POST
+def remove_staff(request):
+    staff_member = request.POST.get('settingName')
+    select_member = get_object_or_404(Staff, name=staff_member)
+    select_member.delete()
+    return HttpResponse(status=200)  
 
 
 

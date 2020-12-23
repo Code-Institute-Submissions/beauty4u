@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_title %}Shop Online{% endblock %}
+
 {% block page_header %}
 <div class="container header-container">
 <div class="row">
@@ -10,8 +12,68 @@
 {% endblock %}
 
 
+
 {% block content %}
 <div class="container mt-5">
+
+<div class="row pt-2">
+    <div class="col-12 shop-top-banner">
+        <div class="contain-top-banner-content">
+            <h2>UP TO <strong>50% OFF</strong> YOUR FAVOURITE BRANDS!</h2>
+            <div class="shop-sale">SHOP SALE</div>
+        </div>
+    </div>
+</div>
+
+<!--Highlighted Products-->
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5 text-center">
+            <h2 class="text-muted">Featured Products</h2>
+        </div>
+    </div>
+    <div class="row">
+        {% for items in featured_products %}
+        <div class="col-6 col-lg-3 mt-5 pt-4">
+        <div class="col-12 text-center">
+            {% if items.sale_price < items.price  %}   
+            <span class="sale-badge"><img class="sale-tag" src="/media/sale-tag.png"></span>
+            {% endif %}
+            {% if items.image %}
+            <a href="{% url 'product_detail' items.id %}">
+            <img src="/media/{{ items.image }}" class="product-image" alt="{{ items.name }}">
+            </a>
+            {% endif %}
+        </div>
+             <a href="{% url 'product_detail' items.id %}">
+           <div class="col-12 text-center mt-2 product-title">{{ items.name }}</div>
+           </a>
+           <div class="row">
+           <div class="col-6 mt-2 lightgrey">
+            {% if items.sale_price < items.price  %}   
+            <strike>{{ items.price }}</strike><span class="text-danger ml-3">{{ items.sale_price }}</span>
+            {% else %}
+            {{ items.price }}
+            {% endif %}
+        </div>
+            <div class="col-6 mt-2 text-right">
+                <!--Logic to output wishlist icon based on if item is in wishlist-->
+                <form action="{% url 'add_to_wishlist' items.id %}" method="POST">
+                  {% csrf_token %}
+                <button type="submit"><i class="far fa-heart pr-3"></i></button>
+                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                 </form>
+                </div>
+        
+        </div>
+        </div>
+        {% endfor %}
+    
+    </div>
+</div>
+
+
+
 <!--Sory by Brand-->
 <div class="row pl-2 pl-2 ">
 <div class="col-12">
@@ -64,6 +126,9 @@
     {% for items in products %}
     <div class="col-6 col-lg-3 mt-5 pt-4">
     <div class="col-12 text-center">
+        {% if items.sale_price < items.price  %}   
+        <span class="sale-badge"><img class="sale-tag" src="/media/sale-tag.png"></span>
+        {% endif %}
         {% if items.image %}
         <a href="{% url 'product_detail' items.id %}">
         <img src="/media/{{ items.image }}" class="product-image" alt="{{ items.name }}">
@@ -75,8 +140,12 @@
        </a>
        <div class="row">
        <div class="col-6 mt-2 lightgrey">
+        {% if items.sale_price < items.price  %}   
+        <strike>{{ items.price }}</strike><span class="text-danger ml-3">{{ items.sale_price }}</span>
+        {% else %}
         {{ items.price }}
-         </div>
+        {% endif %}
+    </div>
         <div class="col-6 mt-2 text-right">
             <!--Logic to output wishlist icon based on if item is in wishlist-->
             <form action="{% url 'add_to_wishlist' items.id %}" method="POST">
@@ -99,4 +168,5 @@
 <!--Load JQuery for navigation-->
 {% block postloadjs %}
 <script src="{% static 'js/product-nav.js' %}"></script>
+<script src="{% static 'products/js/image_slider.js'%}"></script>
 {% endblock %}

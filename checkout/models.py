@@ -19,6 +19,7 @@ class Order(models.Model):
     postcode = models.CharField(max_length=20, null=True, blank=True) #not required
     date = models.DateTimeField(auto_now_add=True)
     delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
+    shipping_method = models.CharField(max_length=50,  null=True, blank=False, default="Standard Shipping")
     subtotal = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     original_cart = models.TextField(null=False, blank=False, default='')

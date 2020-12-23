@@ -6,6 +6,18 @@ text-decoration: none;
 color: red;
 }
 
+.expand-menu {
+    cursor: pointer;
+}
+
+.sub-menu {
+    display: none;
+}
+
+.sub-menu li{
+    cursor: pointer;
+}
+
 /* Management base template */
 .top-bar {
 background-color: #4A94BF;
@@ -129,7 +141,22 @@ color: green;
     background-color: #E25847;
     border-radius: 5px;
     color: #fff;
+    cursor: pointer;
 }
+
+.remove-staff {
+cursor: pointer;
+}
+
+
+.display_shipping_method {
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    line-height: 50px;
+    background-color: rgb(36, 30, 65);
+    color: #fff;
+  }
 
 
 @media(min-width: 992px) {

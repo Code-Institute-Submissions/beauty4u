@@ -284,6 +284,56 @@ color: #fff;
 
 /* 4. Products ------------- */
 
+.shop-top-banner {
+  background-image: url(/media/top-banner.jpg);
+  background-size: cover;
+  width: 100%;
+  min-height: 40vh;
+  position: relative;
+ }
+
+.sale-badge {
+  position: absolute;
+  top: 0%;
+  left: 2%;
+  padding: 7px;
+  border-radius: 50%;
+}
+
+.sale-tag {
+  width: 50px;
+  height: 50px;
+}
+
+
+ .contain-top-banner-content {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  max-width: 50%;
+ }
+
+ .shop-sale {
+   height: 50px;
+   width: 150px;
+   line-height: 50px;
+   background-color: red;
+   text-align: center;
+   color: #fff;
+   cursor: pointer;
+   margin-top: 10px;
+ }
+
+/* Image Product Highlight Slider */
+
+.product-highlights-list li{
+display: inline-block;
+}
+
+
 .product-image {
 min-height: 150px;
 max-height:150px;
@@ -468,6 +518,15 @@ color: #aab7c4;
   top: 50%;
   transform: translate(-50%, -50%);
   color: #000 !important;
+}
+
+.display_shipping_method {
+  height: 50px;
+  width: 200px;
+  text-align: center;
+  line-height: 50px;
+  background-color: rgb(36, 30, 65);
+  color: #fff;
 }
 
 
