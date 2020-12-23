@@ -1,0 +1,53 @@
+{% extends 'management/dashboard_base.html' %}
+{% load static %}
+{% block extra_title %} Dashboard {% endblock %}
+
+
+{% block content %}
+<div class="container-fluid mt-5 pt-4">
+  <div class="row">
+    <div class="col-12 text-muted">
+      <h3 class="d-inline-block">Staff</h3>   <div class="ml-3 view-btn text-center d-inline-block">Add</div>
+      <hr />
+    </div>
+  </div>
+
+
+
+  <div class="row">
+
+    <div class="col-12">
+      <p>Manage staff members and <strong>choose whether or not they are available for online booking</strong></p>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Available</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% csrf_token %}
+          {% for person in staff %}
+          <tr>
+            <td class="contain-setting-name">
+              <h4 class="text-muted settingName">{{ person.name }}</h4>
+              <p>{{ person.position }}</p>
+            </td>
+            <td>
+              <input type="checkbox" {% if person.available == True %} checked {% endif %} name="updatestaffavail"
+                class="updatestaffavail" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Yes" data-off="No">
+
+            </td>
+          
+          </tr>
+          <tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+
+  {% endblock %}

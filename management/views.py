@@ -3,9 +3,10 @@ from home.models import openHours, aboutUs
 from django.views.decorators.http import require_POST
 from booking.models import Bookings
 from checkout.models import Order
-from management.models import Sitesettings
+from management.models import Sitesettings, Staff
 from .forms import HoursForm, aboutForm, addProductForm
 from django.contrib import messages
+from decimal import Decimal
 
 
 # Create your views here.
@@ -37,26 +38,68 @@ def settings(request):
 
     return render(request, 'management/dashboard_settings.html', context)
 
+
+
+def staff(request):
+
+    staff = Staff.objects.all()
+
+    context = {
+        'staff': staff
+    }
+
+    return render(request, 'management/dashboard_staff.html', context)    
+
 @require_POST
 def save_data(request):
-   
-    """ This view will handle Post requests from the settings page """
-    settingName = request.POST.get('settingName')
-    settingValue = request.POST.get('settingValue')
-    settingStatus= request.POST.get('settingStatus')
+    try:
+        """ This view will handle Post requests from the settings page """
+        settingName = request.POST.get('settingName')
+        settingValue = request.POST.get('settingValue')
+        settingStatus= request.POST.get('settingStatus')
 
-    setting = get_object_or_404(Sitesettings, name=settingName)
-    if settingValue is not None:
-        setting.value = settingValue
+        # Check format of setting 
+
+        setting = get_object_or_404(Sitesettings, name=settingName)
+        if settingValue is not None:
+            setting.value = settingValue
+        
+        if settingStatus is not None:
+            setting.status = settingStatus
+                
+        setting.save()
+        print(f'New Status: {setting.status}')
+
+        return HttpResponse(status=200)
     
-    if settingStatus is not None:
-         setting.status = settingStatus
-            
-   
-    setting.save()
-    print(f'New Status: { setting.status}')
+    except Exception as e:
+        print(e)
+        return HttpResponse(content=e, status=400)
 
-    return HttpResponse(200)    
+@require_POST
+def update_staff_avail(request):
+    try:
+        """ This view will handle Post requests from the settings page """
+        settingName = request.POST.get('settingName')
+        settingStatus= request.POST.get('settingStatus')
+
+        # Check format of setting 
+
+        setting = get_object_or_404(Staff, name=settingName)
+
+        setting.available = settingStatus
+                
+        setting.save()
+        print(f'New Status: {setting.availability}')
+
+        return HttpResponse(status=200)
+    
+    except Exception as e:
+        print(e)
+        return HttpResponse(content=e, status=400)
+
+
+
 
 
 def changeHours(request):

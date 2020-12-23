@@ -42,6 +42,11 @@ color: #fff;
 cursor: pointer;
 }
 
+#myChart {
+height: 300px;
+width: 300pxs;
+}
+
 
 .exit-btn:hover {
   background-color:rgb(247, 171, 57);
@@ -56,6 +61,10 @@ cursor: pointer;
      background-color:rgb(26, 26, 31); 
      z-index: 1;
      padding-top: 80px;
+ }
+
+ .dashboard-menu {
+     display: none;
  }
 
  .nav-list li {
@@ -114,9 +123,9 @@ color: green;
 }
 
 .view-btn {
-    height: 40px;
-    width: 100px;
-    line-height: 40px;
+    height: 30px;
+    width: 80px;
+    line-height: 30px;
     background-color: #E25847;
     border-radius: 5px;
     color: #fff;
@@ -127,6 +136,10 @@ color: green;
     .wrap-content {
         margin-left: 320px;
         max-width: calc(100vw-320px);
+    }
+
+    .dashboard-menu {
+        display: block;
     }
    
 }

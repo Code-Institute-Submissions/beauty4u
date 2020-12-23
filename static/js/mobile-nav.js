@@ -11,3 +11,10 @@ $(this).next(".inner-menu").toggle("slide", {direction: "left"}, 100);
 $(".toggle-mobile-cart").click(function(){
     $(".container-mobile-cart").toggle("slide", {direction: "right"}, 100);
     });
+
+
+    
+   /* Mobile Dashboard Menu */
+$(".open-mobile-settings").click(function(){
+    $(".dashboard-menu").toggle("slide", {direction: "left"}, 100);
+    });
