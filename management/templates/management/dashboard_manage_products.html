@@ -45,7 +45,7 @@
       {% csrf_token %}
       <form method="GET" action="{% url 'manage_products' %}">
         <input type="text" name="q" placeholder="Search A Product" class="search_product_input">
-        <button type="submit"><i class="ml-3 mr-3 fas fa-search search_product_input_icon"></i></button>
+        <button type="submit" class="d-inline"><i class="ml-3 mr-3 fas fa-search search_product_input_icon"></i></button>
       </form>
     </div>
     </div>

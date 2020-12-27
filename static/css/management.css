@@ -174,7 +174,7 @@ cursor: pointer;
 }
 
 .search_product_input {
-    min-width: 300px;
+    min-width: 250px;
     min-height: 60px;
     font-size: 24px;
     padding-left: 5px;

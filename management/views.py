@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse, reverse
 from home.models import openHours, aboutUs
 from django.views.decorators.http import require_POST
 from booking.models import Bookings
@@ -72,9 +72,8 @@ def staff(request):
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            messages.info(request, 'Staff Member Added')
             form = staffForm()
-        
+            return redirect(reverse('staff'))
 
     staff = Staff.objects.all()
 
@@ -230,6 +229,7 @@ def coupons(request):
             form.save()
             form = couponForm()
             form_error = False
+            return redirect(reverse('coupons'))
         else:
             form_error = True
 
