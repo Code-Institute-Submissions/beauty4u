@@ -19,7 +19,7 @@ $(".savesetting").change(function () {
         'settingStatus': settingStatus,
     };
 
-    let url = 'saveData';
+    let url = 'save_data';
     $.post(url, postData).done(function () {
 
     });
@@ -38,7 +38,7 @@ $(".updateshipping").click(function () {
         'settingValue': settingValue,
     };
 
-    let url = 'saveData';
+    let url = 'save_data';
     $.post(url, postData).done(function () {
         location.reload();
     });
@@ -57,7 +57,7 @@ $(".setstandardshipping").click(function () {
         'settingValue': settingValue,
     };
 
-    let url = 'saveData';
+    let url = 'save_data';
     $.post(url, postData).done(function () {
         location.reload();
     });
@@ -88,7 +88,6 @@ $(".updatestaffavail").change(function () {
 });
 
 
-
 $(".remove-staff").click(function () {
     csrf = $('input[name=csrfmiddlewaretoken]').val();
     settingName = $(this).parents().siblings().children(".settingName").text();
@@ -104,4 +103,30 @@ $(".remove-staff").click(function () {
     });
 
 });
+
+
+
+$(".activatecoupon").change(function () {
+    csrf = $('input[name=csrfmiddlewaretoken]').val();
+    settingName = $(this).parents().siblings().children(".settingName").text();
+    if (this.checked) {
+        settingStatus = "True";
+    } else {
+        settingStatus = "False";
+    }
+
+    let postData = {
+        'csrfmiddlewaretoken': csrf,
+        'settingName': settingName,
+        'settingStatus': settingStatus,
+    };
+
+    let url = 'update_coupon_active';
+    $.post(url, postData).done(function () {
+     
+    });
+
+});
+
+
 

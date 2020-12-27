@@ -1,0 +1,95 @@
+{% extends 'management/dashboard_base.html' %}
+{% load static %}
+{% block extra_title %} Dashboard {% endblock %}
+
+
+{% block content %}
+<div class="container-fluid mt-5 pt-4">
+  <div class="row">
+    <div class="col-12 text-muted">
+      <h3 class="d-inline-block">Coupons</h3><div class="ml-3 view-btn text-center d-inline-block" data-toggle="modal" data-target="#addcouponmodal">Add</div>
+      <hr />
+    </div>
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-12">
+      <p>Set up coupons to give customers <strong>fixed percentage discounts</strong></p>
+      {% if count == 0 %}
+      <div class="col-12 text-center mt-5">
+        <img class="img-fluid text-center" src="/media/coupon.png">
+        <h3>No Coupons Found!</h3>
+        <div class="add_coupon_button mx-auto mt-4" data-toggle="modal" data-target="#addcouponmodal">Add A Coupon</div>
+      </div>
+      {% else %}
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Coupon Code</th>
+            <th scope="col">Discount (%)</th>
+            <th scope="col">Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% csrf_token %}
+          {% for coupon in coupons %}
+          <tr>
+            <td class="contain-setting-name">
+              <h4 class="text-muted settingName">{{ coupon.code }}</h4>
+            </td>
+            <td>{{coupon.discount }}</td>
+            <td>
+              <input type="checkbox" {% if coupon.active == True %} checked {% endif %} name="activatecoupon"
+                class="activatecoupon" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Yes" data-off="No">
+
+            </td>
+          </tr>
+          <tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+
+
+  </div>
+
+
+
+
+            <!--Set shipping costs modal-->
+              <div class="modal fade" id="addcouponmodal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-cogs mr-3"></i> Add Coupon</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form method="POST">  
+                        {% csrf_token %}
+                          {{ form | crispy }}
+                          <input type="submit" value="Save" class="clicked_submit"/>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+          
+              {% if form_error == True %}
+              <script>
+                $(function() {
+                  console.log('error');
+                  $('#addcouponmodal').modal({show: true});
+                });
+                </script>
+              {% endif %}
+
+
+  {% endblock %}

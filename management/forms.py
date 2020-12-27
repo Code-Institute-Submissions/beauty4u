@@ -1,6 +1,6 @@
 from django import forms 
 from home.models import openHours, aboutUs
-from management.models import Staff
+from management.models import Staff, Coupons
 from products.models import Product
 
 class HoursForm(forms.ModelForm):
@@ -32,6 +32,8 @@ class staffForm(forms.ModelForm):
             'position',
             'available',
         ]                
+
+
 
 
 class addProductForm(forms.ModelForm):
@@ -76,3 +78,19 @@ class addProductForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
                 self.fields[field].widget.attrs['class'] = 'add-product-input'
                 self.fields[field].label = False 
+
+
+
+class couponForm(forms.ModelForm):
+    """ A form to render model fields for opening time changes """
+    class Meta:
+        model = Coupons
+        fields = [
+            'name',
+            'code',
+            'discount',
+            'active',
+        ]                
+
+
+

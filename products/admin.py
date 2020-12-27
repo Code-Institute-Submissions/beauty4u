@@ -14,6 +14,7 @@ class ProductAdmin(admin.ModelAdmin):
         'price',
         'rating',
         'image',
+        'in_stock'
 
     )
 

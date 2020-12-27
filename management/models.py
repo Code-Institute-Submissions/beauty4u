@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class Sitesettings(models.Model):
@@ -29,3 +30,20 @@ class Staff(models.Model):
     
     def __str__ (self):
         return self.name        
+
+
+# Create your models here.
+class Coupons(models.Model):
+    
+    class Meta:
+        verbose_name_plural = 'Coupons'
+
+    min = 1
+    max = 99
+    name = models.CharField(max_length=250, null=True, blank=False, unique=True)
+    code = models.CharField(max_length=20, null=True, blank=False, unique=True)
+    discount = models.IntegerField (validators=[MinValueValidator(min), MaxValueValidator(max)],null=True, blank=False)
+    active = models.BooleanField(default=True, null=True, blank=False)
+    
+    def __str__ (self):
+        return self.name    

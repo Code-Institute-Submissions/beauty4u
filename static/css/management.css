@@ -1,3 +1,8 @@
+.contain-search-form button {
+    background-color: transparent !important;
+    border: none !important;
+}
+
 a:hover {
 text-decoration: none;
 }
@@ -158,6 +163,26 @@ cursor: pointer;
     color: #fff;
   }
 
+.add_coupon_button{
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    color: #fff;
+    background-color:#4A94BF;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.search_product_input {
+    min-width: 300px;
+    min-height: 60px;
+    font-size: 24px;
+    padding-left: 5px;
+}
+
+.search_product_input_icon {
+    font-size: 24px;
+}
 
 @media(min-width: 992px) {
     .wrap-content {
