@@ -2,6 +2,7 @@
 
 let toggleSave = document.getElementById('save');
 let settingName;
+let couponCode;
 let csrf;
 
 $(".savesetting").change(function () {
@@ -127,6 +128,57 @@ $(".activatecoupon").change(function () {
     });
 
 });
+
+$('.coupon-settings').click(function(){
+coupon = $(this).parents().siblings().children(".settingName").text();
+$('.inject-coupon-name').text(coupon);
+$('#couponsettingsmodal').modal({show: true});
+});
+
+
+$(".save_minspend_setting").click(function () {
+    csrf = $('input[name=csrfmiddlewaretoken]').val();
+    couponName = $('.inject-coupon-name').text();
+    minspend = $('#minspend').val();
+
+
+
+    
+
+    if ($.isNumeric(minspend)){
+
+    minspend = parseFloat(minspend);
+
+    let postData = {
+        'csrfmiddlewaretoken': csrf,
+        'couponName': couponName,
+        'minspend': minspend,
+    };
+
+    let url = 'update_coupon_minspend';
+        
+    $.post(url, postData).done(function () {
+     $('.text-danger').text(' ');
+     $('.text-success').text('Update Successful!');
+        // Update coupon data 
+        $('.' + coupon + '-minspend').text(minspend);
+    }).fail(function(){
+       $('.text-danger').text('There was a problem contacting the server!');
+       $('.text-success').text(' ');
+    });
+
+    }
+    else {
+        $('.text-success').text(' ');
+        $('.text-danger').text('There was a problem! Please make sure you enter a number!')
+    }
+
+});
+
+
+
+
+
 
 
 

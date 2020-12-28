@@ -44,6 +44,7 @@ class Coupons(models.Model):
     code = models.CharField(max_length=20, null=True, blank=False, unique=True)
     discount = models.IntegerField (validators=[MinValueValidator(min), MaxValueValidator(max)],null=True, blank=False)
     active = models.BooleanField(default=True, null=True, blank=False)
+    minspend = models.DecimalField(max_digits=5, null=True, blank=True, decimal_places=2)
     
     def __str__ (self):
-        return self.name    
+            return self.name

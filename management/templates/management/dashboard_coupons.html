@@ -29,7 +29,9 @@
           <tr>
             <th scope="col">Coupon Code</th>
             <th scope="col">Discount (%)</th>
+            <th scope="col">Minimum Spend (€)</th>
             <th scope="col">Active</th>
+            <th scope="col">Settings</th>
           </tr>
         </thead>
         <tbody>
@@ -39,11 +41,15 @@
             <td class="contain-setting-name">
               <h4 class="text-muted settingName">{{ coupon.code }}</h4>
             </td>
-            <td>{{coupon.discount }}</td>
+            <td class="coupon-discount">{{coupon.discount }}</td>
+            <td class="coupon-minspend {{coupon.code}}-minspend">{{coupon.minspend}}</td>
             <td>
               <input type="checkbox" {% if coupon.active == True %} checked {% endif %} name="activatecoupon"
                 class="activatecoupon" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Yes" data-off="No">
 
+            </td>
+            <td>
+              <div class="btn btn-success coupon-settings"><i class="fas fa-cogs"></i></div>
             </td>
           </tr>
           <tr>
@@ -81,7 +87,31 @@
               </div>
 
 
-          
+            <!--Coupon Settings-->
+            <div class="modal fade" id="couponsettingsmodal" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-cogs mr-3"></i>Coupon (<span class="inject-coupon-name"></span>)</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Set a <strong>minimum amount the customer must spend</strong> before this coupon can be used</p>
+                      <input type="number" name="minspend" id="minspend" placeholder="30.00" required>
+                      {% csrf_token %}
+                        <button class="btn btn-success save_minspend_setting">Update</button>
+                    </form>
+                  <div class="success-message mt-3">
+                    <p class='text-success'></p>
+                    <p class="text-danger"></p>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
               {% if form_error == True %}
               <script>
                 $(function() {
@@ -90,6 +120,10 @@
                 });
                 </script>
               {% endif %}
+
+              
+  
+
 
 
   {% endblock %}

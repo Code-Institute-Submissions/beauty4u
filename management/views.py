@@ -243,6 +243,24 @@ def coupons(request):
     """ A view that returns the coupon page """
     return render(request, 'management/dashboard_coupons.html',  context)
 
+@require_POST
+def update_coupon_minspend(request):
+    try:
+        """ This view will handle Post requests from the settings page """
+        minspend = request.POST.get('minspend')
+        couponName = request.POST.get('couponName')
+        # Check format of setting 
+
+        coupon = get_object_or_404(Coupons, code=couponName)
+        coupon.minspend = minspend
+        coupon.save()
+        print(f'New Status: {coupon.minspend}')
+
+        return HttpResponse(status=200)
+    
+    except Exception as e:
+        print(e)
+        return HttpResponse(content=e, status=400)
 
 
 @require_POST
