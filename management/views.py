@@ -3,6 +3,7 @@ from home.models import openHours, aboutUs
 from django.views.decorators.http import require_POST
 from booking.models import Bookings
 from checkout.models import Order, OrderLineItem
+from allauth.account.models import EmailAddress
 from management.models import Sitesettings, Staff, Coupons, SiteStats
 from .forms import HoursForm, aboutForm, addProductForm, staffForm, couponForm
 from products.models import Product, Brand, Category
@@ -43,10 +44,20 @@ def manage(request):
     else:
         traffic_down = 0    
 
-    print(difference)
-    print(last_day)
-    print(last_7)
-    print(last_31)
+    #Get Shop Stats
+    totalrevenue = 0
+    orders = Order.objects.all()
+    num_of_orders = Order.objects.all().count() 
+
+    for item in orders:
+        totalrevenue = totalrevenue + item.total 
+
+    #Get Booking Stats
+    num_of_bookings = Bookings.objects.all().count() 
+
+    #Get Total User Count (excluding super users )
+    total_users = EmailAddress.objects.all().exclude(user__is_superuser=True).count()
+
     context = {
         'bookings': bookings,
         'orders': orders,
@@ -54,7 +65,11 @@ def manage(request):
         'last_7': last_7,
         'last_31': last_31,
         'previous_week': previous_week,
-        'traffic_down': traffic_down
+        'traffic_down': traffic_down,
+        'num_of_orders': num_of_orders,
+        'totalrevenue': totalrevenue,
+        'num_of_bookings': num_of_bookings,
+        'total_users': total_users
 
     }
 
