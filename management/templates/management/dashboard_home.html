@@ -68,27 +68,25 @@
             <script>
                 var ctx = document.getElementById('myChart').getContext('2d');
                 var myChart = new Chart(ctx, {
-                    type: 'bar',
+                    type: 'horizontalBar',
                     data: {
-                        labels: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
+                        labels: ['Today', 'This Week', 'Last Week', 'This Month'],
                         datasets: [{
                             label: '# Unique Website Visits',
-                            data: [200, 19, 3, 5, 2, 3, 8],
+                            data: [{{last_day}}, {{last_7}}, {{previous_week}}, {{last_31}}],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 99, 132, 0.2)'
+
                             ],
                             borderColor: [
                                 'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 99, 132, 1)'
+
                             ],
                             borderWidth: 1
                         }]
@@ -99,11 +97,28 @@
                                 ticks: {
                                     beginAtZero: true
                                 }
+                            }],
+                            xAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
                             }]
                         }
                     }
                 });
             </script>
+        </div>
+        <div class="col-12 col-lg-6 text-center">
+            {% if traffic_down == 1 %} 
+            <img src="/media/sad.png" class="img-fluid emoji">
+            <h6 class="mt-4"><strong>Your traffic is down from last week!</strong></h6>
+            <div class="email_btn">SEND A MARKETING EMAIL</div>
+            {% else %}
+            <img src="/media/thumb.png" class="img-fluid emoji">
+            <h6 class="mt-4"><strong>Your traffic is up from last week! Well done!</strong></h6>
+            <div class="email_btn">SEND A MARKETING EMAIL</div>
+            
+            {% endif %}
         </div>
     </div>
 </div>

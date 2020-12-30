@@ -3,27 +3,59 @@ from home.models import openHours, aboutUs
 from django.views.decorators.http import require_POST
 from booking.models import Bookings
 from checkout.models import Order, OrderLineItem
-from management.models import Sitesettings, Staff, Coupons
+from management.models import Sitesettings, Staff, Coupons, SiteStats
 from .forms import HoursForm, aboutForm, addProductForm, staffForm, couponForm
 from products.models import Product, Brand, Category
 from django.contrib import messages
 from decimal import Decimal
 from django.db.models import Q
+import datetime
+from datetime import timedelta
 
 
 # Create your views here.
 
 def manage(request):
     """ A view that returns the dashboard home page """
+
+    #Get data for website traffic 
+    today = datetime.date.today()
+    month = today.month
+    day = today.day
+    last_week = today-timedelta(days=7)
+    two_weeks = today-timedelta(days=14)
+
+   
     bookings = Bookings.objects.all().order_by('-date')[:5] 
     orders = Order.objects.all().order_by('-date')[:5]
 
-    # Get Unique Website Visits
+    last_day = SiteStats.objects.filter(date__day=day).count()
+    last_7 = SiteStats.objects.filter(date__lt=today, date__gt=last_week).count() + last_day
+    last_31 = SiteStats.objects.filter(date__month=month).count()
 
+    # Get number of website vists from 14 to 7 days ago (previous week) anfd compare to this week
+    previous_week = SiteStats.objects.filter(date__lt=last_week, date__gt=two_weeks).count()
 
+    difference = last_7 - previous_week
+
+    if difference < 0:
+        traffic_down = 1
+    else:
+        traffic_down = 0    
+
+    print(difference)
+    print(last_day)
+    print(last_7)
+    print(last_31)
     context = {
         'bookings': bookings,
-        'orders': orders
+        'orders': orders,
+        'last_day': last_day,
+        'last_7': last_7,
+        'last_31': last_31,
+        'previous_week': previous_week,
+        'traffic_down': traffic_down
+
     }
 
     return render(request, 'management/dashboard_home.html', context)

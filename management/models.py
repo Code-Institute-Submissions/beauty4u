@@ -48,3 +48,16 @@ class Coupons(models.Model):
     
     def __str__ (self):
             return self.name
+
+# Create your models here.
+class SiteStats(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Site Stats'
+
+    
+    date = models.DateField(null=True, blank=True)
+    day = models.CharField(max_length=10,null=True, blank=True)
+
+    def __str__ (self):
+        return self.day
