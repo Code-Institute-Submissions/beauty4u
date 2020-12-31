@@ -48,6 +48,7 @@ class openHours(models.Model):
     day = models.CharField(max_length=15, choices=DAY_CHOICE, default="MONDAY")
     openingTime = models.CharField(max_length=15, choices=TIME_CHOICES, default="9 A.M")
     closingTime = models.CharField(max_length=15, choices=TIME_CHOICES, default="6 P.M")
+    markedClosed = models.BooleanField(null=True, blank=True, default=False)
     
     def __str__(self):
         return self.day

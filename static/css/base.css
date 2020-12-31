@@ -594,7 +594,7 @@ background-color: #fff;
 }
 
 
-.continue-cooking-btn {
+.continue-booking-btn {
   height: 40px;
   width: 80%;
   margin: 0 auto;
@@ -644,6 +644,26 @@ float: right;
 background-color: #000;
 border: none ;
 color: #fff;
+}
+
+
+.center-widget {
+margin: 0 auto;
+margin-top: 10vh;
+}
+
+.circle-select-staff-member {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  border: 1px solid lightgrey;
+  vertical-align: middle;
+}
+
+
+#datepicker {
+  width: 100%;
+  padding: 5px;
 }
 
 /* 9. Login ------- */ 

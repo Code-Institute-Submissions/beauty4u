@@ -14,7 +14,7 @@
 
 {% block content %}
 <!--Booking Widget-->
-<div class="container mt-4">
+<div class="container mt-4 booking-container h-100">
     <div class="row">
         <div class="col-12">
             <h3>Make A Booking</h3>
@@ -72,12 +72,14 @@
     <div class="fixed-popup-desktop d-sm-none d-md-none d-lg-none shadow">
     <div class="col-12 text-center pt-3">
     <strong>BOOK</strong>
+  
     <hr />
     </div>
     <div id="contain-selected-services"></div>
     <div class="col-12 text-right">
     <h6>Total: €<span class="total-cost">0</span></h6>
-    <div class="continue-cooking-btn">CONTINUE</div>
+    {% csrf_token %}
+    <div class="continue-booking-btn">CONTINUE</div>
     </div>
     </div>
 
@@ -98,5 +100,7 @@
 
 <!--Load JQuery for booking widget-->
 {% block postloadjs %}
+{{ block.super }}
 <script src="{% static 'js/booking.js' %}"></script>
+<!--Load scripts for time picker-->
 {% endblock %}

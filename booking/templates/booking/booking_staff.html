@@ -1,0 +1,19 @@
+
+
+<div class="center-widget shadow p-4 w-100">
+{% csrf_token %}
+<!--Booking Widget-->
+<h3>Choose A Staff Member</h3>
+<p class="message text-danger mt-3 text-center"></p>
+<hr/>
+{% for member in staff %}
+
+<div onclick="selectStaffMember(this)" class="col-12 pt-3 pb-3 select-staff-member"><div class="circle-select-staff-member d-inline-block"></div><span class="ml-3 staff-name">{{ member.name }}</span>
+</div>
+<hr class="p-0 m-0"/>
+
+{% endfor %}
+<div onclick="continueBookingTime()" class="continue-booking-btn continue-booking-to-time mt-3">Continue</div>
+</div>
+
+

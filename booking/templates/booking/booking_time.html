@@ -1,0 +1,24 @@
+<div class="center-widget shadow p-4 w-100">
+    <!--Booking Widget-->
+    <h3>Choose A Date</h3>
+    <hr />
+    <input type="text" id="datepicker" placeholder="Select Date">
+</div>
+
+<div class="center-widget shadow p-4 w-100">
+    <!--Booking Widget-->
+    <h3>Choose A Time</h3>
+    <hr />
+</div>
+
+<script>
+   $( "#datepicker" ).datepicker({
+  beforeShowDay: closed
+});
+function closed(date){
+      if (date.getDay() === 1)  /* Monday */
+            return [ false, "closed", "Closed on Monday" ]
+      else
+            return [ true, "", "" ]
+}
+</script>

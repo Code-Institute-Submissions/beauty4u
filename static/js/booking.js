@@ -1,11 +1,12 @@
 let tempArray = []; // Array to store all the service booking items selected
 let storeCost = 0;
+let staffSelected = []
 let displayArray = []
 let selected = ""; // Stores the clicked item value
 let check; // 1 or 0 depending if item has been selected 
 displayArray = JSON.parse(sessionStorage.getItem("services"));
 let sessionCost =  parseFloat(JSON.parse(sessionStorage.getItem("storedCost")));
-
+let csrf;
 // Check if there is a cost stored - if there is update the cost
     if (sessionCost > 0) {
         storeCost = sessionCost;
@@ -123,3 +124,62 @@ function addCost(serviceCost) {
 }
 
 
+$(".continue-booking-btn").click(function(){
+// Post selected services in session to django view to hangle 
+csrf = $('input[name=csrfmiddlewaretoken]').val();
+
+let postData = {
+    'csrfmiddlewaretoken': csrf,
+    'displayArray': tempArray,
+    'sessionCost': sessionCost,
+};
+
+console.log(tempArray);
+
+let url = 'select_staff';
+
+$.post(url, postData).done(function (response) {
+    $(".booking-container").html(response);
+});
+
+});
+
+
+
+
+// Select Staff Member 
+function selectStaffMember(obj) {
+let staffName = $(obj).children(".staff-name").text();
+$(".select-staff-member").children(".circle-select-staff-member").toggleClass("service-item-selected");
+if (staffSelected.includes(staffName)){
+    staffSelected.pop(staffName);
+} else {
+    staffSelected.push(staffName);
+    $(".message").text("");
+}
+
+}
+
+
+function continueBookingTime(){
+    if (staffSelected.length < 1)
+    {
+        $(".message").text("Please select at least one staff member!");
+    }
+    else {
+
+        csrf = $('input[name=csrfmiddlewaretoken]').val();
+
+        let postData = {
+            'csrfmiddlewaretoken': csrf,
+            'staffSelected': staffSelected,
+        };
+        let url = 'select_time';
+
+        $.post(url, postData).done(function (response) {
+            $(".booking-container").html(response);
+        });
+        
+
+    }
+}
