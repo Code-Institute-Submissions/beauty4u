@@ -649,7 +649,7 @@ color: #fff;
 
 .center-widget {
 margin: 0 auto;
-margin-top: 10vh;
+
 }
 
 .circle-select-staff-member {
@@ -662,6 +662,11 @@ margin-top: 10vh;
 
 
 #datepicker {
+  width: 100%;
+  padding: 5px;
+}
+
+.selectpicker {
   width: 100%;
   padding: 5px;
 }

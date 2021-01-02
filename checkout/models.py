@@ -3,7 +3,9 @@ from django.db.models import Sum
 from django.conf import settings
 from django.db import models
 from products.models import Product
-
+from django_countries.fields import CountryField
+from management.models import Sitesettings
+from django.shortcuts import get_object_or_404
 # Create your models here.
 class Order(models.Model):
  
@@ -15,7 +17,7 @@ class Order(models.Model):
     street_address2 = models.CharField(max_length=80, null=False, blank=False)
     town_or_city = models.CharField(max_length=40, null=False, blank=False)
     county = models.CharField(max_length=40, null=True, blank=True) #not required
-    country = models.CharField(max_length=40, null=False, blank=False)
+    country = CountryField(blank_label="Country *", null=False, blank=False)
     postcode = models.CharField(max_length=20, null=True, blank=True) #not required
     date = models.DateTimeField(auto_now_add=True)
     delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
@@ -29,8 +31,14 @@ class Order(models.Model):
     def update_total(self):
         """ Update total each time a new line item is added """
         self.subtotal = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
-        if self.subtotal < settings.FREE_SHIPPING_THRESHOLD:
-            self.delivery_cost = settings.STANDARD_DELIVERY_COST
+
+        settings = Sitesettings.objects.get(name="Free Shipping Threshold")
+        threshold_value = settings.value
+        setting2 = Sitesettings.objects.get(name="Standard Shipping")
+        std_value = setting2.value
+
+        if self.subtotal < threshold_value:
+            self.delivery_cost = std_value
         else:
             self.delivery_cost = 0
         self.total = self.subtotal + self.delivery_cost        

@@ -1,0 +1,12 @@
+
+<div class="center-widget shadow p-4 w-100">
+{% csrf_token %}
+<h3 class="text-muted">Confirm Booking Details</h3>
+<p>Services: {% for item in services %} {{ item }} {% if services|length > 1 %}, {% endif %}{% endfor %}</p>
+<p>Staff Members: {% for item in staff %} {{ item }} {% if staff|length > 1 %}, {% endif %}{% endfor %}</p>
+<p>Date: {{ date }}</p>
+<p>Time: {{ time }}</p>
+<p>Cost: €{{ cost }}</p>
+</div>
+
+

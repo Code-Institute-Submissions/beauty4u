@@ -221,7 +221,7 @@ def changeHours(request):
     }
 
     """ A view that returns the index page """
-    return render(request, 'management/changehours.html', context)
+    return render(request, 'management/dashboard_changehours.html', context)
 
 
 def changeAbout(request):

@@ -11,7 +11,34 @@ class HoursForm(forms.ModelForm):
             'day',
             'openingTime',
             'closingTime',
+            'markedClosed',
         ]
+
+
+    def __init__(self, *args, **kwargs):
+            """ Style the form """ 
+
+            super().__init__(*args, **kwargs)
+
+            placeholders = {
+                'day': 'Select Day',
+                'openingTime': 'Select Opening Time',
+                'closingTime': 'Select Closing Time',
+                'markedClosed':'Open/Closed',
+                }
+
+            for field in self.fields:
+                if self.fields[field].required:
+                    placeholder = f' {placeholders[field]} *'
+                else:
+                    placeholder = placeholders[field]
+                self.fields[field].widget.attrs['placeholder'] = placeholder
+                self.fields["markedClosed"].widget.attrs['data-toggle'] = "toggle"
+                self.fields["markedClosed"].widget.attrs['data-onstyle'] = "success"
+                self.fields["markedClosed"].widget.attrs['data-offstyle'] = "danger"
+                self.fields["markedClosed"].widget.attrs['data-on'] = "Yes"
+                self.fields["markedClosed"].widget.attrs['data-off'] = "No"
+                self.fields[field].label = False 
 
 class aboutForm(forms.ModelForm):
     """ A form to render model fields for opening time changes """

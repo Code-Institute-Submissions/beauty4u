@@ -1,9 +1,9 @@
 
-
 <div class="center-widget shadow p-4 w-100">
 {% csrf_token %}
 <!--Booking Widget-->
 <h3>Choose A Staff Member</h3>
+<p>If you select multiple staff members, we will assign you a staff member from that selection based on your requirements and availability.</p>
 <p class="message text-danger mt-3 text-center"></p>
 <hr/>
 {% for member in staff %}
@@ -15,5 +15,5 @@
 {% endfor %}
 <div onclick="continueBookingTime()" class="continue-booking-btn continue-booking-to-time mt-3">Continue</div>
 </div>
-
+</div>
 

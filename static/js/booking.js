@@ -183,3 +183,55 @@ function continueBookingTime(){
 
     }
 }
+
+
+function continueBookingConfirm() {
+
+    dateVal =  $("#datepicker").datepicker({ dateFormat: 'dd,MM,yyyy' }).val();
+    timeVal =   $("#time").val()
+
+    if (!timeVal && dateVal == "") {
+        $(".select-date-message").text("Please make sure you select a date!")
+        $(".select-time-message").text("Please make sure you select a time!")
+    }
+    else if (dateVal == "") {
+        $(".select-date-message").text("Please make sure you select a date!")
+    }
+    else if (!timeVal) {
+        $(".select-time-message").text("Please make sure you select a time!")
+    }
+   
+    else {
+
+        // Post the data to the server 
+
+        csrf = $('input[name=csrfmiddlewaretoken]').val();
+
+        let postData = {
+            'csrfmiddlewaretoken': csrf,
+            'dateVal': dateVal,
+            'timeVal': timeVal,
+        };
+        
+        let url = 'confirm_booking';
+
+        $.post(url, postData).done(function (response) {
+            $(".booking-container").html(response);
+        });
+
+
+
+
+
+
+
+
+        $(".select-date-message").text("")
+        $(".select-time-message").text("")
+    }
+
+
+   
+
+
+}

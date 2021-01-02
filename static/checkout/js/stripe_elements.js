@@ -4,7 +4,7 @@ let stripe = Stripe(stripePublicKey)
 
 let elements = stripe.elements();
 let card = elements.create('card', { style: style });
-
+let errorDiv = document.getElementById('card-errors');
 
 var style = {
   base: {
@@ -28,7 +28,7 @@ card.mount('#card-element');
 
 card.addEventListener('change', function (event) {
 
-  let errorDiv = document.getElementById('card-errors');
+
   if (event.error) {
 
     let html = `
@@ -52,25 +52,25 @@ form.addEventListener('submit', function (ev) {
   ev.preventDefault(); // Prevent form from submitting
   // Disable card element and submit button to prevent multiple payments
   card.update({ 'disabled': true });
-  $('#submit-button').attr('disabled', True);
+  $('#submit-button').attr('disabled', true);
 
   // Capture form data 
-  let safeInfo = Boolean($('#id-save-info').attr('checked'))
+  let saveInfo = Boolean($('#id-save-info').attr('checked'))
   let csrf = $('input[name=csrfmiddlewaretoken]').val();
   let postData = {
-      'csrfmiddlewaretoken': csrfToken, 
-      'client_ecret': clientSecret, 
+      'csrfmiddlewaretoken': csrf, 
+      'client_secret': clientSecret, 
       'save_info': saveInfo,
   };
 
-  let url = '/checkout/cache_checkout_data/'
+  let url = 'cache_checkout_data'
 
   $.post(url, postData).done(function(){
     stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: card,
         billing_details: {
-          name: $.trim(form.full_name_value),
+          name: $.trim(form.full_name.value),
           phone: $.trim(form.phone_number.value),
           email: $.trim(form.email.value),
           address: {
@@ -84,7 +84,7 @@ form.addEventListener('submit', function (ev) {
         }
       },
       shipping: {
-        name: $.trim(form.full_name_value),
+        name: $.trim(form.full_name.value),
         phone: $.trim(form.phone_number.value),
         address: {
           line1: $.trim(form.street_address1.value),
