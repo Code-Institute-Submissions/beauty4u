@@ -15,6 +15,7 @@ colorama==0.4.4
 cycler==0.10.0
 defusedxml==0.6.0
 distlib==0.3.1
+dj-database-url==0.5.0
 Django==3.0.7
 django-allauth==0.42.0
 django-countries==7.0
@@ -38,6 +39,7 @@ oauthlib==3.1.0
 pathspec==0.8.0
 pefile==2019.4.18
 Pillow==7.2.0
+psycopg2-binary==2.8.6
 pycparser==2.20
 pyinstaller==4.0
 pyinstaller-hooks-contrib==2020.8

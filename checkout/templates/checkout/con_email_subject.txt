@@ -1,0 +1,1 @@
+Beauty4U Confirmation for Order Number {{ order.order_number }}
