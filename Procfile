@@ -1,0 +1,1 @@
+web: gunicorn beauty4u.wsgi:application

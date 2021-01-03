@@ -30,7 +30,7 @@ SECRET_KEY = '&k3_zu*7+xd531g&z!()du6skxx_*jvof5k)cx5i%b@ripj-x*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['beauty4u.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -131,13 +131,19 @@ WSGI_APPLICATION = 'beauty4u.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-       'HOST': 'localhost',
+
+if 'DATEBASE_URL' in os.environ:
+    DATEBASES = {
+        'default': dj_datebase_url.parse(os.environ.get('DATABASE_URL'))
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'HOST': 'localhost',
+        }
+    }
 
 
 
