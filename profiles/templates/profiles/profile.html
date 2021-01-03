@@ -11,9 +11,21 @@
 
 
 {% block content %}
-<div class="container mt-5">
-<h4>Profile</h4>
-{{ profile }}
+<div class="container mt-5 h-100">
+    <h4>Profile</h4>
+    <hr />
+    <div class="col-12 col-lg-6">
+        <form action="{% url 'profile' %}" method="POST" id="update-info-form">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <p class="text-right">
+            <button type="submit" class="submit-form text-center">Update</button>
+            </p>
+        </form>
+    </div>
+
+    <div class="col-12 col-lg-6">
+        {{ orders }}
+    </div>
 </div>
 {% endblock %}
-

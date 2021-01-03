@@ -74,7 +74,14 @@ border: none !important;
 background-color: #248f62;
 }
 
-
+.submit-form {
+  height: 40px;
+  width: 150px;
+  background-color: #000 !important;
+  color: #fff;
+  line-height: 40px;
+  border: none;
+}
 
 /* 2. Nav  ------- */ 
 
