@@ -12,20 +12,20 @@ from profiles.models import UserProfile
 # Create your models here.
 class Order(models.Model):
  
-    order_number = models.CharField(max_length=32, null=False, editable=False)
+    order_number = models.CharField(max_length=254, null=False, editable=False)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name="orders")
-    full_name = models.CharField(max_length=50,  null=False, blank=False)
+    full_name = models.CharField(max_length=254,  null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
-    phone_number = models.CharField(max_length=20, null=False, blank=False)
-    street_address1 = models.CharField(max_length=80, null=False, blank=False)
-    street_address2 = models.CharField(max_length=80, null=False, blank=False)
-    town_or_city = models.CharField(max_length=40, null=False, blank=False)
-    county = models.CharField(max_length=40, null=True, blank=True) #not required
-    country = CountryField(blank_label="Country *", null=False, blank=False)
-    postcode = models.CharField(max_length=20, null=True, blank=True) #not required
+    phone_number = models.CharField(max_length=254, null=False, blank=False)
+    street_address1 = models.CharField(max_length=254, null=False, blank=False)
+    street_address2 = models.CharField(max_length=254, null=False, blank=False)
+    town_or_city = models.CharField(max_length=254, null=False, blank=False)
+    county = models.CharField(max_length=254, null=True, blank=True) #not required
+    country = CountryField(max_length=254, blank_label="Country *", null=False, blank=False)
+    postcode = models.CharField(max_length=254, null=True, blank=True) #not required
     date = models.DateTimeField(auto_now_add=True)
     delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
-    shipping_method = models.CharField(max_length=50,  null=True, blank=False, default="Standard Shipping")
+    shipping_method = models.CharField(max_length=254,  null=True, blank=False, default="Standard Shipping")
     subtotal = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     original_cart = models.TextField(null=False, blank=False, default='')

@@ -24,14 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-if 'DATABASE_URL' in os.environ:
+
 # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = os.environ.get('SECRET_KEY', '')
-else: 
-    SECRET_KEY="ts7%9m@beu4%4=x-_lhb#9&m98r=!zhlf*76c2ldjrs+5)(mzn"
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['beauty4u.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -137,17 +135,17 @@ WSGI_APPLICATION = 'beauty4u.wsgi.application'
 
 
 
-#if 'DATABASE_URL' in os.environ:
+if 'DATABASE_URL' in os.environ:
 DATABASES = {
-        'default': dj_database_url.parse('postgres://qmchwnqmoyxgms:8008aa2f07cc6ee68ea93d46132d6fca05d28e3e7f11b3de7162e0e841332dbb@ec2-54-247-125-38.eu-west-1.compute.amazonaws.com:5432/dc5h5eorpf6ig4')
+     'default': dj_database_url.parse('postgres://qmchwnqmoyxgms:8008aa2f07cc6ee68ea93d46132d6fca05d28e3e7f11b3de7162e0e841332dbb@ec2-54-247-125-38.eu-west-1.compute.amazonaws.com:5432/dc5h5eorpf6ig4')
+ }
+else:
+DATABASES = {
+  'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+       }
   }
-#else:
-#DATABASES = {
-        #'default': {
-         #   'ENGINE': 'django.db.backends.sqlite3',
-        #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-      #  }
- #  }
 
 
 
