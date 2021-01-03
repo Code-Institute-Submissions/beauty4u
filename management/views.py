@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse, reverse
 from home.models import openHours, aboutUs
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.decorators.http import require_POST
 from booking.models import Bookings
 from checkout.models import Order, OrderLineItem
@@ -18,6 +19,10 @@ from datetime import timedelta
 
 def manage(request):
     """ A view that returns the dashboard home page """
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
 
     #Get data for website traffic 
     today = datetime.date.today()
@@ -77,6 +82,10 @@ def manage(request):
 
 
 def view_orders(request):
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
     
     orders = Order.objects.all().order_by('-date')
 
@@ -88,6 +97,10 @@ def view_orders(request):
 
 
 def order_detail(request, order_number2):
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
 
     order = get_object_or_404(Order, order_number=order_number2)
 
@@ -103,6 +116,10 @@ def order_detail(request, order_number2):
 
 def settings(request):
 
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
+
     settings = Sitesettings.objects.all()
     context = {
         'settings': settings
@@ -113,6 +130,10 @@ def settings(request):
 
 
 def staff(request):
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
 
     form = staffForm(request.POST or None)
 
@@ -132,8 +153,14 @@ def staff(request):
 
     return render(request, 'management/dashboard_staff.html', context)    
 
+
+
 @require_POST
 def save_data(request):
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
 
     """ This view will handle Post requests from the settings page """
     settingName = request.POST.get('settingName')
@@ -155,9 +182,14 @@ def save_data(request):
     return HttpResponse(status=200)
 
 
-
 @require_POST
 def update_staff_avail(request):
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
+
+
     try:
         """ This view will handle Post requests from the settings page """
         settingName = request.POST.get('settingName')
@@ -181,6 +213,11 @@ def update_staff_avail(request):
 
 @require_POST
 def remove_staff(request):
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
+
     staff_member = request.POST.get('settingName')
     select_member = get_object_or_404(Staff, name=staff_member)
     select_member.delete()
@@ -189,6 +226,11 @@ def remove_staff(request):
 
 
 def changeHours(request):
+
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
 
     if request.method == "POST":
   
@@ -226,6 +268,10 @@ def changeHours(request):
 
 def changeAbout(request):
 
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
+
     text = aboutUs.objects.get(pk=1)
     form = aboutForm(request.POST or None, instance=text)
 
@@ -247,6 +293,10 @@ def changeAbout(request):
 
 def add_a_product(request):
 
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
+
     form = addProductForm(request.POST or None)
     
     if request.method == "POST":
@@ -264,6 +314,10 @@ def add_a_product(request):
 
 
 def coupons(request):
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
 
     form_error = False
     coupons = Coupons.objects.all()
@@ -292,6 +346,10 @@ def coupons(request):
 
 @require_POST
 def update_coupon_minspend(request):
+  
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))  
     try:
         """ This view will handle Post requests from the settings page """
         minspend = request.POST.get('minspend')
@@ -312,6 +370,11 @@ def update_coupon_minspend(request):
 
 @require_POST
 def update_coupon_active(request):
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home')) 
+ 
     try:
         """ This view will handle Post requests from the settings page """
         settingName = request.POST.get('settingName')
@@ -336,6 +399,10 @@ def update_coupon_active(request):
 
 
 def manage_products(request):
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, You need to be a shop owner to do this!')
+        return redirect(reverse('home'))
 
     products = Product.objects.all()
     brands = Brand.objects.all()
