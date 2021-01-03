@@ -136,16 +136,16 @@ WSGI_APPLICATION = 'beauty4u.wsgi.application'
 
 
 if 'DATABASE_URL' in os.environ:
-DATABASES = {
-     'default': dj_database_url.parse('postgres://qmchwnqmoyxgms:8008aa2f07cc6ee68ea93d46132d6fca05d28e3e7f11b3de7162e0e841332dbb@ec2-54-247-125-38.eu-west-1.compute.amazonaws.com:5432/dc5h5eorpf6ig4')
- }
+    DATABASES = {
+         'default': dj_database_url.parse('postgres://qmchwnqmoyxgms:8008aa2f07cc6ee68ea93d46132d6fca05d28e3e7f11b3de7162e0e841332dbb@ec2-54-247-125-38.eu-west-1.compute.amazonaws.com:5432/dc5h5eorpf6ig4')
+    }
 else:
-DATABASES = {
-  'default': {
-       'ENGINE': 'django.db.backends.sqlite3',
-         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-       }
-  }
+    DATABASES = {
+    'default': {
+    'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+    }
 
 
 
