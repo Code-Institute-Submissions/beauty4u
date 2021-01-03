@@ -134,7 +134,7 @@ WSGI_APPLICATION = 'beauty4u.wsgi.application'
 
 if 'DATEBASE_URL' in os.environ:
     DATEBASES = {
-        'default': dj_datebase_url.parse(os.environ.get('DATABASE_URL'))
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
 else:
     DATABASES = {
