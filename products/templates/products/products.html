@@ -37,11 +37,11 @@
         <div class="col-6 col-lg-3 mt-5 pt-4">
         <div class="col-12 text-center">
             {% if items.sale_price < items.price  %}   
-            <span class="sale-badge"><img class="sale-tag" src="{{media}}sale-tag.png"></span>
+            <span class="sale-badge"><img class="sale-tag" src="{{MEDIA}}sale-tag.png"></span>
             {% endif %}
             {% if items.image %}
             <a href="{% url 'product_detail' items.id %}">
-            <img src="{{media}}{{ items.image }}" class="product-image" alt="{{ items.name }}">
+            <img src="{{MEDIA}}{{items.image}}" class="product-image" alt="{{ items.name }}">
             </a>
             {% endif %}
         </div>
@@ -83,7 +83,7 @@
     <ul class="list-group list-group-horizontal brand-list">
         <!--Some logic here to output brands-->
         {% for brands in brandList %}
-    <a href="{% url 'products' %}?brand={{ brands.id }}"><li class="list-group-item m-2">{% if brands.logo %}<img src="{{media}}{{ brands.logo }}" alt="brands.brand" class="brand-list-logo">{% else %}{{ brands.brand }}{% endif %}</li></a>
+    <a href="{% url 'products' %}?brand={{ brands.id }}"><li class="list-group-item m-2">{% if brands.logo %}<img src="{{MEDIA}}{{brands.logo}}" alt="brands.brand" class="brand-list-logo">{% else %}{{ brands.brand }}{% endif %}</li></a>
         {% endfor %}
       </ul>
     </div>
@@ -127,11 +127,11 @@
     <div class="col-6 col-lg-3 mt-5 pt-4">
     <div class="col-12 text-center">
         {% if items.sale_price < items.price  %}   
-        <span class="sale-badge"><img class="sale-tag" src="{{media}}sale-tag.png"></span>
+        <span class="sale-badge"><img class="sale-tag" src="{{MEDIA}}sale-tag.png"></span>
         {% endif %}
         {% if items.image %}
         <a href="{% url 'product_detail' items.id %}">
-        <img src="{{media}}{{ items.image }}" class="product-image" alt="{{ items.name }}">
+        <img src="{{MEDIA}}{{items.image}}" class="product-image" alt="{{ items.name }}">
         </a>
         {% endif %}
     </div>
