@@ -24,10 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-#if 'USE_AWS' in os.environ:
-# SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = os.environ.get('SECRET_KEY', '')
-#else:
+
 SECRET_KEY = os.environ.get('DJANGO_SECRET', '')
 
 
@@ -119,17 +116,17 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 
 
-#if 'DEVELOPMENT' in os.environ:
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Log Emails to console 
-DEFAULT_FROM_EMAIL = "beauty4u@example.com"
-#else:
-   # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-   # EMAIL_USE_TLS = True
-   # EMAIL_PORT = 587
-   # EMAIL_HOST = 'smtp.gmail.com'
-   # EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    #iEMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-   #i DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Log Emails to console 
+    DEFAULT_FROM_EMAIL = "beauty4u@beauty4u.ie"
+else:
+   EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+   EMAIL_USE_TLS = True
+   EMAIL_PORT = 587
+   EMAIL_HOST = 'smtp.gmail.com'
+   EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+   EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+   DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 #User Account Settings
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'

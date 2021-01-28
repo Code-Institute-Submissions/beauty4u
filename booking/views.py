@@ -12,6 +12,7 @@ from profiles.models import UserProfile
 from home.models import openHours
 import json
 import datetime as dt
+from django.conf import settings
 
 
 """ Login Required to view this app - if not logged in - redirect to login"""
@@ -223,7 +224,7 @@ def booking_success(request):
             subject2, 
             body2, 
             "booking@beauty4u.ie",
-            ["booking@beauty4u.ie",],
+            [settings.EMAIL_HOST_USER,],
         )
  
 
