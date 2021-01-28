@@ -243,6 +243,9 @@ $(".booking-container").on("click", ".continue-booking-to-confirm", function () 
 
 $(".booking-container").on("click", ".confirm-booking-btn", function () {
 
+    $('.confirm-booking-btn').prop('disabled', True);
+    $('.processing-payment-overlay').fadeIn(200).removeClass('d-none');
+
     csrf = $('input[name=csrfmiddlewaretoken]').val();
 
     let postData = {
@@ -252,6 +255,7 @@ $(".booking-container").on("click", ".confirm-booking-btn", function () {
 
     $.post(url, postData).done(function (response) {
         $(".booking-container").html(response);
+        $('.processing-payment-overlay').fadeIn(200).addClass('d-none');
         // Clear session storage
         sessionStorage.clear();
     });

@@ -7,6 +7,7 @@ import calendar
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.http import JsonResponse
+from django.conf import settings
 
 
 def index(request):
@@ -54,7 +55,7 @@ def contact(request):
         message = request.POST.get('message')
 
 
-        send_to_email = "contact@beauty4u.ie"
+        send_to_email = settings.EMAIL_HOST_USER
         subject = render_to_string('home/contact_subject.txt')
         body = render_to_string('home/contact_body.txt', {'name': name, 'email': email, 'message': message})
 
