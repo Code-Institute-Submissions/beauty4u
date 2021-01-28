@@ -11,5 +11,5 @@ Services: {% for item in services %} {{ item }} {% if services|length > 1 %}, {%
 Staff Member(s): {% for item in staff %} {{ item }} {% if staff|length > 1 %}, {% endif %}{% endfor %}
 Cost: {{ cost }}
 
-To confirm this booking, please visit your management panel at: beauty4u.ie/management/bookings
+To confirm this booking, please visit your management panel at: beauty4u.herokuapp.com/management/bookings
 

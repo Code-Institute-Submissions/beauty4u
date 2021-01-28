@@ -774,7 +774,10 @@ def update_booking_status(request):
     time = request.POST.get('bookingTime')
     booking_id = request.POST.get('bookingId') 
 
-   
+    customer_name_string = str(customer_name).strip()
+    booking_date_string = str(date_string).strip()
+    booking_time_string = str (time).strip()
+
     customer_booking = get_object_or_404(Bookings, booking_id=booking_id)
     customer_booking.confirmed = confirmed
     username = customer_booking.username
@@ -788,7 +791,7 @@ def update_booking_status(request):
     #Email        
     cust_email = email
     subject = render_to_string('booking/confirm_booking_subject.txt')
-    body = render_to_string('booking/confirm_booking_body.txt', {'date': date_string, 'time': time, 'name': customer_name})
+    body = render_to_string('booking/confirm_booking_body.txt', {'date': booking_date_string, 'time': booking_time_string, 'name': customer_name_string})
 
 
     #Send email to user to say booking was confirmed

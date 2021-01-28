@@ -16,9 +16,9 @@ $(".mobile-menu-item").click(function () {
 
 /* Mobile Cart */
 $(".toggle-mobile-cart").click(function () {
-    $(".container-mobile-cart").toggle("slide", {
+    $('.container-mobile-cart').toggle("slide", {
         direction: "right"
-    }, 500);
+    }, 400);
 });
 
 

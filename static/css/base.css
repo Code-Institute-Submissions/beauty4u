@@ -140,7 +140,9 @@ background-color: #FEB801;
 }
 
 
-
+.container-mobile-cart {
+  display: none;
+}
 
 
 .free-shipping-banner {

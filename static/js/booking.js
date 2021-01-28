@@ -243,7 +243,7 @@ $(".booking-container").on("click", ".continue-booking-to-confirm", function () 
 
 $(".booking-container").on("click", ".confirm-booking-btn", function () {
 
-    $('.confirm-booking-btn').prop('disabled', True);
+    $('.confirm-booking-btn').prop('disabled', true);
     $('.processing-payment-overlay').fadeIn(200).removeClass('d-none');
 
     csrf = $('input[name=csrfmiddlewaretoken]').val();
