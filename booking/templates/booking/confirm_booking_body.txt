@@ -1,0 +1,9 @@
+Hello {{ name }}
+
+This is an email to say that your booking has been confirmed. 
+
+You have been booked in on {{ date }} at {{ time }}
+
+If you have any questions or want to ammend your request, please contact us on 01 1234567 or email bookings@beauty4u.ie
+
+Beauty4U

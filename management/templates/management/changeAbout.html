@@ -14,13 +14,13 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-12 text-center mb-3">
-           <h3><strong>Current About Text</strong></h3>
+            <h3><strong>Current About Text</strong></h3>
 
         </div>
         <div class="col-12 text-center">
-            
-            <p>{{ text }}</td>
-               
+
+            <p>{{ text }}</p>
+
 
         </div>
     </div>
@@ -31,16 +31,16 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-12 text-center mb-4">
-            <h3><strong>Change Opening Hours</h3></strong>
+            <h3><strong>Change Opening Hours</strong></h3>
         </div>
         <div class="col-12 text-center">
             <form method="POST" class="input-forms">
-                
+
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="Save" />
             </form>
-          
+
         </div>
     </div>
 </div>

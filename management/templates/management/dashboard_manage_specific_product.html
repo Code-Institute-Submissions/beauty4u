@@ -1,0 +1,64 @@
+{% extends 'management/dashboard_base.html' %}
+{% load static %}
+{% block extra_title %} Dashboard {% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-5 pt-5">
+  <div class="row">
+    {% if messageresult > 0 %}
+    <div
+      class="col-12 col-lg-8 mx-auto text-center {% if messageresult == 1%} border-green {% elif messageresult == 2 %}border-red{% endif %} p-3 mb-3">
+      <h4>{{ message }}</h4>
+      <a href="{% url 'manage_products' %}"><button class="d-block go-back mt-3"><i
+            class="fas fa-backward mr-2"></i>Back to Products</button></a>
+    </div>
+    {% endif %}
+    <div class="col-12 col-lg-8 mx-auto">
+    </div>
+    <div class="col-12 col-lg-8 mx-auto text-muted text-center">
+      <h3 class="d-inline-block ">Product: <span id="product-name">{{ product_name }}</span></h3>
+      <hr />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto mb-4">
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <button type="submit" class="send-marketing-email-btn mt-3">Update Product</button>
+      </form>
+      <button class="delete-btn mt-3" data-toggle="modal" data-target="#deleteModal">Delete This Product</button>
+
+    </div>
+  </div>
+</div>
+
+<!--Confirm Delete Modal-->
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Are you sure?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="delete-btn-confirm">Confirm Delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script type="text/javascript">
+  $('#new-image').change(function () {
+    var file = $('#new-image')[0].files[0];
+    $('#filename').text(`Image will be set to: ${file.name}`);
+  });
+</script>
+{% endblock %}

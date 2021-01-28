@@ -7,24 +7,31 @@
 
 {% block page_header %}
 <div class="container header-container">
-<div class="row">
-<div class="col"></div>
-</div>
+  <div class="row">
+    <div class="col"></div>
+  </div>
 </div>
 {% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Out" %}</h1>
+<div class="container h-100">
+  <div class="row">
+    <!--Contain Login Form-->
+    <div class="col-12 text-center mt-5 pt-5">
 
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
+      <h1>{% trans "Sign Out" %}</h1>
+      <hr />
+      <p>{% trans 'Are you sure you want to sign out?' %}</p>
 
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
-</form>
+      <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button type="submit" class="submit-form">{% trans 'Sign Out' %}</button>
+      </form>
 
-
+    </div>
+  </div>
+</div>
 {% endblock %}

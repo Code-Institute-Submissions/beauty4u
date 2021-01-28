@@ -14,7 +14,7 @@ Your order will be shipped to:
 {{ order.postcode }}
 
 
-If you have any questions .... 
+If you have any questions, please contact our support team. 
 
 
 Beauty4U

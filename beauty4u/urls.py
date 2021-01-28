@@ -25,7 +25,6 @@ urlpatterns = [
     path('products/', include('products.urls')), #include products
     path('booking/', include('booking.urls')),
     path('cart/', include('cart.urls')),
-    path('wishlist/', include('wishlist.urls')),
     path('management/', include('management.urls')),
     path('checkout/', include('checkout.urls')),
     path('profile/', include('profiles.urls')),

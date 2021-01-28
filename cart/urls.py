@@ -1,9 +1,11 @@
 from django.urls import path
-from . import views #import home views 
+from . import views 
+
 
 urlpatterns = [
-    path('', views.view_cart, name="view_cart"), #root dir
-    path('add/<item_id>', views.add_to_cart, name="add_to_cart"), #root dir
-    path('addtowishlist/<item_id>', views.add_wishlist_item_to_cart, name="add_wishlist_item_to_cart"),
-    path('remove/<item_id>', views.adjust_cart, name="adjust_cart")
+    path('add_to_cart', views.add_to_cart, name="add_to_cart"),
+    path('refresh_cart', views.refresh_cart, name="refresh_cart"),
+    path('change_shipping_method', views.change_shipping_method, name="change_shipping_method"),
+    path('adjust_cart', views.adjust_cart, name="adjust_cart"),
+   
 ]

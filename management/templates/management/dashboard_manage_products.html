@@ -13,70 +13,97 @@
     </div>
   </div>
   <!-- Sorting -->
-  <div class="row">
-    <div class="col-12 text-right">
-    <div class="dropdown d-inline m-3 text-right">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Filter By Category
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        {% for category in categories %}
-        <a class="dropdown-item" href="{% url 'manage_products' %}?category={{category.name}}">{{ category.name }}</a>
-        {% endfor %}
+  <div class="row m-0">
+    <!--Desktop Filter Products-->
+    <div class="col-12 text-right d-none d-lg-block">
+      <div class="d-inline m-3 text-right">
+        <a href="{% url 'manage_products' %}"><button class="btn btn-secondary">All Products</button></a>
+      </div>
+      <div class="dropdown d-inline m-3 text-right">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Filter By Category
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {% for category in categories %}
+          <a class="dropdown-item" href="{% url 'manage_products' %}?category={{category.name}}">{{ category.name }}</a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="dropdown d-inline m-3 text-right">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton4" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Filter By Brand
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {% for brand in brands %}
+          <a class="dropdown-item" href="{% url 'manage_products' %}?brand={{brand.brand}}">{{ brand.brand }}</a>
+          {% endfor %}
+        </div>
       </div>
     </div>
-    
-    <div class="dropdown d-inline m-3 text-right">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Filter By Brand
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        {% for brand in brands %}
-        <a class="dropdown-item" href="{% url 'manage_products' %}?brand={{brand.brand}}">{{ brand.brand }}</a>
-        {% endfor %}
+
+    <!--Mobile Filter-->
+    <div class="col-12 text-center d-block d-lg-none">
+      <div class="dropdown d-inline ">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Filter By Category
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {% for category in categories %}
+          <a class="dropdown-item" href="{% url 'manage_products' %}?category={{category.name}}">{{ category.name }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-12 text-center mt-2 mb-2 d-block d-lg-none">
+      <div class="dropdown d-inline ">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Filter By Brand
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {% for brand in brands %}
+          <a class="dropdown-item" href="{% url 'manage_products' %}?brand={{brand.brand}}">{{ brand.brand }}</a>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
-  </div>
-  <div class="col-12 text-center">
-    <div class="contain-search-form d-inline m-3 mt-2">
+  <div class="col-12 text-center m-0 p-0">
+    <div class="contain-search-form mt-2 mb-2">
       {% csrf_token %}
       <form method="GET" action="{% url 'manage_products' %}">
         <input type="text" name="q" placeholder="Search A Product" class="search_product_input">
-        <button type="submit" class="d-inline"><i class="ml-3 mr-3 fas fa-search search_product_input_icon"></i></button>
+        <button type="submit" class="d-inline"><i
+            class="ml-3 mr-3 fas fa-search search_product_input_icon"></i></button>
       </form>
     </div>
-    </div>
+  </div>
 
 
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 mt-2">
       {% if query and products|length == 0 %}
-      <h3 class="text-center mb-4">Nothing Found for : <span class="text-muted">{{ query }}</span></h3>
+      <p class="text-center mb-2">Nothing Found for : <span class="text-muted">{{ query }}</span></p>
       {% elif products|length != 0 %}
       {% if query %}
-      <h3 class="text-center mb-4">Showing results for : <span class="text-muted">{{ query }}</span></h3>
+      <p class="text-center mb-2">Showing results for : <span class="text-muted">{{ query }}</span></p>
       {% endif %}
       <table class="table">
-        <thead class="thead-dark">
+        <thead class="thead-light">
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Brand</th>
-            <th scope="col">Category</th>
-            <th scope="col">Price</th>
-            <th scope="col">Action</th>
+            <th scope="col">Product</th>
+
           </tr>
         </thead>
         <tbody>
           {% for product in products %}
           <tr>
-            <td>{{ product.name }}</td>
-            <td>{{ product.brand }}</td>
-            <td>{{ product.category }}</td>
-            <td>{{ product.price }}</td>
-            <td>Action</td>
+            <td><a href="{% url 'manage_specific_product' product.name %}">{{ product.name }}</a></td>
+
           </tr>
           {% endfor %}
           {% endif %}
@@ -90,5 +117,5 @@
 
   </div>
 
-
+</div>
   {% endblock %}

@@ -12,7 +12,8 @@
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="container mt-5" id="checkout-container">
+
     <!--Page Heading-->
     <div class="row">
         <div class="col">
@@ -21,23 +22,22 @@
             <hr />
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            Please complete the form below 
-        </div>
-    </div>
+
     <div class="row">
         <div class="col-12 col-lg-6">
-            <form acton="{% url 'checkout' %}" method='POST' id="payment-form">
+
+            <form acton="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                 <fieldset class="rounded px-3 mb-5">
                     <legend class="fieldset-label w-auto">Details</legend>
+                    <hr />
                     {{ order_form.full_name | as_crispy_field }}
                     {{ order_form.email | as_crispy_field }}
                     {{ order_form.phone_number | as_crispy_field }}
                 </fieldset>
                 <fieldset class="rounded px-3 mb-5">
-                    <legend class="fieldset-label w-auto">Shipping</legend>
+                    <legend class="fieldset-label w-auto">Billing Address</legend>
+                    <hr />
                     {{ order_form.street_address1 | as_crispy_field }}
                     {{ order_form.street_address2 | as_crispy_field }}
                     {{ order_form.town_or_city | as_crispy_field }}
@@ -48,55 +48,133 @@
                         {% if user.is_authenticated %}
                         <!--If user is logged in - Ask if they want to save this delivery information to their profile-->
                         <label class="form-check-label" for="id-save-info">Save this infomation to my profile
-                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
-                        {% else %}
-                        <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                        <a class="text-info" href="{% url 'account_login' %}">Login</a> to save this information
+                            <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info"
+                                checked>
                         </label>
-                        {% endif %} 
+                        {% else %}
+                        <p class="text-center mt-3">
+                            <a class="text-info d-inline" href="{% url 'account_signup' %}?next=/checkout/">Create an
+                                account</a> or
+                            <a class="text-info d-inline" href="{% url 'account_login' %}?next=/checkout/">Login</a> to
+                            save this information</p>
+
+                        {% endif %}
                     </div>
                 </fieldset>
                 <fieldset class="px-3">
                     <legend class="fieldset-label w-auto">Payment</legend>
+                    <hr />
                     <div class="mb-3" id="card-element"></div>
                     <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
                 </fieldset>
-                <table class="ml-auto">
-                    <tr>
-                        <td colspan="5" class="text-right">
-                        <h3><strong>Subtotal: </strong>€{{ total }}</h3>
-                        {% if free_shipping_delta > 0 %}
-                        <h3><strong>Shipping: </strong> €{{ shipping }}</h3>
-                        <p class="text-upper">Spend another € {{free_shipping_delta }} to qualify for free shipping</p>
-                        {% else %}
-                        <h3><strong>Shipping: </strong> FREE</h3>
+
+                <div class="col-12 mt-3">
+                    <h4><strong>Shipping Method</strong></h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            <div class="contain-shipping-method select-standard-shipping shipping-select">
+                                <i class="fas fa-shipping-fast mt-2"></i>
+                                <span class="d-block mt-2">Standard Delivery</span>
+                                <span class="d-block mt-2"> €<span
+                                        id="contain-standard-shipping-cost">{{ shipping }}</span></span>
+
+                            </div>
+                        </div>
+                        {% if click_and_collect %}
+                        <div class="col-6 text-center">
+                            <div class="contain-shipping-method select-click-collect">
+                                <i class="fas fa-people-carry mt-2"></i>
+                                <span class="d-block mt-2">Click & Collect</span>
+                                <span class="d-block mt-2">FREE</span>
+                            </div>
+                        </div>
                         {% endif %}
-                        <h3><strong>Total: €{{ grand_total }}</strong></h3>
-                        </td>
-                         </tr>
-                </table>
-                <div class="submit-button text-right mt-5 mb-2">
-                    <a href="{% url 'view_cart' %}" class="btn btn-outline-black rounded-0">
-                        Adjust Cart
-                    </a>
-                    <button type="submit" id="submit-button" class="btn btn-black rounded-0" >
-                        <span class="font-weight-bold">Complete Order</span>
-                        <span class="icon">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                    </button>
-                    <p class="text-danger">Your card will be charged <strong>€{{ grand_total | floatformat:2 }}</strong></p>
+                    </div>
                 </div>
 
             </form>
         </div>
+
+        <!--Order Summary-->
+        <!--Hidden input to contain shipping method selected-->
+        <input type="hidden" name="shipping_method" value="" id="shipping_method_val">
+        <div class="col-12 col-lg-4 mt-3">
+            <div class="col-12 pt-3 pb-3 bg-blue text-white mb-3">
+                Order Summary
+            </div>
+            {% for item in cart_items %}
+            <div class="col-12 mt-2">
+                {{ item.product.name }}
+                {% if item.product.sale_price %}
+                {% if item.product.sale_price < item.product.price %}
+                <p class="light-grey">Qty: {{ item.quantity }}</p>
+                <div class="row">
+                    <div class="delete-item-button ml-2 remove-item-checkout">REMOVE</div>
+                    <input type="hidden" class="checkout-product-id" value="{{item.product.id}}">
+                    <p class="light-grey ml-auto">€{{ item.product.sale_price }}</p>
+                </div>
+                {% endif %}
+                {% else %}
+                <p class="light-grey">Qty: {{ item.quantity }}</p>
+                <div class="row">
+                    <div class="delete-item-button ml-2 remove-item-checkout">REMOVE</div>
+                    <input type="hidden" class="checkout-product-id" value="{{item.product.id}}">
+                    <p class="text-right d-inline ml-auto">€{{ item.product.price }}</p>
+                </div>
+                {% endif %}
+                <hr />
+            </div>
+            {% endfor %}
+            <div class="col-12 m-0">
+                <div class="alert result d-none" role="alert"></div>
+                <p><strong>Coupon Code</strong></p>
+                <p class="text-muted">Got a coupon code? Enter it below!</p>
+                <input class="form-control" type="text" name="coupon" id="couponcode" placeholder="COUPON">
+                <p class="text-right">
+                    <button class="coupon-btn" id="submitcoupon">APPLY</button></p>
+                <hr class="mb-0" />
+            </div>
+            <div class="col-12 text-right bg-lightgrey m-0">
+                <div class="col-12 pt-3 pb-2">
+                    <h6><strong>Subtotal: </strong>€<span id="contain-subtotal">{{ total }}</span></h6>
+                    {% if free_shipping_delta > 0 %}
+                    <h6><strong>Shipping:</strong><span id="show-currency">€</span><span
+                            id="contain-current-shipping-cost">{{ shipping }}</span></h6>
+                    <p class="text-upper">Spend another € {{free_shipping_delta }} to qualify for free shipping
+                    </p>
+                    {% else %}
+                    <h6><strong>Shipping:</strong> FREE</h6>
+                    {% endif %}
+                    <p class="text-danger">Your card will be charged <strong>€<span
+                                id="card_charge">{{ grand_total | floatformat:2 }}</span></strong></p>
+
+                    <h5><strong>Total: €<span id="contain-grand-total">{{ grand_total }}</span></strong></h5>
+                </div>
+            </div>
+            <div class="submit-button text-right mt-3 mb-2">
+                <button type="submit" id="submit-button" class="checkout-btn">
+                    <span class="font-weight-bold">Complete Order</span>
+                    <span class="icon">
+                        <i class="fas fa-lock ml-2"></i>
+                    </span>
+                </button>
+
+            </div>
+        </div>
+
+
     </div>
-<div class="processing-payment-overlay">
+
+</div>
+<div class="processing-payment-overlay d-none">
     <h1 class="complete-center">
         <i class="fas fa-spinner fa-spin"></i>
     </h1>
-</div>
+    <div class="complete-center mt-5 pt-2">
+        <h3>Just a sec!</h3>
+    </div>
 </div>
 {% endblock %}
 
@@ -105,5 +183,8 @@
 {{ block.super }}
 {{ stripe_public_key | json_script:"id_stripe_public_key"}}
 {{ client_secret | json_script:"id_client_secret"}}
+{{ intent_id | json_script:"id_intent"}}
+<script src="{% static 'checkout/js/shipping.js' %}"></script>
 <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+<script src="{% static 'checkout/js/coupon.js' %}"></script>
 {% endblock %}

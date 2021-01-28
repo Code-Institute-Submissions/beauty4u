@@ -5,9 +5,9 @@
 
 {% block page_header %}
 <div class="container header-container">
-<div class="row">
-<div class="col"></div>
-</div>
+    <div class="row">
+        <div class="col"></div>
+    </div>
 </div>
 {% endblock %}
 
@@ -15,151 +15,279 @@
 
 {% block content %}
 <div class="container mt-5">
-
-<div class="row pt-2">
-    <div class="col-12 shop-top-banner">
-        <div class="contain-top-banner-content">
-            <h2>UP TO <strong>50% OFF</strong> YOUR FAVOURITE BRANDS!</h2>
-            <div class="shop-sale">SHOP SALE</div>
-        </div>
-    </div>
-</div>
-
-<!--Highlighted Products-->
-<div class="container">
-    <div class="row">
-        <div class="col-12 mt-5 text-center">
-            <h2 class="text-muted">Featured Products</h2>
-        </div>
-    </div>
-    <div class="row">
-        {% for items in featured_products %}
-        <div class="col-6 col-lg-3 mt-5 pt-4">
-        <div class="col-12 text-center">
-            {% if items.sale_price < items.price  %}   
-            <span class="sale-badge"><img class="sale-tag" src="{{MEDIA}}sale-tag.png"></span>
-            {% endif %}
-            {% if items.image %}
-            <a href="{% url 'product_detail' items.id %}">
-            <img src="{{MEDIA}}{{items.image}}" class="product-image" alt="{{ items.name }}">
-            </a>
-            {% endif %}
-        </div>
-             <a href="{% url 'product_detail' items.id %}">
-           <div class="col-12 text-center mt-2 product-title">{{ items.name }}</div>
-           </a>
-           <div class="row">
-           <div class="col-6 mt-2 lightgrey">
-            {% if items.sale_price < items.price  %}   
-            <strike>{{ items.price }}</strike><span class="text-danger ml-3">{{ items.sale_price }}</span>
-            {% else %}
-            {{ items.price }}
-            {% endif %}
-        </div>
-            <div class="col-6 mt-2 text-right">
-                <!--Logic to output wishlist icon based on if item is in wishlist-->
-                <form action="{% url 'add_to_wishlist' items.id %}" method="POST">
-                  {% csrf_token %}
-                <button type="submit"><i class="far fa-heart pr-3"></i></button>
-                <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                 </form>
-                </div>
-        
-        </div>
-        </div>
-        {% endfor %}
-    
-    </div>
-</div>
-
-
-
-<!--Sory by Brand-->
-<div class="row pl-2 pl-2 ">
-<div class="col-12">
-    <!--List of all brands-->
-    <h2 class="toggle-brand-dropdown">Brands <i class="fas fa-sort-down"></i></h2>
-    <div class="contain-brand-list d-none">
-    <ul class="list-group list-group-horizontal brand-list">
-        <!--Some logic here to output brands-->
-        {% for brands in brandList %}
-    <a href="{% url 'products' %}?brand={{ brands.id }}"><li class="list-group-item m-2">{% if brands.logo %}<img src="{{MEDIA}}{{brands.logo}}" alt="brands.brand" class="brand-list-logo">{% else %}{{ brands.brand }}{% endif %}</li></a>
-        {% endfor %}
-      </ul>
-    </div>
-</div>
-<div class="col-6">
-    <h2>All Products</h2>
-    <ul class="list-group list-group-horizontal">
-        <li class="list-inline-item dropdown">
-            <!--If by price is cliked, sort by lowest price first (most likely what the user will want if sorting by price)-->
-        <a class="text-black nav-link" href="#" id="sort-price" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        By Price</a>
-        <div class="dropdown-menu border-0" aria-labelledby="sort-price">
-        <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">Low - High</a>
-        <a href="{% url 'products' %}?sort=price&direction=dsc" class="dropdown-item">High - Low</a>
-        </div>
-        </li>
-        <a href="{% url 'products' %}?sort=rating">
-        <li class="list-inline-item">By Rating</li></a>
-      </ul>
-</div>
-</div>
-<!--Output sorting title-->
-<div class="row mt-4">
-<div class="col-12 text-center">
- <h3>
-        {% if selectedBrand != 'None' %}
-        {% for name in selectedBrand %}
-        <h3><strong>{{ name.brand }} </strong>- <span class="light-gray"> {{ products|length }} products</span></h3>
-        {% endfor %}
-        {% endif %}
-        {% if query %}
-        <h5>Showing results for: {{ query }}</h5>
-        <h6 class="light-gray">{{ products|length }} items found</h6>
-        {% endif %}
-
- </h3>   
-</div>
-</div>
-<div class="row">
-    {% for items in products %}
-    <div class="col-6 col-lg-3 mt-5 pt-4">
-    <div class="col-12 text-center">
-        {% if items.sale_price < items.price  %}   
-        <span class="sale-badge"><img class="sale-tag" src="{{MEDIA}}sale-tag.png"></span>
-        {% endif %}
-        {% if items.image %}
-        <a href="{% url 'product_detail' items.id %}">
-        <img src="{{MEDIA}}{{items.image}}" class="product-image" alt="{{ items.name }}">
-        </a>
-        {% endif %}
-    </div>
-         <a href="{% url 'product_detail' items.id %}">
-       <div class="col-12 text-center mt-2 product-title">{{ items.name }}</div>
-       </a>
-       <div class="row">
-       <div class="col-6 mt-2 lightgrey">
-        {% if items.sale_price < items.price  %}   
-        <strike>{{ items.price }}</strike><span class="text-danger ml-3">{{ items.sale_price }}</span>
-        {% else %}
-        {{ items.price }}
-        {% endif %}
-    </div>
-        <div class="col-6 mt-2 text-right">
-            <!--Logic to output wishlist icon based on if item is in wishlist-->
-            <form action="{% url 'add_to_wishlist' items.id %}" method="POST">
-              {% csrf_token %}
-            <button type="submit"><i class="far fa-heart pr-3"></i></button>
-            <input type="hidden" name="redirect_url" value="{{ request.path }}">
-             </form>
+    <div class="row pt-2">
+        <div class="col-12 shop-top-banner">
+            <div class="contain-top-banner-content">
+                <h3>UP TO <strong>50% OFF</strong> YOUR FAVOURITE BRANDS!</h3>
+                <a href="{% url 'products' %}?sale=true">
+                    <div class="shop-sale">SHOP SALE</div>
+                </a>
             </div>
-    
+        </div>
     </div>
-    </div>
-    {% endfor %}
 
-</div>
+
+    <!-- Mobile Sorting-->
+    <div class="col-12 text-center mt-4 d-block d-lg-none">
+        <div class="dropdown">
+            <div class="select-sorting-mobile mx-auto" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                Filter Products <i class="fas fa-sort ml-1"></i>
+            </div>
+            <div class="dropdown-menu border-0 shadow dropdown-filter mx-auto">
+                <h5 class="ml-3 text-muted">Price</h5>
+                <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">Low - High</a>
+                <a href="{% url 'products' %}?sort=price&direction=dsc" class="dropdown-item">High - Low</a>
+                <h5 class="ml-3 text-muted mt-2">Rating</h5>
+                <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">Highest Rated</a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Sorting-->
+    <div class="col-12 text-center mt-4 d-none d-lg-block">
+        <div class="dropdown">
+            <div class="select-sorting ml-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Filter Products <i class="fas fa-sort ml-1"></i>
+            </div>
+            <div
+                class="dropdown-menu border-0 shadow dropdown-filter-desktop ml-auto dropdown-menu-right dropdown-menu-lg-left">
+                <h5 class="ml-3 text-muted">Price</h5>
+                <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">Low - High</a>
+                <a href="{% url 'products' %}?sort=price&direction=dsc" class="dropdown-item">High - Low</a>
+                <h5 class="ml-3 text-muted mt-2">Rating</h5>
+                <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">Highest Rated</a>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Featured Products - If there are featured products selected, then display the featured products section-->
+    {% if featured_products|length != 0%}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-5 text-center">
+                <h2 class="text-muted">Featured Products</h2>
+            </div>
+        </div>
+        <div class="row">
+            {% for items in featured_products %}
+            <div class="col-6 col-lg-3 mt-5 pt-4 mx-auto">
+                <div class="col-12 text-center">
+                    {% if items.sale_price < items.price  %}
+                    <span class="sale-badge"><img class="sale-tag" src="{{MEDIA}}sale-tag.png"></span>
+                    {% endif %}
+                    {% if items.image %}
+                    <a href="{% url 'product_detail' items.id %}">
+                        <img src="{{MEDIA}}{{items.image}}" class="product-image" alt="{{ items.name }}">
+                    </a>
+                    {% endif %}
+                </div>
+                <a href="{% url 'product_detail' items.id %}">
+                    <div class="col-12 text-center mt-2 product-title">{{ items.name }}</div>
+                </a>
+                <div class="row">
+                    <div class="col-12 text-center mt-2 lightgrey">
+                        {% if items.sale_price < items.price  %}
+                        <strike>{{ items.price }}</strike><span class="text-danger ml-3">{{ items.sale_price }}</span>
+                        {% else %}
+                        {{ items.price }}
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endif %}
+
+    <!--Make sure shampoo category exists (it will 99% of the time)-->
+    {% if hair_products|length > 0 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-5 text-center">
+                <h2 class="text-muted">Hair</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-2">
+                <a class="see-all mx-auto" href="{% url 'products' %}?category=Shampoo">See All Shampoo Products</a>
+            </div>
+            {% for items in  hair_products %}
+            <div class="col-6 col-lg-3 mt-2 pt-4 mx-auto">
+                <div class="col-12 text-center">
+                    {% if items.sale_price < items.price  %}
+                    <span class="sale-badge"><img class="sale-tag" src="{{MEDIA}}sale-tag.png"></span>
+                    {% endif %}
+                    {% if items.image %}
+                    <a href="{% url 'product_detail' items.id %}">
+                        <img src="{{MEDIA}}{{items.image}}" class="product-image" alt="{{ items.name }}">
+                    </a>
+                    {% endif %}
+                </div>
+                <a href="{% url 'product_detail' items.id %}">
+                    <div class="col-12 text-center mt-2 product-title">{{ items.name }}</div>
+                </a>
+                <div class="row">
+                    <div class="col-12 text-center mt-2 lightgrey">
+                        {% if items.sale_price < items.price  %}
+                        <strike>{{ items.price }}</strike><span class="text-danger ml-3">{{ items.sale_price }}</span>
+                        {% else %}
+                        {{ items.price }}
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endif %}
+
+    <!--Make sure the conditioner category exists (it will 99% of the time)-->
+    {% if conditoner_products|length > 0 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-5 text-center">
+                <h2 class="text-muted">Conditioner</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-2">
+                <a class="see-all mx-auto" href="{% url 'products' %}?category=Conditioner">See All Conditioner Products</a>
+            </div>
+            {% for items in conditoner_products %}
+            <div class="col-6 col-lg-3 mt-2 pt-4 mx-auto">
+                <div class="col-12 text-center">
+                    {% if items.sale_price < items.price  %}
+                    <span class="sale-badge"><img class="sale-tag" src="{{MEDIA}}sale-tag.png"></span>
+                    {% endif %}
+                    {% if items.image %}
+                    <a href="{% url 'product_detail' items.id %}">
+                        <img src="{{MEDIA}}{{items.image}}" class="product-image" alt="{{ items.name }}">
+                    </a>
+                    {% endif %}
+                </div>
+                <a href="{% url 'product_detail' items.id %}">
+                    <div class="col-12 text-center mt-2 product-title">{{ items.name }}</div>
+                </a>
+                <div class="row">
+                    <div class="col-12 text-center mt-2 lightgrey">
+                        {% if items.sale_price < items.price  %}
+                        <strike>{{ items.price }}</strike><span class="text-danger ml-3">{{ items.sale_price }}</span>
+                        {% else %}
+                        {{ items.price }}
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endif %}
+
+
+    <!--Make sure the skin category exists (it will 99% of the time)-->
+    {% if skin_products|length > 0 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-5 text-center">
+                <h2 class="text-muted">Skin</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-2">
+                <a class="see-all mx-auto" href="{% url 'products' %}?category=Skin">See All Skin Products</a>
+            </div>
+            {% for items in skin_products %}
+            <div class="col-6 col-lg-3 mt-2 pt-4 mx-auto">
+                <div class="col-12 text-center">
+                    {% if items.sale_price < items.price  %}
+                    <span class="sale-badge"><img class="sale-tag" src="{{MEDIA}}sale-tag.png"></span>
+                    {% endif %}
+                    {% if items.image %}
+                    <a href="{% url 'product_detail' items.id %}">
+                        <img src="{{MEDIA}}{{items.image}}" class="product-image" alt="{{ items.name }}">
+                    </a>
+                    {% endif %}
+                </div>
+                <a href="{% url 'product_detail' items.id %}">
+                    <div class="col-12 text-center mt-2 product-title">{{ items.name }}</div>
+                </a>
+                <div class="row">
+                    <div class="col-12 text-center mt-2 lightgrey">
+                        {% if items.sale_price < items.price  %}
+                        <strike>{{ items.price }}</strike><span class="text-danger ml-3">{{ items.sale_price }}</span>
+                        {% else %}
+                        {{ items.price }}
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endif %}
+
+
+    <!--If there are no categories or they are deleted, just show all products -->
+    {% if skin_products|length < 1 and makeup_products|length < 1 and hair_products|length < 1 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-5 text-center">
+                <h2 class="text-muted">All Products</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-2">
+                <a class="see-all mx-auto" href="{% url 'products' %}?category=Skin">See All Skin Products</a>
+            </div>
+            {% for items in products %}
+            <div class="col-6 col-lg-3 mt-2 pt-4 mx-auto">
+                <div class="col-12 text-center">
+                    {% if items.sale_price < items.price  %}
+                    <span class="sale-badge"><img class="sale-tag" src="{{MEDIA}}sale-tag.png"></span>
+                    {% endif %}
+                    {% if items.image %}
+                    <a href="{% url 'product_detail' items.id %}">
+                        <img src="{{MEDIA}}{{items.image}}" class="product-image" alt="{{ items.name }}">
+                    </a>
+                    {% endif %}
+                </div>
+                <a href="{% url 'product_detail' items.id %}">
+                    <div class="col-12 text-center mt-2 product-title">{{ items.name }}</div>
+                </a>
+                <div class="row">
+                    <div class="col-12 text-center mt-2 lightgrey">
+                        {% if items.sale_price < items.price  %}
+                        <strike>{{ items.price }}</strike><span class="text-danger ml-3">{{ items.sale_price }}</span>
+                        {% else %}
+                        {{ items.price }}
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endif %}
+
+
+
+
+
 </div>
 
 {% endblock %}
@@ -167,6 +295,6 @@
 
 <!--Load JQuery for navigation-->
 {% block postloadjs %}
-<script src="{% static 'js/product-nav.js' %}"></script>
-<script src="{% static 'products/js/image_slider.js'%}"></script>
+{{ block.super }}
+<script src="{% static 'js/product.js' %}"></script>
 {% endblock %}

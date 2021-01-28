@@ -13,21 +13,32 @@
 
 
 {% block content %}
-<div class="container mt-2">
+<div class="container">
+    {% if message == 1 %}
+    <div class="row mt-3">
+        <div class="col-12 text-center mx-auto p-3 mt-5">
+            <div class="alert alert-success" role="alert">
+                Opening Hours Updated!
+            </div>
+        </div>
+    </div>
+    {% endif %}
     <div class="row">
-        <div class="col-12 text-center mb-3">
+        <div class="col-12 text-center mb-3 mt-5 pt-4">
+            <p>Please note that <strong>if you mark a day as closed,</strong> this day will not be available for request
+                in your booking system! </p>
             <h3><strong>Current Opening Hours</strong></h3>
 
         </div>
         <div class="col-12 text-center">
             {% for items in hours %}
             {% if items.markedClosed == False %}
-            <p>{{ items.day }} : {{ items.openingTime }} - {{ items.closingTime }}</td>
+            <p>{{ items.day }} : {{ items.openingTime }} - {{ items.closingTime }}</p>
                 {% else %}
-                <p>{{ items.day }} : <strong>Closed</strong></td>
-                {% endif %}
-                {% endfor %}
-           
+                <p>{{ items.day }} : <strong>Closed</strong></p>
+                    {% endif %}
+                    {% endfor %}
+
         </div>
     </div>
 
@@ -37,7 +48,7 @@
 <div class="container mt-3  mb-5">
     <div class="row">
         <div class="col-12 text-center mb-4">
-            <h3><strong>Change Opening Hours</h3></strong>
+            <h3><strong>Change Opening Hours</strong></h3>
         </div>
         <div class="col-12 text-center">
             <form method="POST" class="input-forms">
@@ -52,10 +63,10 @@
                     {{ form.closingTime | as_crispy_field }}
                 </div>
                 <div class="col-12 mb-4">
-                <div class="row">
-                  <div class="col-6 text-right pt-2"><strong>MARK THIS DAY AS CLOSED?</strong></div>
-                    <div class="col-6 text-left">{{ form.markedClosed }}</div>
-                </div>
+                    <div class="row">
+                        <div class="col-6 text-right pt-2"><strong>MARK THIS DAY AS CLOSED?</strong></div>
+                        <div class="col-6 text-left">{{ form.markedClosed }}</div>
+                    </div>
                 </div>
                 <input type="submit" value="Save" class="save-btn" />
             </form>

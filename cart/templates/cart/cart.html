@@ -1,106 +1,79 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block page_header %}
-<div class="container header-container">
-    <div class="row">
-        <div class="col"></div>
+<div class="contain-cart-heading text-center">
+    <h5 class="text-center pt-2 text-bold p-0">
+        Your Cart
+    </h5>
+    <div class="col-12 text-black text-center m-0 p-0 w-100 m-0">
+        {% if free_shipping_delta > 0 %}
+        <span class="text-danger">Spend another € {{free_shipping_delta }} to qualify for free shipping</span>
+        {% else %}
+        <span class="text-success text-bold">YOU QUALIFY FOR FREE SHIPPING</span>
+        {% endif %}
     </div>
+    <hr class="p-0 m-0" />
 </div>
-{% endblock %}
-
-
-{% block content %}
-<div class="container mt-5 h-100">
-    <!--Page Heading-->
-    <div class="row">
-        <div class="col">
-            <hr />
-            <h2>Your Cart</h2>
-            <hr />
+{% csrf_token %}
+{% if cart_items %}
+<div class="contain-mobile-cart-items pl-2 pr-2 mt-0 pt-0">
+    {% for item in cart_items %}
+    <div class="row mt-2 mb-2">
+        <div class="col-4">
+            <img class="img-fliud rounded cart-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <!--Output cart or message-->
-            {% if cart_items %}
-            <div class="table-responsive rounded">
-                <table class="table table-sm table-borderless">
-                    <thread>
-                        <!--Table Headings-->
-                        <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col"></th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Subtotal</th>
-                        </tr>
-                    </thread>
+        <div class="col-8 my-auto">
+            <p><strong>{{ item.product.name }}</strong></p>
+            <div class="row">
+                <div class="col-4">
+                    {% if item.product.sale_price %}
+                    {% if item.product.sale_price < item.product.price %}
+                    <p class="light-grey">€{{ item.product.sale_price }}</p>
+                    {% endif %}
+                    {% else %}
+                    <p class="light-grey">€{{ item.product.price }}</p>
 
-                {% for item in cart_items %}       
-                <!--Output each item in cart into a table row-->
-                    <tr>
-                    <td class="p-3 w-25">
-                    <img class="img-fliud rounded cart-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                    </td>
-                    <td class="py-3">
-                     <p>{{ item.product.name }}</p>   
-                    </td>
-                    <td class="py-3">
-                        <p>€{{ item.product.price }}</p>   
-                       </td>
-                       <td class="py-3">
-                        <p>{{ item.quantity }}</p>   
-                       </td>
-                       <td class="py-3">
-                        <p>€{{ item.product.price }}</p>   
-                       </td>
-                       <td class="py-3">
-                        <p>
-                        <form action="{% url 'adjust_cart' item.product.id %}" method="POST" class="form">
-                            {% csrf_token %}
-                        <button type="submit"><i class="fas fa-times"></i> </button>
-                        </form> 
-                       </td>
-                    </tr>
-                {% endfor %}
-                <tr>
-                <td colspan="5" class="text-right">
-                <h3><strong>Subtotal: </strong>€{{ total }}</h3>
-                {% if free_shipping_delta > 0 %}
-                <h3><strong>Shipping: </strong> €{{ shipping }}</h3>
-                <p class="text-upper">Spend another € {{free_shipping_delta }} to qualify for free shipping</p>
-                {% else %}
-                <h3><strong>Shipping: </strong> FREE</h3>
-                {% endif %}
-                <h3><strong>Total: €{{ grand_total }}</strong></h3>
-                </td>
-                 </tr>
-                    <tr>
-                    <td colspan="5" class="py-1 text-right">
-                    <a href="#">
-                    <div class="cart_button text-upper ml-auto">
-                        Continue Shopping
-                    </div></a>
-                    <a href="{% url 'checkout' %}">
-                    <div class="cart_button text-upper ml-auto mt-2">
-                       Secure Checkout
-                    </div></a>
-                    </td>
-         
-                </tr>
-                </table>
+                    {% endif %}
+                </div>
+                <div class="col-4">
+                    Qty: {{ item.quantity }}
+                </div>
+                <div class="col-4">
+                    <i class="fas fa-times remove-item"></i>
+                    <input type="hidden" id="product-id" value="{{item.product.id}}">
+                </div>
             </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="contain-mobile-cart-summary">
+    <div class="row m-0">
+        <div class="col-6">
+            <p><strong>Total (Exlc. delivery)</strong></p>
+        </div>
+        <div class="col-6 text-right light-grey">
+            €{{ total }}
+        </div>
+    </div>
 
-
-            {% else %}
-            <p>Looks like your cart is empty</p>
-            <a href="{% url 'products' %}">
-                <div class="continue-shopping">Continue Shopping</div>
-                {% endif %}
-
-
+    <div class="col-12 text-center m-0 p-0">
+        <div class="row m-0 p-0">
+            <div class="col-6 p-0 m-0">
+                <div class="checkout-popup-cart continue-shopping">Continue Shopping</div>
+            </div>
+            <div class="col-6 p-0 m-0">
+                <a href="{% url 'checkout' %}">
+                    <div class="checkout-popup-cart-2">Checkout <i class="fas fa-lock ml-3"></i></div>
+                </a>
+            </div>
         </div>
     </div>
 </div>
-{% endblock %}
+{% else %}
+<div class="col-12 text-center">
+    <i class="fas fa-shopping-basket empty-cart mb-4"></i>
+    <p>Looks like your cart is empty!</p>
+    <a href="{% url 'products' %}">
+        <div class="shop-now-btn mt-4">Let's Shop!</div>
+    </a>
+    <div class="continue-shopping shop-now-btn-2 mt-4">Close Cart</div>
+</div>
+{% endif %}

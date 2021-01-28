@@ -12,20 +12,49 @@
 
 {% block content %}
 <div class="container mt-5 h-100">
-    <h4>Profile</h4>
-    <hr />
-    <div class="col-12 col-lg-6">
-        <form action="{% url 'profile' %}" method="POST" id="update-info-form">
-            {% csrf_token %}
-            {{ form | crispy }}
-            <p class="text-right">
-            <button type="submit" class="submit-form text-center">Update</button>
-            </p>
-        </form>
-    </div>
+    <div class="row">
 
-    <div class="col-12 col-lg-6">
-        {{ orders }}
+        <!--Mobile Nav-->
+        <div class="col-12 text-center d-block d-lg-none mb-3">
+            <h3 class="text-muted ">Welcome back, {{ request.user.username }}</h3>
+            <div class="dropdown">
+                <div class="select-sorting-mobile mx-auto" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    OPTIONS <i class="fas fa-sort ml-1"></i>
+                </div>
+                <div class="dropdown-menu border-0 shadow dropdown-filter mx-auto">
+                    <a href="{% url 'profile' %}" class="dropdown-item">My Details</a>
+                    <a href="{% url 'my_orders' %}" class="dropdown-item">My Orders</a>
+                    <a href="{% url 'my_bookings' %}" class="dropdown-item">My Bookings</a>
+                    <a href="{% url 'account_change_password' %}" class="dropdown-item">Change Password</a>
+                    <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!--Desktop Nav-->
+        <div class="col-3 border-right d-none d-lg-block">
+            <h3 class="text-muted ">Welcome back, {{ request.user.username }}</h3>
+            <hr />
+            <ul class="list-unstyled profile-menu-list">
+                <li class="mb-3"><a href="{% url 'profile' %}">My Details</a></li>
+                <li class="mb-3 text-muted "><a href="{% url 'my_orders' %}">My Orders</a></li>
+                <li class="mb-3 text-muted"><a href="{% url 'my_bookings' %}">My Bookings</a></li>
+                <li class="text-muted mb-3"><a href="{% url 'account_change_password' %}">Change My Password</a></li>
+                <li class="text-muted"><a href="{% url 'account_logout' %}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="col-12 col-lg-8  mt-2">
+            <p>Update your default delivery information below!</p>
+            <form action="{% url 'profile' %}" method="POST" id="update-info-form" class="w-100">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <p class="text-right">
+                    <button type="submit" class="submit-form text-center">Update</button>
+                </p>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

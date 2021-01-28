@@ -14,85 +14,88 @@
 
 {% block content %}
 <!--Booking Widget-->
-<div class="container mt-4 booking-container h-100">
+<div class="container mt-4 booking-container h-100 mb-5">
     <div class="row">
         <div class="col-12">
             <h3>Make A Booking</h3>
             <hr />
         </div>
+
     </div>
     <div class="row">
-        <div class="col-12 col-md-9">
-            {% for category in categories %}
-            <h4 class="mt-5 mb-3">{{ category }}</h4>
+        <div class="col-12 col-md-6 mx-auto">
+            <div class="col-12 d-flex justify-content-center mb-3">
+                <ul class="list-group list-group-horizontal mx-auto">
+                    <li class="list-group-item">
+                        <div class="bullet-open"></div>
+                    </li>
+                    <li class="list-group-item ">
+                        <div class="grey-line"></div>
+                    </li>
+                    <li class="list-group-item ">
+                        <div class="bullet-open"></div>
+                    </li>
+                    <li class="list-group-item ">
+                        <div class="grey-line"></div>
+                    </li>
+                    <li class="list-group-item ">
+                        <div class="bullet-open"></div>
+                    </li>
+                    <li class="list-group-item ">
+                        <div class="grey-line"></div>
+                    </li>
+                    <li class="list-group-item ">
+                        <div class="bullet-open"></div>
+                    </li>
+                </ul>
+            </div>
+            <p>To begin, <strong>please select at leat one service!</strong></p>
+            {% for category in service_categories %}
+            <h4 class="mt-3 mb-3">{{ category }}</h4>
             <div class="contain-services shadow">
-                           {% for service in services %}
-                            {% ifequal service.serviceCategory|stringformat:"s" category.name|stringformat:"s" %} 
-                            <!-- Output Service -->
-                            <div class="col-12 pt-3 pb-3 select-service"><div class="circle-select-service d-inline-block"></div><span class="service-name ml-3">{{ service.name }}</span>
-                            <span class="d-inline-block service-price">€<span class="raw-cost">{{ service.price }}</span></span>
-                            </div>
-                            <hr class="p-0 m-0"/>
-                            {% endifequal %}
-                           
-                            {% endfor %}    
-
+                {% for service in services %}
+                {% ifequal service.serviceCategory|stringformat:"s" category.name|stringformat:"s" %}
+                <!-- Output Service -->
+                <div class="col-12 pt-3 pb-3 select-service">
+                    <div class="circle-select-service d-inline-block"></div><span
+                        class="service-name ml-3">{{ service.name }}</span>
+                    <span class="d-inline-block service-price">€<span class="raw-cost">{{ service.price }}</span></span>
                 </div>
-              {% endfor %}
-          
-        </div>
+                <hr class="p-0 m-0" />
+                {% endifequal %}
 
+                {% endfor %}
 
+            </div>
+            {% endfor %}
 
-        <div class="col-3 d-none d-lg-block"> 
-            <div class="card" style="width: 18rem;">
-                <div class="card-body heading-card pb-0">
-                  <h5 class="card-title text-center">Upcoming Bookings ({{ bookings|length}})</h5>
-                 
-                </div>
-                <div class="card-body pt-0 pb-0">
-                    <ul class="list-group list-group-flush ">
-                        {% if bookings %}
-                        {% for booking in bookings %}
-                        <li class="list-group-item"> {{ booking.service }}
-                            - {{ booking.time }}</li>
-                        {% endfor %}
-                        {% else %}
-                        <li class="list-group-item">You have no upcoming bookings</li>
-                        {% endif %}                       
-                      </ul>
-                </div>
-              </div> 
         </div>
 
     </div>
 
 
     <!--Request Booking Fixed PopUp for Desktop-->
-    <div class="fixed-popup-desktop d-sm-none d-md-none d-lg-none shadow">
-    <div class="col-12 text-center pt-3">
-    <strong>BOOK</strong>
-  
-    <hr />
-    </div>
-    <div id="contain-selected-services"></div>
-    <div class="col-12 text-right">
-    <h6>Total: €<span class="total-cost">0</span></h6>
-    {% csrf_token %}
-    <div class="continue-booking-btn">CONTINUE</div>
-    </div>
-    </div>
-
-    <!--Request Booking Fixed Bottom Bar For Mobile-->
-    <div class="row request-fixed-bar d-none d-lg-none ">
-        <div class="col-12 text-center">
-            <!--Insert selected services-->
-            <div class="mr-auto display-selected-services"></div>
-            <div class="ml-auto request-a-booking-btn">Request Booking</div>
+    <div class="fixed-popup-desktop d-none d-lg-none shadow">
+        <div class="col-12 text-center booking-top-bar mb-4">
+            YOUR BOOKING
+        </div>
+        <div id="contain-selected-services"></div>
+        <div class="col-12 text-right text-muted mt-3">
+            <h6>Total: €<span class="total-cost">0</span></h6>
+            {% csrf_token %}
+            <div class="continue-booking-btn mt-4">CONTINUE</div>
         </div>
     </div>
 
-
+    <!--Request Booking Fixed Bottom Bar For Mobile-->
+    <div class="row request-fixed-bar d-none d-lg-none">
+        <div class="col-12">
+            <!--Insert selected services-->
+            <div class="display-total-cost"></div>
+            <div class="display-service-number"></div>
+            <div class="continue-booking-btn continue-booking-mobile">CONTINUE</div>
+        </div>
+    </div>
 
 </div>
 {% endblock %}

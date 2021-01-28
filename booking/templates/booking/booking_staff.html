@@ -1,19 +1,58 @@
-
-<div class="center-widget shadow p-4 w-100">
-{% csrf_token %}
-<!--Booking Widget-->
-<h3>Choose A Staff Member</h3>
-<p>If you select multiple staff members, we will assign you a staff member from that selection based on your requirements and availability.</p>
-<p class="message text-danger mt-3 text-center"></p>
-<hr/>
-{% for member in staff %}
-
-<div onclick="selectStaffMember(this)" class="col-12 pt-3 pb-3 select-staff-member"><div class="circle-select-staff-member d-inline-block"></div><span class="ml-3 staff-name">{{ member.name }}</span>
+<div class="col-8 contain-booking-progress d-flex justify-content-center pl-3 pr-3 mx-auto mt-5">
+    <ul class="list-group list-group-horizontal mx-auto">
+        <li class="list-group-item">
+            <div class="bullet"></div>
+        </li>
+        <li class="list-group-item">
+            <div class="line"></div>
+        </li>
+        <li class="list-group-item ">
+            <div class="bullet-open"></div>
+        </li>
+        <li class="list-group-item ">
+            <div class="grey-line"></div>
+        </li>
+        <li class="list-group-item ">
+            <div class="bullet-open"></div>
+        </li>
+        <li class="list-group-item ">
+            <div class="grey-line"></div>
+        </li>
+        <li class="list-group-item ">
+            <div class="bullet-open"></div>
+        </li>
+    </ul>
 </div>
-<hr class="p-0 m-0"/>
-
-{% endfor %}
-<div onclick="continueBookingTime()" class="continue-booking-btn continue-booking-to-time mt-3">Continue</div>
+<div class="col-12 text-center">
+    <a href="{% url 'booking' %}"><i class="fas fa-sync mt-3"></i></a>
 </div>
+
+<div class="col-12 col-md-6 mx-auto mt-3">
+    <div class="center-widget shadow p-4 w-100">
+        {% csrf_token %}
+        <!--Booking Widget-->
+        <h3>Choose A Staff Member</h3>
+        <p>If you select multiple staff members, we will asign you a staff member on the day from your selection based
+            on
+            requirements and availability.</p>
+        <p class="message text-danger mt-3 text-center"></p>
+        <hr />
+        <div class="col-12 pt-3 pb-3 select-staff-member no-preference">
+            <div class="circle-select-staff-member d-inline-block"></div><span
+                class="ml-3 staff-name">No Preference</span>
+        </div>
+        <hr class="p-0 m-0" />
+        <div class="contain-staff-names">
+        {% for member in staff %}
+        <div class="col-12 pt-3 pb-3 select-staff-member">
+            <div class="circle-select-staff-member d-inline-block"></div><span
+                class="ml-3 staff-name">{{ member.name }}</span>
+        </div>
+        <hr class="p-0 m-0" />
+
+        {% endfor %}
+    </div>
+        <div class="continue-booking-btn continue-booking-to-time mt-3">Continue</div>
+    </div>
 </div>
 

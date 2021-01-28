@@ -40,22 +40,20 @@ color: red;
 
 /* Management base template */
 .top-bar {
-background-color: #4A94BF;
+background-color: #fff;
 color: #fff;
 height: 50px;
 line-height: 50px !important;
 position: fixed;
 top: 0;
 z-index: 2;
+border-bottom: 1px solid #70717479;
 }
 
 .title-text {
-line-height: 50px;
-font-size: 24px;
-position: absolute;
-top: 50%;
--ms-transform: translateY(-50%);
-transform: translateY(-50%);
+
+font-size: 20px;
+color: #1A1F36;
 }
 
 
@@ -65,14 +63,21 @@ top: 50%;
 right: 0;
 -ms-transform: translateY(-50%);
 transform: translateY(-50%);
-height: 40px;
-width: 80px;
-border-radius: 3px;
-background-color: #F49F1B;
-line-height: 40px; 
-color: #fff;
+color: #707174;
 cursor: pointer;
+font-size: 16px;
 }
+
+.fa-question-circle {
+color: #707174;
+}
+
+
+.fa-mail-bulk, .fa-tag, .booking-icon {
+    font-size: 60px;
+}
+
+
 
 #myChart {
 height: 300px;
@@ -80,19 +85,16 @@ width: 300pxs;
 }
 
 
-.exit-btn:hover {
-  background-color:rgb(247, 171, 57);
- }
 
  .nav-bar {
      position: fixed;
      top: 0;
      left: 0;
      height: 100vh;
-     width: 300px;
-     background-color:rgb(26, 26, 31); 
-     z-index: 1;
-     padding-top: 80px;
+     width: 280px;
+     background-color:#F7FAFC;
+     z-index: 99;
+     padding-top: 10px;
  }
 
  .dashboard-menu {
@@ -100,14 +102,14 @@ width: 300pxs;
  }
 
  .nav-list li {
-color: #fff;
+color: #1A1F36;
 width: 260px;
 position: relative;
  }
 
  .expand-icon {
 position: absolute;
-top: 50%;right: 0;
+top: 50%;right: 10%;
 -ms-transform: translateY(-50%);
 transform: translateY(-50%);
  }
@@ -136,7 +138,7 @@ border-right: 1px solid lightgrey;
 
 .icon-box i {
     font-size: 24px;
-    color: #E25847;
+    color: #1A1F36;
 }
 
 
@@ -158,15 +160,18 @@ color: green;
     height: 30px;
     width: 80px;
     line-height: 30px;
-    background-color: #E25847;
+    background-color: #1A1F36;
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
 }
 
-.remove-staff {
+
+
+.remove-staff, .remove-service, .remove-service-category {
 cursor: pointer;
 }
+
 
 
 .display_shipping_method {
@@ -189,9 +194,9 @@ cursor: pointer;
 }
 
 .search_product_input {
-    min-width: 250px;
-    min-height: 60px;
-    font-size: 24px;
+    min-width: 200px;
+    min-height: 40px;
+    font-size: 14px;
     padding-left: 5px;
 }
 
@@ -204,15 +209,187 @@ cursor: pointer;
 }
 
 .email_btn {
-    width: 70%;
+    
     height: 40px;
     line-height: 40px;
     text-align: center;
-    background-color: #4A94BF;
+    background-color: #1A1F36;
     border-radius: 5px;
     color: #fff;
     margin: 0 auto;
     cursor: pointer;
+
+}
+
+
+.border-thin {
+border: 1px solid rgba(175, 175, 175, 0.24);
+}
+
+.banner-contain {
+    background-color: #6a2b86;
+    color: #fff !important;
+}
+
+.banner-contain-email-success {
+    background-color: rgb(12, 173, 98);
+    color: #fff !important;
+}
+
+.banner-contain-email-fail {
+    background-color: red;
+    color: #fff !important;
+}
+
+.confirmed-booking {
+    background-color: rgb(12, 173, 98);
+}
+
+
+
+
+
+.green-tick, .text-green {
+    color: green;
+}
+
+.text-area {
+    min-height: 200px;
+}
+
+
+.send-marketing-email-btn {
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #1A1F36;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.delete-btn {
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #6e1616;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    margin: 0 auto;
+    cursor: pointer;
+
+}
+
+.delete-btn-confirm {
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #6e1616;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    margin: 0 auto;
+    cursor: pointer;
+
+}
+
+
+.go-back {
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: rgb(26,31,54);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.border-green {
+    border: 0.5px solid rgb(18, 88, 18) !important;
+    color: #000 !important;
+}
+
+.open-mobile-settings {
+color: #1A1F36;
+}
+
+
+.border-red {
+    border: 0.5px solid rgb(143, 36, 36) !important;
+    color: #000 !important;
+}
+
+
+
+#id_in_stock {
+font-weight: bold;
+}
+
+label {
+    font-weight: bold; 
+}
+
+.call_btn {
+height: 40px;
+width: 200px;
+line-height: 40px;
+background-color: #2624A6;
+color: #fff;
+text-align: center;
+}
+
+a {
+color: inherit !important;
+}
+
+.make-same-height {
+    min-height: 80px !important;
+}
+
+.submit-form {
+    display: block;
+    height: 40px !important; 
+    width: 150px !important;
+    background-color: #FEB801 !important;
+    color: rgb(75, 75, 75);
+    line-height: 40px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+
+
+.btn-file {
+position: relative;
+overflow: hidden;
+  }
+
+
+.btn-file input[type="file"] {
+position: absolute;
+top: 0;
+right: 0;
+min-width: 100%;
+min-height: 100%;
+opacity: 0;
+cursor: pointer;
+
+
+}  
+
+#myLineChart 
+{
+
+    min-height: 200px !important;
 }
 
 @media(min-width: 992px) {
@@ -221,6 +398,13 @@ cursor: pointer;
         max-width: calc(100vw-320px);
     }
 
+    
+#myLineChart 
+{
+
+    min-height: none;
+}
+    
     .dashboard-menu {
         display: block;
     }

@@ -1,0 +1,46 @@
+{% extends 'management/dashboard_base.html' %}
+{% load static %}
+{% block extra_title %} Dashboard {% endblock %}
+
+
+{% block content %}
+<div class="container-fluid mt-5 pt-4">
+  <div class="row">
+    <div class="col-12 text-muted text-center">
+      <h3 class="d-inline-block ">Add A Category</h3>
+      <hr />
+      <p>To create a category, please enter a category name and click the button below!</p>
+    </div>
+    <div class="col-12 col-lg-8 mx-auto">
+      <form method="POST" action="">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <button type="submit" class="send-marketing-email-btn mt-3">Add Category</button>
+      </form>
+    </div>
+  </div>
+  <h4 class="text-muted">Current Categories</h4>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Category Name</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if categories|length < 1%}
+      <p>You have not created any categories yet!</p>
+      {% endif %}
+      {% for items in categories %}
+      <tr>
+        <td id="category_name">{{ items.name }}</td>
+        <td><i class="fas fa-times delete-category"></i></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+</div>
+{% endblock %}

@@ -60,81 +60,121 @@
     </div>
 </div>
 
+
+
 <div class="container-fluid mt-5">
     <div class="row">
-        <div class="col-12 col-lg-6">
-            <canvas id="myChart"></canvas>
-            
+        <div class="col-12">
+            <h3>Marketing & Website Analysis</h3>
+            <hr />
+        </div>
+        <div class="col-12 mx-auto shadow-sm pt-3 pb-3">
+            {% if traffic_down == 1 %}
+            <h6><strong><i class="fas fa-traffic-light mr-3 text-red"></i>Your traffic is down from last
+                    week!</strong><span class="ml-2 fas fa-question-circle" data-toggle="tooltip" data-placement="top"
+                    title="You are seeing this message because we have noticed that your website traffic has reduced since last week! Check out our recommendations to increase website traffic."></span>
+            </h6>
+            {% else %}
+            <h6><strong><i class="fas fa-traffic-light mr-3 text-green"></i>Your traffic is up from last week! Well
+                    Done!</strong><span class="ml-2 fas fa-question-circle" data-toggle="tooltip" data-placement="top"
+                    title="You are seeing this message because your website traffic has increased since last week! Keep up the good work! Check out our recommendations to increase website traffic."></span>
+            </h6>
+            {% endif %}
+
+        </div>
+
+        <div class="col-12 col-lg-5 mr-2 shadow-sm mt-4 text-center border-thin">
+            <i class="fas fa-mail-bulk mt-5"></i>
+            <h5 class="mt-5 mb-2">Increase Your Traffic!</h5>
+            <p>Keeping in touch with your customers is extremely important. An easy way to keep them up to date with any
+                offers or news is to send out an email. </p>
+            <a href="{% url 'send_marketing_email' %}">
+                <div class="email_btn mb-5">Send Marketing Email</div>
+            </a>
+
+        </div>
+        <div class="col-12 col-lg-5 shadow-sm border-thin mt-4">
+            <canvas id="myLineChart"></canvas>
             <script>
-                var ctx = document.getElementById('myChart').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'horizontalBar',
+                var ctx = document.getElementById('myLineChart').getContext('2d');
+                data = [{{last_day}},{{last_7}}, {{previous_week}}, {{last_31}}];
+                var myLineChart = new Chart(ctx, {
+                    type: 'line',
                     data: {
-                        labels: ['Today', 'This Week', 'Last Week', 'This Month'],
+                        labels: ["Today", "This Week", "Last Week", "This Month"],
                         datasets: [{
-                            label: '# Unique Website Visits',
-                            data: [{{last_day}}, {{last_7}}, {{previous_week}}, {{last_31}}],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(255, 99, 132, 0.2)'
-
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(255, 99, 132, 1)'
-
-                            ],
-                            borderWidth: 1
+                            data: data,
+                            label: "Traffic",
+                            borderColor: "#3e95cd",
+                            fill: false
                         }]
                     },
                     options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }],
-                            xAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
+                        title: {
+                            display: true,
+                            text: 'Website Traffic'
                         }
                     }
                 });
             </script>
         </div>
-        <div class="col-12 col-lg-6 text-center">
-            {% if traffic_down == 1 %} 
-            <img src="{{MEDIA}}sad.png" class="img-fluid emoji">
-            <h6 class="mt-4"><strong>Your traffic is down from last week!</strong></h6>
-            <div class="email_btn">SEND A MARKETING EMAIL</div>
+
+
+        <div class="col-12 col-lg-5 mr-2 shadow-sm mt-4 text-center border-thin">
+            <i class="fas fa-tag mt-5"></i>
+            <h5 class="mt-5 mb-2">Drive Sales!</h5>
+            <div class="make-same-height">
+                <p>Offering discounts to customers is a great way to increase traffic and drive more sales on your
+                    website!
+                    You can create coupons to give your customers discounts!</p>
+            </div>
+            <a href="{% url 'coupons' %}">
+                <div class="email_btn mb-5">Create A Coupon</div></a>
+        </div>
+
+
+
+
+
+        <div class="col-12 col-lg-5 shadow-sm mt-4 text-center border-thin ">
+
+            <i class="fas fa-user-clock booking-icon mt-5"></i>
+            <h5 class="mt-5 mb-2">Your Bookings</h5>
+            <div class="make-same-height">
+                <p>Todays Bookings: <span class="text-green">{{ todays_bookings}}</span> |
+                    Next 7 Days: <span class="text-green">{{ this_week_bookings }}</span></p>
+            </div>
+            <a href="{% url 'bookings' %}">
+                <div class="email_btn">View Bookings</div>
+            </a>
+            {% if next_7_bookings > 0 %}
+            <div class="alert alert-warning mt-3" role="alert">
+                You have unconfirmed bookings due in the next 7 days!
+            </div>
             {% else %}
-            <img src="{{MEDIA}}thumb.png" class="img-fluid emoji">
-            <h6 class="mt-4"><strong>Your traffic is up from last week! Well done!</strong></h6>
-            <div class="email_btn">SEND A MARKETING EMAIL</div>
-            
+            <div class="alert alert-success mt-3" role="alert">
+                All your bookings for the next 7 days are confirmed!
+            </div>
             {% endif %}
         </div>
+
     </div>
 </div>
 
 <div class="container-fluid mt-5">
     <div class="row">
-        <div class="col-12 text-muted">
-            <h3 class="d-inline-block">Recent Bookings</h3>
-            <div class="ml-3 view-btn text-center d-inline-block">All</div>
+        <div class="col-12">
+            <h4 class="d-inline-block">Recent Bookings</h4>
+            <a href="{% url 'bookings' %}">
+                <div class="ml-3 view-btn text-center d-inline-block">View All</div>
+            </a>
             <hr />
         </div>
         <!--Output recent bookings-->
 
         <div class="col-12">
             <table class="table">
-                <thead class="thead-dark">
+                <thead class="thead-light">
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Service</th>
@@ -146,7 +186,7 @@
                     {% for booking in bookings %}
                     <tr>
                         <td>{{ booking.customer_name }}</td>
-                        <td>{{ booking.service}}</td>
+                        <td>{{ booking.service }}</td>
                         <td>{{ booking.date }}</td>
                         <td>{{ booking.time }}</td>
                     </tr>
@@ -164,30 +204,30 @@
 
 <div class="container-fluid mt-5">
     <div class="row">
-        <div class="col-12 text-muted">
-            <h3 class="d-inline-block">Recent Orders</h3>
-            <div class="ml-3 view-btn text-center d-inline-block">All</div>
+        <div class="col-12">
+            <h4 class="d-inline-block">Recent Orders</h4>
+            <a href="{% url 'view_orders' %}">
+                <div class="ml-3 view-btn text-center d-inline-block">All</div>
+            </a>
             <hr />
         </div>
         <!--Output recent orders-->
 
         <div class="col-12">
             <table class="table">
-                <thead class="thead-dark">
+                <thead class="thead-light">
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Date</th>
                         <th scope="col">Amount</th>
-                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for order in orders %}
+                    {% for order in recent_orders %}
                     <tr>
                         <td>{{ order.full_name }}</td>
                         <td>{{ order.date }}</td>
                         <td>{{ order.total }}</td>
-                        <td>Processed</td>
                     </tr>
                     {% endfor %}
                 </tbody>

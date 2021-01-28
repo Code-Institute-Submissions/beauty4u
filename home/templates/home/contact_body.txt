@@ -1,0 +1,7 @@
+You have received a contact form submission from Beaty4U. Please find the details below
+
+Name: {{ name }}
+
+Email: {{ email }}
+
+Message: {{ message }}

@@ -1,6 +1,6 @@
 <div class="contain-mobile-icon-menu">
     <li class="list-inline-item">
-        <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown"
+        <a class="top-icon-nav  nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <div class="text-center">
                 <div><i class="fas fa-search"></i></div>
@@ -10,7 +10,7 @@
             <form class="form" method="GET" action="{% url 'products' %}">
                 <div class="input-group w-100">
                     <input class="form-control border border-black rounded-0" type="text" name="q"
-                        placeholder="Search our site">
+                        placeholder="Search for products..">
                     <div class="input-group-append">
                         <button class="form-control form-control btn btn-black border border-black rounded-0"
                             type="submit">
@@ -23,81 +23,125 @@
             </form>
         </div>
     </li>
-    <li class="list-inline-item">
-        <a class="text-black nav-link d-block d-lg-none" href="{% url 'view_wishlist' %}">
+    <!--My Account-->
+    <li class="list-inline-item dropdown">
+        <a class="top-icon-nav nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             <div class="text-center">
-                {% if wishlist_items %}
-                <i class="far fa-heart"></i>
-                {% else %}
-                <i class="far fa-heart"></i>
-                {% endif %}
+                <i class="fas fa-user fa-lg"></i>
             </div>
         </a>
+        <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="user-options">
+            {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+            <a href="{% url 'management' %}" class="dropdown-item">Dashboard</a>
+            <hr />
+            {% else %}
+            <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+            <hr />
+            {% endif %}
+            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+            {% else %}
+            <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+            <hr />
+            <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+            {% endif %}
+        </div>
     </li>
     <li class="list-inline-item">
         <!--For the mobile cart - when clicked display the popout cart-->
-        <div
-            class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none toggle-mobile-cart">
+        <div class="nav-link d-block d-lg-none toggle-mobile-cart top-icon-nav ">
             <div class="text-center">
-                <div><i class="fas fa-shopping-bag"></i></div>
+                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
             </div>
         </div>
     </li>
 </div>
 
+<!-- <i class="fas fa-arrow-alt-circle-left p-1 close-cart-icon"></i> -->
+
 <!--Mobile Cart Popout-->
-<div class="container-mobile-cart">
-   <div class="col-12 bg-black text-white contain-cart-heading mb-4">
-    <h2 class="text-center mt-5 mb-5">
-        Cart
-    </h2>
-    </div>
-    {% if cart_items %}
-    <div class="contain-mobile-cart-items pl-2 pr-2 ">
-     {% for item in cart_items %}  
-        <div class="row mt-2 mb-2">
-        <div class="col-4">
-            <img class="img-fliud rounded cart-image" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-        </div>
-        <div class="col-8 my-auto">
-            <p><strong>{{ item.product.name }}</strong></p>
-            <div class="row">
-                <div class="col-6">
-            <p class="light-grey">€{{ item.product.price }}</p>
-            </div>
-            <div class="col-6">
-             Qty: {{ item.quantity }}   
-            </div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-    </div>  
-    <div class="contain-mobile-cart-summary">
-        <div class="row p-2">
-        <div class="col-6">
-        <p><strong>Total (Exlc. delivery)</strong></p>
-        </div>
-        <div class="col-6 text-right light-grey">
-         €{{ total }}
-        </div>
-        </div>
-        <div class="col-12 bg-highlight text-black text-center m-0 p-0 w-100">
+<div class="container-mobile-cart shadow">
+    <div class="contain-cart-heading text-center">
+        <h5 class="text-center pt-2 text-bold p-0">
+            Your Cart
+        </h5>
+        <div class="col-12 text-black text-center m-0 p-0 w-100 m-0">
             {% if free_shipping_delta > 0 %}
-            <p>Spend another € {{free_shipping_delta }} to qualify for free shipping</p>
+            <span class="text-danger font-shipping-alert">Spend another € {{free_shipping_delta }} for free
+                shipping!</span>
             {% else %}
-            <p class="pt-2 pb-2">YOU QUALIFY FOR FREE SHIPPING</hp>
+            <span class="text-success text-bold">YOU QUALIFY FOR FREE SHIPPING</span>
             {% endif %}
         </div>
-        <div class="col-12 text-center">
-            <a href="#">
-            <div class="checkout-popup-cart">Checkout</div>
-        </a>
+        <hr class="p-0 m-0" />
+    </div>
+    {% csrf_token %}
+    {% if cart_items %}
+    <div class="contain-mobile-cart-items pl-2 pr-2 mt-0 pt-0">
+        {% for item in cart_items %}
+        <div class="row mt-2 mb-2">
+            <div class="col-4">
+                <img class="img-fliud rounded cart-image" src="{{ item.product.image.url }}"
+                    alt="{{ item.product.name }}">
+            </div>
+            <div class="col-8 my-auto">
+                <p><strong>{{ item.product.name }}</strong></p>
+                <div class="row">
+                    <div class="col-4">
+                        {% if item.product.sale_price %}
+                        {% if item.product.sale_price < item.product.price %}
+                        <p class="light-grey">€{{ item.product.sale_price }}</p>
+                        {% endif %}
+                        {% else %}
+                        <p class="light-grey">€{{ item.product.price }}</p>
+
+                        {% endif %}
+                    </div>
+                    <div class="col-4">
+                        Qty: {{ item.quantity }}
+                    </div>
+                    <div class="col-4">
+                        <i class="fas fa-times remove-item"></i>
+                        <input type="hidden" id="product-id" value="{{item.product.id}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="contain-mobile-cart-summary">
+        <div class="row m-0">
+            <div class="col-6">
+                <p><strong>Total (Exlc. delivery)</strong></p>
+            </div>
+            <div class="col-6 text-right light-grey">
+                €{{ total }}
+            </div>
+        </div>
+
+        <div class="col-12 text-center m-0 p-0">
+            <div class="row m-0 p-0">
+                <div class="col-6 p-0 m-0">
+                    <div class="checkout-popup-cart continue-shopping">Continue Shopping</div>
+                </div>
+                <div class="col-6 p-0 m-0">
+                    <a href="{% url 'checkout' %}">
+                        <div class="checkout-popup-cart-2">Checkout <i class="fas fa-lock ml-3"></i></div>
+                    </a>
+                </div>
+
+            </div>
         </div>
     </div>
     {% else %}
-    <div class="col-12">
-        Looks like your cart is empty
+    <div class="col-12 text-center">
+        <i class="fas fa-shopping-basket empty-cart mb-4"></i>
+        <p>Looks like your cart is empty!</p>
+        <a href="{% url 'products' %}">
+            <div class="shop-now-btn mt-4">Let's Shop!</div>
+        </a>
+        <div class="continue-shopping shop-now-btn-2 mx-auto mt-4">Close Cart!</div>
     </div>
     {% endif %}
 </div>
@@ -117,33 +161,54 @@
         </a>
         <hr />
         <li>
-            <p class="mobile-menu-item"> <i class="pr-2 fas fa-plus"></i>Products</p>
+            <p class="mobile-menu-item"><i class="pr-2 fas fa-plus"></i>Products</p>
             <div class="inner-menu">
-                <ul class="list-unstyled ml-5">
-                    <li>All Products</li>
+                <ul class="list-unstyled">
+                    <a href="{% url 'products' %}">
+                        <li>All Products</li>
+                    </a>
                     <hr />
-                    <li>Top sellers</li>
+                    <a href="{% url 'products' %}?sale=true">
+                        <li>Sale</li>
+                    </a>
                     <hr />
-                    <li>Special Offers</li>
+                    <li class="mobile-menu-item"><i class="pr-2 fas fa-plus"></i>Brands</li>
+                    <div class="inner-menu">
+                        <ul class="list-unstyled mt-3">
+                            {% for brand in brands %}
+                            <a href="{% url 'products' %}?brand={{ brand.brand }}">
+                                <li>{{ brand.brand }}</li>
+                            </a>
+                            <hr />
+                            {% endfor %}
+                        </ul>
+                    </div>
                     <hr />
-                    <li>Shop by Brands</li>
-                    <hr />
-                    <li>Shop by Product Type</li>
+                    <li class="mobile-menu-item"><i class="pr-2 fas fa-plus"></i>Product Types</li>
+                    <div class="inner-menu">
+                        <ul class="list-unstyled mt-3">
+                            {% for type in categories %}
+                            <li><a href="{% url 'products' %}?category={{type.name}}">{{ type.name }}</a></li>
+                            <hr />
+                            {% endfor %}
+                        </ul>
+                    </div>
                     <hr />
                 </ul>
-
             </div>
+            <hr />
         </li>
-        <hr />
         <a href="{% url 'booking' %}">
             <li>Make a booking</li>
         </a>
         <hr />
-        <li>About Us</li>
+        <a href="{% url 'profile' %}">
+            <li>My Account</li>
+        </a>
         <hr />
-        <li>Gallery</li>
-        <hr />
-        <li>My Account</li>
+        <a href="{% url 'contact' %}">
+            <li>Contact Us</li>
+        </a>
         <hr />
     </ul>
 </div>

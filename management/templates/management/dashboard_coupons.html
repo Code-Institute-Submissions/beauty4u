@@ -7,7 +7,8 @@
 <div class="container-fluid mt-5 pt-4">
   <div class="row">
     <div class="col-12 text-muted">
-      <h3 class="d-inline-block">Coupons</h3><div class="ml-3 view-btn text-center d-inline-block" data-toggle="modal" data-target="#addcouponmodal">Add</div>
+      <h3 class="d-inline-block">Coupons</h3>
+      <div class="ml-3 view-btn text-center d-inline-block" data-toggle="modal" data-target="#addcouponmodal">Add</div>
       <hr />
     </div>
   </div>
@@ -45,14 +46,14 @@
             <td class="coupon-minspend {{coupon.code}}-minspend">{{coupon.minspend}}</td>
             <td>
               <input type="checkbox" {% if coupon.active == True %} checked {% endif %} name="activatecoupon"
-                class="activatecoupon" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Yes" data-off="No">
+                class="activatecoupon" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Yes"
+                data-off="No">
 
             </td>
             <td>
               <div class="btn btn-success coupon-settings"><i class="fas fa-cogs"></i></div>
             </td>
           </tr>
-          <tr>
             {% endfor %}
         </tbody>
       </table>
@@ -65,65 +66,69 @@
 
 
 
-            <!--Set shipping costs modal-->
-              <div class="modal fade" id="addcouponmodal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-cogs mr-3"></i> Add Coupon</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form method="POST">  
-                        {% csrf_token %}
-                          {{ form | crispy }}
-                          <input type="submit" value="Save" class="clicked_submit"/>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <!--Set shipping costs modal-->
+  <div class="modal fade" id="addcouponmodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel2"><i class="fas fa-cogs mr-3"></i> Add Coupon</h5>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>You can create a coupon that will give the user a percentage discount! In the <strong>discount*
+              box,</strong> please enter the % discount you want to give!</p>
+          <p>For example: Entering '5' will create a coupon that will give a 5% discount on the cart!</p>
+          <form method="POST">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <input type="submit" value="Save" class="clicked_submit submit-form" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-            <!--Coupon Settings-->
-            <div class="modal fade" id="couponsettingsmodal" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-cogs mr-3"></i>Coupon (<span class="inject-coupon-name"></span>)</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <p>Set a <strong>minimum amount the customer must spend</strong> before this coupon can be used</p>
-                      <input type="number" name="minspend" id="minspend" placeholder="30.00" required>
-                      {% csrf_token %}
-                        <button class="btn btn-success save_minspend_setting">Update</button>
-                    </form>
-                  <div class="success-message mt-3">
-                    <p class='text-success'></p>
-                    <p class="text-danger"></p>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <!--Coupon Settings-->
+  <div class="modal fade" id="couponsettingsmodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-cogs mr-3"></i>Coupon (<span
+              class="inject-coupon-name"></span>)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Set a <strong>minimum amount the customer must spend</strong> before this coupon can be used</p>
+          <input type="number" name="minspend" id="minspend" placeholder="30.00" required>
+          {% csrf_token %}
+          <button class="btn btn-success save_minspend_setting">Update</button>
+          <div class="success-message mt-3">
+            <p class="text-success"></p>
+            <p class="text-danger"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-              {% if form_error == True %}
-              <script>
-                $(function() {
-                  console.log('error');
-                  $('#addcouponmodal').modal({show: true});
-                });
-                </script>
-              {% endif %}
-
-              
-  
-
+  {% if form_error == True %}
+  <script>
+    $(function () {
+      console.log('error');
+      $('#addcouponmodal').modal({
+        show: true
+      });
+    });
+  </script>
+  {% endif %}
 
 
+
+</div>
   {% endblock %}

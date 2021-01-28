@@ -12,93 +12,130 @@
 
 
 {% block content %}
-<!--Hero Section-->
-<div class="container-fliud mt-3">
+<!--Hero Section Desktop-->
+<div class="container-fliud mt-3 d-none d-xl-block">
     <div class="row m-0 p-0">
         <div class="col-12 col-lg-3 contain-hero p-0 m-0">
-            <div class="contain-hero-text">
-                <h1>Ireland's #1 Source For All Things Hair & Beauty</h1>
-                <h5>Shop for top hair and beauty brands. Book Hair and Beauty services online. </h5>
-                <div class="hero-button mt-3 d-inline-block">SHOP NOW</div>
-                <div class="hero-button mt-3 d-inline-block">BOOK NOW</div>
+            <ul class="list-unstyled text-right mt-5 mr-4 pr-3 d-none d-lg-block">
+                <li class="d-inline-block mx-auto">
+                    <div class="circle-colour"></div>
+                </li>
+                <li class="d-inline-block mx-auto">
+                    <div class="circle-colour"></div>
+                </li>
+                <li class="d-inline-block mx-auto">
+                    <div class="circle-colour"></div>
+                </li>
+            </ul>
+            <div class="contain-hero-text pl-5">
+                <h1 class="main-text">Ireland's #1 Salon Experience</h1>
+                <h5>Shop for top hair and beauty brands. Book Hair and Beauty services for Ireland's Top Salon! </h5>
+                <a href="{% url 'products'%}" class="hero-button mt-3 d-inline-block">SHOP NOW</a>
+                <a href="{% url 'booking'%}" class="hero-button-2 mt-3 d-inline-block">BOOK NOW</a>
             </div>
         </div>
     </div>
 </div>
 
-<!--About Section-->
-<div class="container mt-5">
+<!--Hero Section mob-->
+<div class="container-fliud mt-3 d-block d-xl-none">
+    <div class="row m-0 p-0">
+        <div class="col-12 contain-hero-mob p-0 m-0">
+            <h1 class="contain-mob-hero-text text-left mt-5 ml-4">BEAUTY4U</h1>
+            <p class="text-left mt-3 ml-4 pr-3"><i>Shop for your favourite hair and beauty brands! Make online bookings
+                    and secure an appointment in Ireland's top beauty salon!</i></p>
+            <a href="{% url 'products'%}" class="hero-button-mob mt-3 d-inline-block ml-4">SHOP NOW</a>
+            <a href="{% url 'booking'%}" class="hero-button-mob-2 mt-3 d-inline-block">BOOK NOW</a>
+            <img src="{{MEDIA}}mob.png" class="mob-hero-img mt-4">
+        </div>
+    </div>
+</div>
+
+
+<!--About Section Desktop-->
+<div class="container mt-5 d-none d-lg-block">
     <div class="row">
         <div class="col-12 col-lg-6 text-right contain-about-text">
             <div class="inner-contain-about-text">
+                <h2 class="text-muted">GET THAT FRESH FEELING!</h2>
+                {% for text in text %}
+                <p>{{ text }}</p>
+                {% endfor %}
+                <a href="{% url 'booking'%}">
+                    <div class="book-btn shadow-sm ml-auto">BOOK NOW</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <img class="about-photo" src="{{MEDIA}}index-img1.png">
+        </div>
+    </div>
+</div>
+
+
+<!--About Section Mobile-->
+<div class="container mt-5 d-block d-lg-none">
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <img class="about-photo" src="{{MEDIA}}index-img1.png">
+        </div>
+        <div class="col-12 text-center">
             <h2 class="text-muted">GET THAT FRESH FEELING!</h2>
             {% for text in text %}
             <p>{{ text }}</p>
             {% endfor %}
-            <div class="book-btn shadow-sm ml-auto">BOOK NOW</div>
+            <a href="{% url 'booking'%}">
+                <div class="book-btn shadow-sm mx-auto">BOOK NOW</div>
+            </a>
         </div>
-        </div>
-        <div class="col-12 col-lg-6">
-          <img class="about-photo" src="{{MEDIA}}aboutphoto.jpg">
-        </div>
+
     </div>
 </div>
 
-<!--Shop Prompt-->
-<div class="container mt-5 mb-5">
+
+<!--Shop Prompt Desktop-->
+<div class="container mt-5 mb-5 d-none d-lg-block">
     <div class="row">
-        <div class="col-12 col-lg-6 text-right">
-          <img class="about-photo" src="{{MEDIA}}shopphoto.jpg">
+        <div class="col-6 text-right">
+            <img class="about-photo" src="{{MEDIA}}index-img2.png">
         </div>
-        <div class="col-12 col-lg-6 text-left contain-about-text">
+        <div class="col-6 text-left contain-about-text">
             <div class="inner-contain-shop-text">
-            <h2 class="text-muted">INDULGE!</h2>
-          
-            <p>Beauty4U have a fully stocked online shop full of your favourite hair and beauty products from premium brands! Shop today for Alfaparf, Joico, Dermalogica, ColorWoW and much more!</p>
-          
-            <div class="shop-btn shadow-sm mr-auto">SHOP NOW</div>
-        </div>
-        </div>
-    </div>
-</div>
+                <h2 class="text-muted">INDULGE!</h2>
 
-<!--Info Footer-->
+                <p>Beauty4U have a fully stocked online shop full of your favourite hair and beauty products from
+                    premium brands! Shop today for Alfaparf, Joico, Dermalogica, ColorWoW and much more!</p>
 
-<div class="container-fluid mt-5">
-    <div class="row">  
-        <!--Contact Info-->
-        <div class="col-12 col-lg-4 text-center mt-5">
-        <h2><i class="fas fa-map-marker-alt"></i></h2>
-        <p>123 <br/> Grafton Street <br/> Dublin 2</p>  
-        <p><a href="tel:011111111">01 111 1111</a></p>
-        <div class="google-maps mx-auto">Get Directions</div>
-    </div>
-        <!--Opening Hours-->
-        <div class="col-12 col-lg-4 text-center mt-5">
-            <h2><i class="far fa-clock"></i></h2>
-            <table class="opening-hours-table mt-3">
-                <tr>
-                    {% for items in hours %}
-                    <td>{{ items.day }}</td>
-                    <td>{{ items.openingTime }} - {{ items.closingTime }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-            <!--Socials-->
-            <div class="col-12 col-lg-4 text-center mt-5">
-                <h2>Socials</h2>
-                <ul class="list-group list-unstyled list-group-horizontal social-list">
-                    <li class="list-group-item"><i class="fab fa-instagram"></i></li>
-                    <li class="list-group-item"><i class="fab fa-facebook-square"></i></li>
-                    <li class="list-group-item"><i class="fab fa-twitter"></i></li>
-                    <li class="list-group-item"><i class="fab fa-pinterest"></i></li>
-                    <li class="list-group-item"><i class="fab fa-linkedin"></i></li>
-                </ul>
+                <a href="{% url 'products'%}">
+                    <div class="shop-btn shadow-sm mr-auto">SHOP NOW</div>
+                </a>
             </div>
+        </div>
     </div>
 </div>
 
+
+
+<!--Shop Prompt Mobile-->
+<div class="container mt-5 mb-5 d-block d-lg-none">
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <img class="about-photo" src="{{MEDIA}}index-img2.png">
+        </div>
+        <div class="col-12 text-center">
+
+            <h2 class="text-muted">INDULGE!</h2>
+
+            <p>Beauty4U have a fully stocked online shop full of your favourite hair and beauty products from premium
+                brands! Shop today for Alfaparf, Joico, Dermalogica, ColorWoW and much more!</p>
+
+            <a href="{% url 'products'%}">
+                <div class="shop-btn shadow-sm mx-auto">SHOP NOW</div>
+            </a>
+
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}

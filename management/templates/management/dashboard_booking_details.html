@@ -1,0 +1,43 @@
+{% extends 'management/dashboard_base.html' %}
+{% load static %}
+{% block extra_title %} Dashboard {% endblock %}
+
+
+{% block content %}
+<div class="container-fluid mt-5 pt-4">
+  <div class="row">
+    <div class="col-12 text-muted">
+      <h3 class="d-inline-block">Booking Details</h3>
+      <hr />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h5>Details</h5>
+      <hr />
+      <p>Name: {{ booking.customer_name }}</p>
+      <p>Date: {{ booking.date }}</p>
+      <p>Time: {{ booking.time }}</p>
+      <p>Service(s): {{ booking.service }}</p>
+      <p><strong>Status: </strong>{% if booking.confirmed == False %} Not Confirmed {% else %} <span
+          class="text-success">Confirmed</span>{% endif %}</p>
+    </div>
+    <div class="col-12">
+      <h5>Contact Details </h5>
+      <hr />
+      <p>Email: {{ customer.email }}</p>
+      {% if profile.default_phone_number  %}
+      <p>Phone: {{ profile.default_phone_number }}</p>
+      <a href="tel:{{profile.default_phone_number}}">
+        <div class="call_btn"><i class="fas fa-phone-alt mr-2"></i>Call This Customer</div>
+      </a>
+      {% endif %}
+    </div>
+
+
+  </div>
+</div>
+
+
+  {% endblock %}

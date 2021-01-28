@@ -1,0 +1,18 @@
+Hello {{ name }}
+
+This is an email to say that we have recieved your booking request. We will be in touch shortly to confirm your booking. 
+
+Booking details are as follows:
+
+Date: {{ date }}
+Time: {{ time }}
+Services: {% for item in services %} {{ item }} {% if services|length > 1 %}, {% endif %}{% endfor %}
+Staff Member(s): {% for item in staff %} {{ item }} {% if staff|length > 1 %}, {% endif %}{% endfor %}
+Cost: {{ cost }}
+
+
+If you have any questions or want to ammend your request, please contact us on 01 1234567 or email bookings@beauty4u.ie
+
+We will be in touch with you soon to confirm your booking.
+
+Beauty4U

@@ -1,0 +1,68 @@
+{% extends 'management/dashboard_base.html' %}
+{% load static %}
+{% block extra_title %} Dashboard {% endblock %}
+
+
+{% block content %}
+<div class="container-fluid mt-5 pt-4">
+  <div class="row">
+    <div class="col-12 text-muted">
+      <h3 class="d-inline-block">Bookings</h3>
+      <hr />
+    </div>
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-12">
+      <p>View bookings <strong>and confirm pending bookings</strong></p>
+      <p><i class="fas fa-info-circle mr-3"></i>To view booking details or contact the customer, click on the customer's
+        name below.</p>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Confirmed</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% csrf_token %}
+          {% for booking in bookings %}
+          <tr class="{% if booking.confirmed %} confirmed-booking {% endif %} accept-booking-class"
+            id="{{booking.booking_id}}">
+
+            <td id="contain-customer-booking-name">
+              <input type="hidden" id="booking_id" value="{{booking.booking_id}}">
+              <a href="{% url 'view_booking_details' booking.id %}">{{ booking.customer_name }}</a>
+            </td>
+            <td id="contain-booking-date">
+              {{ booking.date }}
+            </td>
+            <td id="contain-booking-time">
+              {{ booking.time }}
+            </td>
+
+            <td>
+              <input type="checkbox" {% if booking.confirmed == True %} checked disabled {% endif %}
+                name="confirm_booking_switch" class="confirm_booking_switch" data-toggle="toggle" data-onstyle="success"
+                data-offstyle="danger" data-on="Yes" data-off="No">
+
+            </td>
+          </tr>
+          
+            {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+
+
+  </div>
+</div>
+
+
+
+  {% endblock %}

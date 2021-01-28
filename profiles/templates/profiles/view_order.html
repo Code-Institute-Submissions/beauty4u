@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-5 h-100">
+    <div class="row">
+        <div class="col-12">
+            <p><strong>Order Number: </strong>{{ order.order_number }}</p>
+            <p><strong>Customer Name:</strong> {{ order.full_name }}</p>
+            <p><strong>Email:</strong> {{ order.email }}</p>
+            <p><strong>Phone:</strong> {{ order.phone_number }}</p>
+            <p><strong>Shipping Address: </strong><br />
+                {{ order.street_address1 }}<br />
+                {{ order.street_address2 }}<br />
+                {{ order.town_or_city }}<br />
+                {{ order.county}}<br />
+                {{ order.country}}<br />
+            </p>
+
+            <div class="display_shipping_method mb-5">{{ order.shipping_method }}</div>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Qty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.lineitems.all %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        {% if item.product.sale_price %}
+                        {% if item.product.sale_price < item.product.price %}
+                        <td>€{{ item.product.sale_price}}</td>
+                        {% endif %}
+                        {% else %}
+                        <td>€{{ item.product.price }}</td>
+                        {% endif %}
+                        <td>{{ item.quantity }}</td>
+
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td><strong>Order Total: </strong>€ {{ order.total }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr />
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

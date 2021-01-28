@@ -1,14 +1,18 @@
 from decimal import Decimal 
 from django.conf import settings
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, HttpResponse
 from products.models import Product
 from management.models import Sitesettings
 import datetime
+from management.models import Sitesettings
 
 
 def cart_contents(request):
 
+
     free_shipping_setting = get_object_or_404(Sitesettings, name="Free Shipping Threshold")
+    shipping_cost = get_object_or_404(Sitesettings, name="Standard Shipping")
+    std_shipping = shipping_cost.value
     threshold = free_shipping_setting.value
 
 
@@ -20,7 +24,11 @@ def cart_contents(request):
 
     for item_id, quantity in cart.items():
         product = get_object_or_404(Product, pk=item_id)
-        total += quantity * product.price
+        if product.sale_price is not None:
+            if product.sale_price < product.price:
+               total += quantity * product.sale_price
+        else:
+            total += quantity * product.price
         product_count += quantity
 
         cart_items.append({
@@ -32,7 +40,7 @@ def cart_contents(request):
 
 
     if total < threshold:
-        shipping = settings.STANDARD_DELIVERY_COST
+        shipping = std_shipping
         free_shipping_delta =  threshold - total
 
     else: 
@@ -61,5 +69,4 @@ def cart_contents(request):
 
 
     return context
-
 

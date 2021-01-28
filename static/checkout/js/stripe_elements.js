@@ -3,7 +3,9 @@ let clientSecret = $('#id_client_secret').text().slice(1, -1);
 let stripe = Stripe(stripePublicKey)
 
 let elements = stripe.elements();
-let card = elements.create('card', { style: style });
+let card = elements.create('card', {
+  style: style
+});
 let errorDiv = document.getElementById('card-errors');
 
 var style = {
@@ -27,8 +29,6 @@ card.mount('#card-element');
 // Realtime Card validation 
 
 card.addEventListener('change', function (event) {
-
-
   if (event.error) {
 
     let html = `
@@ -46,26 +46,30 @@ card.addEventListener('change', function (event) {
 
 
 // Form Submission 
+let button = document.getElementById('submit-button');
 let form = document.getElementById('payment-form');
 
-form.addEventListener('submit', function (ev) {
+button.addEventListener('click', function (ev) {
   ev.preventDefault(); // Prevent form from submitting
   // Disable card element and submit button to prevent multiple payments
-  card.update({ 'disabled': true });
+  card.update({
+    'disabled': true
+  });
   $('#submit-button').attr('disabled', true);
+  $('.processing-payment-overlay').fadeIn(200).removeClass('d-none');
 
   // Capture form data 
   let saveInfo = Boolean($('#id-save-info').attr('checked'))
   let csrf = $('input[name=csrfmiddlewaretoken]').val();
   let postData = {
-      'csrfmiddlewaretoken': csrf, 
-      'client_secret': clientSecret, 
-      'save_info': saveInfo,
+    'csrfmiddlewaretoken': csrf,
+    'client_secret': clientSecret,
+    'save_info': saveInfo,
   };
 
   let url = 'cache_checkout_data'
 
-  $.post(url, postData).done(function(){
+  $.post(url, postData).done(function () {
     stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: card,
@@ -80,7 +84,7 @@ form.addEventListener('submit', function (ev) {
             state: $.trim(form.county.value),
             country: $.trim(form.country.value),
           }
-  
+
         }
       },
       shipping: {
@@ -94,8 +98,8 @@ form.addEventListener('submit', function (ev) {
           country: $.trim(form.country.value),
           postal_code: $.trim(form.postcode.value),
         }
-  
-  
+
+
       }
     }).then(function (result) {
       if (result.error) {
@@ -106,11 +110,14 @@ form.addEventListener('submit', function (ev) {
     <span>${result.error.message}</span>
     `;
         $(errorDiv).html(html);
-  
+
         // Re-enable card element and submit button to fix errors
-        card.update({ 'disabled': false });
+        card.update({
+          'disabled': false
+        });
         $('#submit-button').attr('disabled', false);
-  
+        $('.processing-payment-overlay').fadeIn(200).removeClass('d-none');
+
       } else {
         // The payment has been processed!
         if (result.paymentIntent.status === 'succeeded') {
@@ -118,9 +125,9 @@ form.addEventListener('submit', function (ev) {
         }
       }
     });
-  
-  }).fail(function(){
+
+  }).fail(function () {
     location.reload();
   })
- 
+
 });

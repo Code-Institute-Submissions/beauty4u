@@ -1,0 +1,45 @@
+{% extends 'management/dashboard_base.html' %}
+{% load static %}
+{% block extra_title %} Dashboard {% endblock %}
+
+
+{% block content %}
+<div class="container-fluid mt-5 pt-4">
+  {% if success == 1 %}
+  <!--Emails Sent-->
+  <div class="row mb-4">
+    <div class="col-12 banner-contain-email-success text-center p-2">
+      <p class="mt-2">Success! Your emails have been sent!</p>
+    </div>
+  </div>
+  <!--Problem Sending Emails-->
+  {% elif success == 2 %}
+  <div class="row">
+    <div class="col-12 banner-contain-email-fail text-center p-2">
+      <p class="mt-2">There was a problem sending your emails!</p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-12 mb-3">
+      <h4>Send a marketing email</h4>
+    </div>
+    <div class="col-12">
+      Fill out the form below to <strong>send an email to all your customers!</strong>
+      <p class="mt-2"><i>Don't forget to include links to your shop and mention any new coupon codes or special
+          offers!</i></p>
+      <p>Number of Customer Emails: <span class="text-success">{{num_of_emails}}</span></p>
+    </div>
+    <div class="col-12 mt-3">
+      <form method="POST" action="{% url 'send_marketing_email' %}" class="form-group">
+        {% csrf_token %}
+        <input type="text" placeholder="Email Subject" name="email_subject" class="form-control" autofocus="True">
+        <textarea placeholder="Email Content..." class="form-control mt-3 text-area" name="email_content"></textarea>
+        <button type="submit" class="send-marketing-email-btn mt-3">Send Email</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

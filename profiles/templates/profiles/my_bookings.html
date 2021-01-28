@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-5 h-100">
+    <div class="row">
+        <!--Mobile Nav-->
+        <div class="col-12 text-center d-block d-lg-none mb-3">
+            <h3 class="text-muted ">Welcome back, {{ request.user.username }}</h3>
+            <div class="dropdown">
+                <div class="select-sorting-mobile mx-auto" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    OPTIONS <i class="fas fa-sort ml-1"></i>
+                </div>
+                <div class="dropdown-menu border-0 shadow dropdown-filter mx-auto">
+                    <a href="{% url 'profile' %}" class="dropdown-item">My Details</a>
+                    <a href="{% url 'my_orders' %}" class="dropdown-item">My Orders</a>
+                    <a href="{% url 'my_bookings' %}" class="dropdown-item">My Bookings</a>
+                    <a href="{% url 'account_change_password' %}" class="dropdown-item">Change Password</a>
+                    <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!--Desktop Nav-->
+        <div class="col-3 border-right d-none d-lg-block">
+            <h3 class="text-muted ">Welcome back, {{ request.user.username }}</h3>
+            <hr />
+            <ul class="list-unstyled profile-menu-list">
+                <li class="text-muted mb-3"><a href="{% url 'profile' %}">My Details</a></li>
+                <li class="mb-3 text-muted"><a href="{% url 'my_orders' %}">My Orders</a></li>
+                <li class="mb-3"><a href="{% url 'my_bookings' %}">My Bookings</a></li>
+                <li class="text-muted mb-3"><a href="{% url 'account_change_password' %}">Change My Password</a></li>
+                <li class="text-muted"><a href="{% url 'account_logout' %}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="col-12 col-lg-8 d-flex justify-content-center">
+            {% if bookings|length < 1 %}
+            <h3 class="text-muted text-center mt-5">Looks like you haven't made any bookings yet!</h3>
+            {% else %}
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Service</th>
+                        <th scope="col">Status</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.date }}</td>
+                        <td>{{ booking.time }}</td>
+                        <td>{{ booking.service }}</td>
+                        <td>{% if booking.confirmed == False %} <span class="text-danger">Unconfirmed</span> {% else %}
+                            <span class="text-success">Confirmed</span>{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

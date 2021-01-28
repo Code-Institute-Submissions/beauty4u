@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_title %}Shop Online{% endblock %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+{% if products|length < 1 %}
+<div class="container h-100 no-results">
+    <div class="row">
+        <div class="col-12 text-center mt-5">
+            <p class="text-muted">Sorry but we could not find any products that match!</p>
+        </div>
+        <div class="col-12 text-center">
+            <a href="{% url 'products'%}">
+                <div class="shop-section-btn mt-2 mx-auto">GO BACK</div>
+            </a>
+        </div>
+    </div>
+</div>
+{% else %}
+
+<div class="container h-100">
+    <div class="row">
+        <div class="col-12 text-center mt-3">
+            {% if brand %}
+            <h2>{{ brand }} products</h2>
+            {% endif %}
+            {% if category %}
+            <h2>{{ category }} products</h2>
+            {% endif %}
+            {% if sale %}
+            <h2>TREAT YOURSELF! IT'S A SALE!</h2>
+            {% endif %}
+            {% if query %}
+            <h2>Results for: {{ query }}</h2>
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="row md-flex justify-content-center h-100">
+        {% for items in products %}
+        <div class="col-6 col-lg-3 mt-5 pt-4">
+            <div class="col-12 text-center">
+                {% if items.sale_price < items.price %} <span class="sale-badge"><img class="sale-tag"
+                        src="{{MEDIA}}sale-tag.png"></span>
+                {% endif %}
+                {% if items.image %}
+                <a href="{% url 'product_detail' items.id %}">
+                    <img src="{{MEDIA}}{{items.image}}" class="product-image" alt="{{ items.name }}">
+                </a>
+                {% endif %}
+            </div>
+            <a href="{% url 'product_detail' items.id %}">
+                <div class="col-12 text-center mt-2 product-title">{{ items.name }}</div>
+            </a>
+            <div class="row">
+                <div class="col-12 text-center mt-2 lightgrey">
+                    {% if items.sale_price < items.price %} <strike>{{ items.price }}</strike><span
+                        class="text-danger ml-3">{{ items.sale_price }}</span>
+                    {% else %}
+                    {{ items.price }}
+                    {% endif %}
+                </div>
+
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+<!--Load JQuery for navigation-->
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'js/product.js' %}"></script>
+{% endblock %}

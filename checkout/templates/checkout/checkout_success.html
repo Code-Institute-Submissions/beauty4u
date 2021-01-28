@@ -12,28 +12,51 @@
 
 {% block content %}
 <div class="container mt-5 text-center h-100">
-    <!--Page Heading-->
     <div class="row">
-        <div class="col">
+        <div class="col-12 text-center mb-4">
             <hr />
-            <h2>Thank You</h2>
+            <h2>Thank You - We've received your order!</h2>
             <hr />
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            Your order has been placed. A confirmation email will be sent to <strong>{{ order.email }}</strong>
+        <div class="col-12 col-lg-6 mx-auto">
+            <img src="{{MEDIA}}order.png" class="order-success-img mb-4">
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            Your order number is {{ order.order_number }}
+
+        <div class="col-12 col-lg-6 text-left p-2">
+            <p>Your order has been placed. A confirmation email will be sent to <strong>{{ order.email }}</strong>.
+                Please find order details below!</p>
+            <ul class="list-unstyled order-summary-list">
+                <li>Your order number is <strong>{{ order.order_number }}</strong></li>
+                <li>Shipping method: {{order.shipping_method}}</li>
+            </ul>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.lineitems.all %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        {% if item.product.sale_price %}
+                        {% if item.product.sale_price < item.product.price %}
+                        <td>€{{ item.product.sale_price}}</td>
+                        {% endif %}
+                        {% else %}
+                        <td>€{{ item.product.price }}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td><strong>Order Total: </strong>€ {{ order.total }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a class="shop-now-btn mt-3 w-50" href="{% url 'products' %}">BACK TO SHOP</a>
         </div>
-        {% for item in order.lineitems.all %}
-        <p>{{ item.product_name }}</p>
-        {% endfor %}
     </div>
 
 </div>
 {% endblock %}
-

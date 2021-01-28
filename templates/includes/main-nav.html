@@ -1,42 +1,68 @@
 <div class="collapse navbar-collapse" id="main-nav">
-    <ul class="navbar-nav w-auto mx-auto mt-3">
+    <ul class="navbar-nav w-auto mx-auto">
         <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'home' %}">
+            <a class="logo-font font-weight-bold nav-link  mr-5" href="{% url 'home' %}">
                 Home
             </a>
-      
+
+        </li>
+
+        <li class="nav-item">
+            <div class="dropdown show text-center">
+                <a class="logo-font font-weight-bold nav-link mr-5" id="brands-menu" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                    BRANDS
+                </a>
+                <div class="dropdown-menu dropdown-style shadow" aria-labelledby="brands-menu">
+                    <div class="contain-arrow text-center w-100"><i class="fas fa-sort-up mx-auto"></i></div>
+                    <ul class="list-unstyled main-menu-dropdown-list">
+                        {% for brand in brands %}
+                        <li>
+                            <h6><a class="dropdown-item"
+                                    href="{% url 'products' %}?brand={{ brand.brand }}">{{ brand }}</a></h6>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </li>
         <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#">
-               About
+            <div class="dropdown show  text-center">
+                <a class="logo-font font-weight-bold nav-link mr-5" id="catmenu" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" href="#">
+                    CATEGORIES
+                </a>
+                <div class="dropdown-menu dropdown-style shadow" aria-labelledby="catmenu">
+                    <div class="contain-arrow text-center w-100"><i class="fas fa-sort-up mx-auto"></i></div>
+
+                    <ul class="list-unstyled main-menu-dropdown-list">
+                        {% for type in categories %}
+                        <li><a class="dropdown-item"
+                                href="{% url 'products' %}?category={{ type.name }}">{{ type.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="logo-font font-weight-bold nav-link mr-5" href="{% url 'products' %}">
+                ALL PRODUCTS
             </a>
-      
+
+        </li>
+
+        <li class="nav-item">
+            <a class="logo-font font-weight-bold nav-link mr-5" href="{% url 'booking' %}">
+                Booking
+            </a>
         </li>
         <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#">
-             Our Services
+            <a class="logo-font font-weight-bold nav-link" href="{% url 'contact' %}">
+                Contact Us
             </a>
-      
         </li>
-        <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#">
-              Gallery
-            </a>
-      
-        </li>
-        <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'products' %}">
-              Shop now
-            </a>
-      
-        </li>
-        <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5 booking-btn" href="{% url 'booking' %}">
-              Booking
-            </a>
-      
-        </li>
-        
-      
+
+
     </ul>
 </div>

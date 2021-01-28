@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_title %} Book An Appointment Today{% endblock %}
+
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<!--Booking Widget-->
+<div class="container mt-4 booking-container h-100">
+    <div class="row">
+        <div class="col-12">
+            <h3>Make A Booking</h3>
+            <hr />
+        </div>
+        <div class="col-12 col-md-8 col-lg-6 text-center mt-3 mx-auto">
+            <img src="{{MEDIA}}details.png" class="details-img mb-2">
+            <h3>Just a few bits first..</h3>
+            <p>Your <strong>First Name, Last Name, & Phone Number</strong> are required to use our booking system.</p>
+
+            <form method="POST" action="{% url 'booking' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control mb-3" autofocus="True" name="first_name"
+                        placeholder="First Name" required>
+                    <input type="text" class="form-control mb-3" name="last_name" placeholder="Last Name" required>
+                    <input type="tel" class="form-control" name="phone_number" placeholder="Phone Number" required>
+                    <button type="submit" class="save_name">CONTINUE</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+
+<!--Load JQuery for booking widget-->
+{% block postloadjs %}
+{{ block.super }}
+<!--Load scripts for time picker-->
+{% endblock %}

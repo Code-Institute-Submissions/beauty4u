@@ -25,7 +25,7 @@ class StripeWH_Handler:
         send_mail(
             subject, 
             body, 
-            "test@test.com",
+            "orders@beauty4u.ie",
             [cust_email],
         )
 
@@ -42,10 +42,14 @@ class StripeWH_Handler:
         """
         Handle the payment_intent.succeeded webhook from Stripe
         """
+
+        print ("RECEIVED WEBHOOK")
         intent = event.data.object
         pid = intent.id
         cart = intent.metadata.cart
         save_info = intent.metadata.save_info
+
+
 
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
@@ -90,6 +94,7 @@ class StripeWH_Handler:
                     stripe_pid=pid,
                 )
                 order_exists = True
+                print("ORDER EXISTS")
                 break
             except Order.DoesNotExist:
                 attempt += 1
@@ -101,6 +106,7 @@ class StripeWH_Handler:
                 status=200)
         else:
             order = None
+            print("ORDER DOES NOT EXIST")
             try:
                 order = Order.objects.create(
                     full_name=shipping_details.name,
@@ -115,6 +121,7 @@ class StripeWH_Handler:
                     county=shipping_details.address.state,
                     original_cart=cart,
                     stripe_pid=pid,
+                    shipping_method=intent.description
                 )
                 for item_id, item_data in json.loads(cart).items():
                     product = Product.objects.get(id=item_id)

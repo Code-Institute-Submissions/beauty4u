@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from profiles.models import UserProfile
 
 
+
 # Create your models here.
 class Order(models.Model):
  
@@ -25,7 +26,7 @@ class Order(models.Model):
     postcode = models.CharField(max_length=254, null=True, blank=True) #not required
     date = models.DateTimeField(auto_now_add=True)
     delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
-    shipping_method = models.CharField(max_length=254,  null=True, blank=False, default="Standard Shipping")
+    shipping_method = models.CharField(max_length=254,  null=True, blank=False)
     subtotal = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     original_cart = models.TextField(null=False, blank=False, default='')
@@ -34,18 +35,6 @@ class Order(models.Model):
 
     def update_total(self):
         """ Update total each time a new line item is added """
-        self.subtotal = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
-
-        settings = Sitesettings.objects.get(name="Free Shipping Threshold")
-        threshold_value = settings.value
-        setting2 = Sitesettings.objects.get(name="Standard Shipping")
-        std_value = setting2.value
-
-        if self.subtotal < threshold_value:
-            self.delivery_cost = std_value
-        else:
-            self.delivery_cost = 0
-        self.total = self.subtotal + self.delivery_cost        
         self.save()
 
     def _generate_order_number(self):

@@ -1,0 +1,46 @@
+{% extends 'management/dashboard_base.html' %}
+{% load static %}
+{% block extra_title %} Dashboard {% endblock %}
+
+
+{% block content %}
+<div class="container-fluid mt-5 pt-4">
+  <div class="row">
+    <div class="col-12 text-muted text-center">
+      <h3 class="d-inline-block ">Add A Brand</h3>
+      <hr />
+      <p>To create a brand, please enter a brand name and click the button below!</p>
+    </div>
+    <div class="col-12 col-lg-8 mx-auto">
+      <form method="POST" action="">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <button type="submit" class="send-marketing-email-btn mt-3">Add Brand</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-12 col-lg-8 mx-auto mt-5 text-center">
+    <h4 class="text-muted">Current Brands</h4>
+    {% if brands|length < 1 %}
+    <p>You have not created any brands yet!</p>
+    {% endif %}
+  </div>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Brand Name</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for items in brands %}
+      <tr>
+        <td id="brand_name">{{ items }}</td>
+        <td><i class="fas fa-times delete-brand"></i></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+{% endblock %}

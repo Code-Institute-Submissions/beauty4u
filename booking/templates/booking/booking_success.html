@@ -1,0 +1,44 @@
+<div class="col-12 contain-booking-progress d-flex justify-content-center mt-5">
+    <ul class="list-group list-group-horizontal mx-auto">
+        <li class="list-group-item">
+            <div class="bullet"></div>
+        </li>
+        <li class="list-group-item ">
+            <div class="line"></div>
+        </li>
+        <li class="list-group-item ">
+            <div class="bullet"></div>
+        </li>
+        <li class="list-group-item ">
+            <div class="line"></div>
+        </li>
+        <li class="list-group-item ">
+            <div class="bullet"></div>
+        </li>
+        <li class="list-group-item ">
+            <div class="line"></div>
+        </li>
+        <li class="list-group-item ">
+            <div class="bullet"></div>
+        </li>
+    </ul>
+</div>
+
+
+
+<div class="center-widget shadow p-4 w-100 mt-3">
+    {% csrf_token %}
+    <h3 class="text-pink">Your Booking Was Successfully Requested</h3>
+    <p>Services: {% for item in services %} {{ item }} {% if services|length > 1 %}, {% endif %}{% endfor %}</p>
+    <p>Staff Members: {% for item in staff %} {{ item }} {% if staff|length > 1 %}, {% endif %}{% endfor %}</p>
+    <p>Date: {{ date }}</p>
+    <p>Time: {{ time }}</p>
+    <p>Cost: €{{ cost }}</p>
+    <p class="mt-4">* Please note all bookings are subject to confirmation by a member of staff. You will recieve a
+        confirmation email once your booking is confirmed. If we need
+        to make an adjustment to your requested booking, we will contact you shortly.
+    </p>
+    <a href="{% url 'home' %}">
+        <div class="confirm-booking-btn">Go Home</div>
+    </a>
+</div>

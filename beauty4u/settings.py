@@ -26,15 +26,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 #if 'USE_AWS' in os.environ:
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', '')
+#SECRET_KEY = os.environ.get('SECRET_KEY', '')
 #else:
-    #SECRET_KEY = 'kpyvw+w3bjpdi%rizi)1c(66@qa%%mmu=2f+euwg2&$-^ul$ov'
+SECRET_KEY = 'kpyvw+w3bjpdi%rizi)1c(66@qa%%mmu=2f+euwg2&$-^ul$ov'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = 'DEVELOPMENT' in os.environ
 DEBUG = True
 
-ALLOWED_HOSTS = ['beauty4u.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['beauty4u.herokuapp.com', 'localhost', '127.0.0.1', 'd2e7ab5cd2e7.ngrok.io']
 
 
 # Application definition
@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'booking',
-    'wishlist',
     'management',
     'checkout',
     'profiles',
@@ -97,7 +96,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'cart.contexts.cart_contents',
                 'management.contexts.setting_contents',
-                'wishlist.contexts.wishlist_contents',
+                'products.contexts.product_menu'
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
@@ -120,17 +119,17 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 
 
-if 'DEVELOPMENT' in os.environ:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Log Emails to console 
-    DEFAULT_FROM_EMAIL = "beauty4u@example.com"
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_USE_TLS = True
-    EMAIL_PORT = 587
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+#if 'DEVELOPMENT' in os.environ:
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Log Emails to console 
+DEFAULT_FROM_EMAIL = "beauty4u@example.com"
+#else:
+   # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+   # EMAIL_USE_TLS = True
+   # EMAIL_PORT = 587
+   # EMAIL_HOST = 'smtp.gmail.com'
+   # EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    #iEMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+   #i DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 #User Account Settings
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
@@ -152,15 +151,15 @@ WSGI_APPLICATION = 'beauty4u.wsgi.application'
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
-         'default': dj_database_url.parse('postgres://qmchwnqmoyxgms:8008aa2f07cc6ee68ea93d46132d6fca05d28e3e7f11b3de7162e0e841332dbb@ec2-54-247-125-38.eu-west-1.compute.amazonaws.com:5432/dc5h5eorpf6ig4')
-    }
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+           }
 else:
     DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-    }
+   }
 
 
 
@@ -234,7 +233,7 @@ if 'USE_AWS' in os.environ:
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
-STANDARD_DELIVERY_COST = 5
+
 #stripe 
 STRIPE_CURRENCY = 'EUR'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')

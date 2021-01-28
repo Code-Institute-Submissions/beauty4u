@@ -1,12 +1,18 @@
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from .models import Sitesettings
+from home.models import openHours
 
 
 
 """ This context file will allow all pages to access the site settings """
 
 def setting_contents(request):
+
+    #opening hours
+    hours = openHours.objects.all()
+
+
 
     #Free Shipping
     free_shipping = get_object_or_404(Sitesettings, name="Free Shipping Threshold")
@@ -23,6 +29,7 @@ def setting_contents(request):
         'free_shipping_threshold': free_shipping_threshold,
         'standard_shipping_setting': standard_shipping_setting, 
         'standard_shipping_cost': standard_shipping_cost,
+        'hours': hours
     }
 
 
