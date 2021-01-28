@@ -28,11 +28,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = os.environ.get('SECRET_KEY', '')
 #else:
-SECRET_KEY = 'kpyvw+w3bjpdi%rizi)1c(66@qa%%mmu=2f+euwg2&$-^ul$ov'
+SECRET_KEY = os.environ.get('DJANGO_SECRET', '')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = 'DEVELOPMENT' in os.environ
-DEBUG = True
+
+DEBUG = 'DEVELOPMENT' in os.environ
+
 
 ALLOWED_HOSTS = ['beauty4u.herokuapp.com', 'localhost', '127.0.0.1', 'd2e7ab5cd2e7.ngrok.io']
 
