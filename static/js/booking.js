@@ -173,7 +173,7 @@ $(".booking-container").on("click", ".no-preference", function () {
 $(".booking-container").on("click", ".continue-booking-to-time", function () {
 
     if (staffSelected.length < 1) {
-        $(".message").text("Please select at least one staff member!");
+        $(".message").text("Please select at least one option!");
     } else {
 
         csrf = $('input[name=csrfmiddlewaretoken]').val();

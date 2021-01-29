@@ -1126,12 +1126,15 @@ background-color: lightgrey;
 position: fixed;
 bottom: 0;
 left: 0;
-background-color: #0A2540; 
+background: linear-gradient(-45deg, #FEB801, #e73c7e, #0A2540, #23d5ab);
+background-size: 400% 400%;
+animation: changecolour 10s ease infinite;
 min-width: 100vw;
 margin: 0;
 padding: 0;
 height: 80px;
 color: #fff;
+z-index: 99999999999 !important;
 }
 
 
@@ -1152,6 +1155,16 @@ font-size: 2em;
 line-height: 6vh;
 }
 
+.remove-item-cart i{
+font-size: 20px !important;
+}
+
+.processing-overlay {
+  background-color: rgba(228, 228, 228, 0.747);
+  height: 100%;
+  width: 100%;
+  display: none;
+}
 
 /* Fixed Popup Desktop */
 .fixed-popup-desktop {

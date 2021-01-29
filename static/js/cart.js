@@ -36,6 +36,7 @@ $(".single_add_to_cart_button").click(function () {
 // Use a delegated event handler to allow for binded events in dynamically generated cart remove buttons
 
 $("body").on("click", '.remove-item', function () {
+    $(".processing-overlay").toggle();
     let csrf = $('input[name=csrfmiddlewaretoken]').val();
     let product_id = $(this).next('#product-id').val()
 
@@ -51,6 +52,8 @@ $("body").on("click", '.remove-item', function () {
         $.get('/cart/refresh_cart', function (data) {
             $(".container-mobile-cart").html(data);
             $(".container-mobile-cart").show();
+            $(".processing-overlay").hide();
+
         });
 
 
