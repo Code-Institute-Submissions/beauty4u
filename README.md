@@ -9,17 +9,11 @@ Beauty4U is a website designed for a hair and beauty salon. It offers the salon 
 ## Contents
 
 1. [**User-Stories**](#User-Stories)
-2. [**Features**](#features)
-    - [**Features Implemented**](#Features-Implemented)
-    - [**Possible Future Features**](#Possible-Future-Features)
-
-3. [**Technologies Used**](#technologies-used)
-    - [**Languages Used**](#Languages-Used)
-    - [**Libraries Used**](#Libraries-Used)
-
-4. [**Testing**](#testing)
-
-5. [**Deployment**](#deployment)
+2. [**Features-Implemented**](#Features-Implemented)
+3. [**Technologies-Used**](#Technologies Used)
+4. [**App-Breakdown**](#App-Breakdown)
+5. [**Testing**](#Testing)
+6. [**Deployment**](#deployment)
 
 
 ## User-Stories
@@ -80,7 +74,7 @@ Salon Owners can send marketing emails to all their registered customers directl
 
 Beauty4U offers an easy to use contact us form so that customers can easily get in touch with the salon 
 
-## Features Implemented  
+## Features-Implemented  
 
 ### Public Website 
 - Home page with dynamic opening hours and free shipping banner 
