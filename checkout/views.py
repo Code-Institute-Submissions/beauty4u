@@ -286,6 +286,7 @@ def apply_coupon(request):
     percentage = coupon.discount
     percentage = percentage / 100
     discount = Decimal(percentage) * Decimal(subtotal)
+    money_saved = round(discount, 2)
 
     stripe_total = round(subtotal - discount, 2)
     new_total = stripe_total
@@ -322,7 +323,7 @@ def apply_coupon(request):
         'coupon_code': coupon_code,
         'coupon_savings': coupon_savings,
         'grand_total': grand_total,
-        'discount': discount,
+        'money_saved': money_saved,
     }
 
     return JsonResponse(result)
