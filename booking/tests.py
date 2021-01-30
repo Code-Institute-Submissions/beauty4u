@@ -1,12 +1,7 @@
 from django.test import TestCase
 from .models import Bookings
-from django.conf import settings
 import unittest
-from django.test.client import Client
-from django.contrib.auth.models import User
-from allauth.utils import get_user_model, get_username_max_length
-from django.urls import reverse
-from django.contrib.auth import views
+
 
 class testBookingModel(TestCase):
 
@@ -20,7 +15,6 @@ class testBookingModel(TestCase):
         booking.save()
         self.assertIsNotNone(booking.booking_id)
 
-
     @unittest.expectedFailure
     def test_booking_id_length(self):
 
@@ -29,14 +23,13 @@ class testBookingModel(TestCase):
 
         """
 
-        self.assertLessEqual(len(booking.booking_id), 20)
-        self.assertEqual(len(booking.booking_id), 32)
-       
+        self.assertLessEqual(len(self.booking.booking_id), 20)
+        self.assertEqual(len(self.booking.booking_id), 32)
+
     def test_redirect_no_login(self):
 
-
         """
-        Test a redirect due to no login on the booking page 
+        Test a redirect due to no login on the booking page
 
         """
 

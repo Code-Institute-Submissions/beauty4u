@@ -1,6 +1,5 @@
-from django.conf import settings
-from django.shortcuts import get_object_or_404, HttpResponse
 from products.models import Brand, Category
+
 
 def product_menu(request):
 
@@ -20,4 +19,3 @@ def product_menu(request):
     }
 
     return context
-

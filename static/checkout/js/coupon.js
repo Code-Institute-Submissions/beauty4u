@@ -25,9 +25,10 @@ $("#submitcoupon").click(function () {
             $('.result').removeClass('alert-danger').addClass('alert-success');
             $('.result').text(result['message']);
             $("#contain-subtotal").text(result['new_total'])
-            $("#show_coupon_discount").text(result['coupon_savings'] + "% discount applied!")
             $('#contain-grand-total').text(result['grand_total'])
             $('#card_charge').text(result['grand_total'])
+            $('#coupon-savings').html("<h6><strong>Coupon Savings: </strong> €" + result['coupon_savings'] + "</h6>");
+
 
         } else {
             $('.result').addClass('alert-info');

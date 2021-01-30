@@ -1,10 +1,13 @@
 from django.contrib import admin
-from .models import Product, Category, Brand, Review 
+from .models import Product, Category, Brand, Review
 
-# Register your models here.
 
 class ProductAdmin(admin.ModelAdmin):
-    """ This class will determine the fields that will display in the admin panel"""
+    """
+    This class will determine the fields that will
+    display in the admin panel
+
+    """
     list_display = (
         'sku',
         'name',
@@ -14,7 +17,7 @@ class ProductAdmin(admin.ModelAdmin):
         'price',
         'rating',
         'image',
-        'in_stock', 
+        'in_stock',
         'featured_product',
 
     )
@@ -22,12 +25,12 @@ class ProductAdmin(admin.ModelAdmin):
     ordering = ('name',)
 
 
-
 class CategoryAdmin(admin.ModelAdmin):
 
-    list_display =(
+    list_display = (
         'name',
     )
+
 
 class BrandAdmin(admin.ModelAdmin):
     list_display = (

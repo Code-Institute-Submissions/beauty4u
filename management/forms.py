@@ -1,4 +1,4 @@
-from django import forms 
+from django import forms
 from home.models import openHours, aboutUs
 from management.models import Staff, Coupons
 from products.models import Product, Category, Brand
@@ -17,31 +17,30 @@ class HoursForm(forms.ModelForm):
             'markedClosed',
         ]
 
-
     def __init__(self, *args, **kwargs):
-            """ Style the form """ 
 
-            super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-            placeholders = {
-                'day': 'Select Day',
-                'openingTime': 'Select Opening Time',
-                'closingTime': 'Select Closing Time',
-                'markedClosed':'Open/Closed',
-                }
+        placeholders = {
+            'day': 'Select Day',
+            'openingTime': 'Select Opening Time',
+            'closingTime': 'Select Closing Time',
+            'markedClosed': 'Open/Closed',
+            }
 
-            for field in self.fields:
-                if self.fields[field].required:
-                    placeholder = f' {placeholders[field]} *'
-                else:
-                    placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-                self.fields["markedClosed"].widget.attrs['data-toggle'] = "toggle"
-                self.fields["markedClosed"].widget.attrs['data-onstyle'] = "success"
-                self.fields["markedClosed"].widget.attrs['data-offstyle'] = "danger"
-                self.fields["markedClosed"].widget.attrs['data-on'] = "Yes"
-                self.fields["markedClosed"].widget.attrs['data-off'] = "No"
-                self.fields[field].label = False 
+        for field in self.fields:
+            if self.fields[field].required:
+                placeholder = f' {placeholders[field]} *'
+            else:
+                placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields["markedClosed"].widget.attrs['data-toggle'] = "toggle"
+            self.fields["markedClosed"].widget.attrs['data-onstyle'] = "success"
+            self.fields["markedClosed"].widget.attrs['data-offstyle'] = "danger"
+            self.fields["markedClosed"].widget.attrs['data-on'] = "Yes"
+            self.fields["markedClosed"].widget.attrs['data-off'] = "No"
+            self.fields[field].label = False
+
 
 class aboutForm(forms.ModelForm):
     """ A form to render model fields for opening time changes """
@@ -49,7 +48,7 @@ class aboutForm(forms.ModelForm):
         model = aboutUs
         fields = [
             'content',
-        ]  
+        ]
 
 
 class addCategory(forms.ModelForm):
@@ -58,43 +57,42 @@ class addCategory(forms.ModelForm):
         model = Category
         fields = [
             'name',
-        ]      
+        ]
 
     def __init__(self, *args, **kwargs):
-            """ Style the form """ 
 
-            super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-            placeholders = {
-                'name': 'Enter Category Name',
-                }
+        placeholders = {
+            'name': 'Enter Category Name',
+            }
 
-            for field in self.fields:
-                placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-                self.fields[field].label = False           
+        for field in self.fields:
+            placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].label = False
+
 
 class addBrand(forms.ModelForm):
     """ A form to render model fields for opening time changes """
     class Meta:
-        model = Brand  
+        model = Brand
         fields = [
             'brand',
-        ]      
+        ]
 
     def __init__(self, *args, **kwargs):
-            """ Style the form """ 
 
-            super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-            placeholders = {
-                'brand': 'Enter Brand Name',
-                }
+        placeholders = {
+            'brand': 'Enter Brand Name',
+            }
 
-            for field in self.fields:
-                placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-                self.fields[field].label = False           
+        for field in self.fields:
+            placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].label = False
 
 
 class staffForm(forms.ModelForm):
@@ -105,10 +103,7 @@ class staffForm(forms.ModelForm):
             'name',
             'position',
             'available',
-        ]                
-
-
-
+        ]
 
 
 class addProductForm(forms.ModelForm):
@@ -123,44 +118,42 @@ class addProductForm(forms.ModelForm):
             'description',
             'price',
             'sale_price',
-            'size', 
+            'size',
             'image',
             'featured_product'
-        ]        
+        ]
 
-    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
-
+    image = forms.ImageField(label='Image',
+                             required=False, widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
-            """ Style the form """ 
 
-            super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-            placeholders = {
-                'category': 'Select Product Category',
-                'brand': 'Select Product Category',
-                'sku': 'Product Sku',
-                'name': 'Product Name',
-                'description': 'Enter Product Description',
-                'price': 'Price',
-                'sale_price': 'Sale Price',
-                'size': 'Size',
-                'image': 'Select Image',
-                'featured_product': 'Featured Product?'
-                }
+        placeholders = {
+            'category': 'Select Product Category',
+            'brand': 'Select Product Category',
+            'sku': 'Product Sku',
+            'name': 'Product Name',
+            'description': 'Enter Product Description',
+            'price': 'Price',
+            'sale_price': 'Sale Price',
+            'size': 'Size',
+            'image': 'Select Image',
+            'featured_product': 'Featured Product?'
+            }
 
-            self.fields['category'].widget.attrs['autofocus'] = True
-            self.fields['category'].empty_label="Select A Category"
-            self.fields['brand'].empty_label="Select A Brand"
-            for field in self.fields:
-                if self.fields[field].required:
-                    placeholder = f' {placeholders[field]} *'
-                else:
-                    placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-                self.fields[field].widget.attrs['class'] = 'add-product-input'
-                self.fields[field].label = False 
-
+        self.fields['category'].widget.attrs['autofocus'] = True
+        self.fields['category'].empty_label = "Select A Category"
+        self.fields['brand'].empty_label = "Select A Brand"
+        for field in self.fields:
+            if self.fields[field].required:
+                placeholder = f' {placeholders[field]} *'
+            else:
+                placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].widget.attrs['class'] = 'add-product-input'
+            self.fields[field].label = False
 
 
 class updateProduct(forms.ModelForm):
@@ -177,46 +170,46 @@ class updateProduct(forms.ModelForm):
             'description',
             'price',
             'sale_price',
-            'size', 
+            'size',
             'image',
 
-        ]        
-    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
+        ]
+    image = forms.ImageField(label='Image',
+                             required=False, widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
-            """ Style the form """ 
 
-            super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-            placeholders = {
-                'in_stock': 'Manage Stock',
-                'featured_product': 'Featured Product?',
-                'category': 'Select Product Category',
-                'brand': 'Select Product Category',
-                'sku': 'Product Sku',
-                'name': 'Product Name',
-                'description': 'Enter Product Description',
-                'price': 'Price',
-                'sale_price': 'Sale Price',
-                'size': 'Size',
-                'image': 'Select Image',
-                
-                }
+        placeholders = {
+            'in_stock': 'Manage Stock',
+            'featured_product': 'Featured Product?',
+            'category': 'Select Product Category',
+            'brand': 'Select Product Category',
+            'sku': 'Product Sku',
+            'name': 'Product Name',
+            'description': 'Enter Product Description',
+            'price': 'Price',
+            'sale_price': 'Sale Price',
+            'size': 'Size',
+            'image': 'Select Image',
+
+            }
+
+        self.fields['category'].widget.attrs['autofocus'] = True
+        self.fields['in_stock'].widget.attrs['class'] = 'make-label-bold'
+        self.fields['category'].empty_label = "Select A Category"
+        self.fields['brand'].empty_label = "Select A Brand"
+        self.fields['featured_product'].empty_label = "Featured Product?"
+        for field in self.fields:
+            if self.fields[field].required:
+                placeholder = f' {placeholders[field]} *'
+            else:
+                placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].widget.attrs['class'] = 'add-product-input'
 
 
-            self.fields['category'].widget.attrs['autofocus'] = True
-            self.fields['in_stock'].widget.attrs['class'] = 'make-label-bold'
-            self.fields['category'].empty_label="Select A Category"
-            self.fields['brand'].empty_label="Select A Brand"
-            self.fields['featured_product'].empty_label="Featured Product?"
-            for field in self.fields:
-                if self.fields[field].required:
-                    placeholder = f' {placeholders[field]} *'
-                else:
-                    placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-                self.fields[field].widget.attrs['class'] = 'add-product-input'
-              
 class couponForm(forms.ModelForm):
     """ A form to render model fields for opening time changes """
     class Meta:
@@ -226,8 +219,7 @@ class couponForm(forms.ModelForm):
             'code',
             'discount',
             'active',
-        ]                
-
+        ]
 
 
 class addServiceForm(forms.ModelForm):
@@ -238,24 +230,23 @@ class addServiceForm(forms.ModelForm):
             'name',
             'price',
             'serviceCategory'
-        ]      
+        ]
 
     def __init__(self, *args, **kwargs):
-            """ Style the form """ 
 
-            super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-            placeholders = {
-                'name': 'Enter Service Name',
-                'price': 'Enter Service price',
-                'serviceCategory': 'Choose Category',
-                }
+        placeholders = {
+            'name': 'Enter Service Name',
+            'price': 'Enter Service price',
+            'serviceCategory': 'Choose Category',
+            }
 
-            self.fields['serviceCategory'].empty_label="Select A Category"
-            for field in self.fields:
-                placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-                self.fields[field].label = False           
+        self.fields['serviceCategory'].empty_label = "Select A Category"
+        for field in self.fields:
+            placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].label = False
 
 
 class addServiceCategoryForm(forms.ModelForm):
@@ -264,19 +255,18 @@ class addServiceCategoryForm(forms.ModelForm):
         model = serviceCategory
         fields = [
             'name',
-        ]      
+        ]
 
     def __init__(self, *args, **kwargs):
-            """ Style the form """ 
 
-            super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-            placeholders = {
-                'name': 'Enter Service Category Name',
+        placeholders = {
+            'name': 'Enter Service Category Name',
 
-                }
+            }
 
-            for field in self.fields:
-                placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-                self.fields[field].label = False           
+        for field in self.fields:
+            placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].label = False

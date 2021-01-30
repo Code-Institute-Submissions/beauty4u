@@ -1,17 +1,16 @@
-from django import forms 
-from .models import Order 
+from django import forms
+from .models import Order
 
 
 class OrderForm(forms.ModelForm):
-    
+
     class Meta:
         model = Order
         fields = ('full_name', 'email', 'phone_number',
-                'street_address1', 'street_address2', 
-                'town_or_city', 'postcode', 'county', 'country',)
+                  'street_address1', 'street_address2',
+                  'town_or_city', 'postcode', 'county', 'country',)
 
     def __init__(self, *args, **kwargs):
-        """ Style the form """ 
 
         super().__init__(*args, **kwargs)
 
@@ -36,4 +35,3 @@ class OrderForm(forms.ModelForm):
             self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'checkout-style-input'
             self.fields[field].label = False
-

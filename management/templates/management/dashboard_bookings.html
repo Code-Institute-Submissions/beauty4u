@@ -19,6 +19,9 @@
       <p>View bookings <strong>and confirm pending bookings</strong></p>
       <p><i class="fas fa-info-circle mr-3"></i>To view booking details or contact the customer, click on the customer's
         name below.</p>
+      <a href="{% url 'clear_bookings' %}" class="d-block">
+        <div class="delete-bookings mt-3 mb-3">Clear Unconfirmed Bookings</div>
+      </a>
       <table class="table">
         <thead class="thead-light">
           <tr>
@@ -52,8 +55,8 @@
 
             </td>
           </tr>
-          
-            {% endfor %}
+
+          {% endfor %}
         </tbody>
       </table>
 
@@ -65,4 +68,4 @@
 
 
 
-  {% endblock %}
+{% endblock %}

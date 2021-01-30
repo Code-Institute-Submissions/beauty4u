@@ -1,15 +1,14 @@
-from django import forms 
+from django import forms
 from .models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):
-    
+
     class Meta:
         model = UserProfile
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
-        """ Style the form """ 
 
         super().__init__(*args, **kwargs)
 
@@ -32,4 +31,3 @@ class UserProfileForm(forms.ModelForm):
             self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'profile-form-input'
             self.fields[field].label = False
-

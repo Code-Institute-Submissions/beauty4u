@@ -10,8 +10,9 @@
 }
 
 #id_markedClosed {
-padding: 30px !important;
+    padding: 30px !important;
 }
+
 .contain-search-form button {
     background-color: transparent !important;
     border: none !important;
@@ -19,11 +20,11 @@ padding: 30px !important;
 
 
 a:hover {
-text-decoration: none;
+    text-decoration: none;
 }
 
 .text-red {
-color: red;
+    color: red;
 }
 
 .expand-menu {
@@ -34,92 +35,95 @@ color: red;
     display: none;
 }
 
-.sub-menu li{
+.sub-menu li {
     cursor: pointer;
 }
 
 /* Management base template */
 .top-bar {
-background-color: #fff;
-color: #fff;
-height: 50px;
-line-height: 50px !important;
-position: fixed;
-top: 0;
-z-index: 2;
-border-bottom: 1px solid #70717479;
+    background-color: #fff;
+    color: #fff;
+    height: 50px;
+    line-height: 50px !important;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    border-bottom: 1px solid #70717479;
 }
 
 .title-text {
 
-font-size: 20px;
-color: #1A1F36;
+    font-size: 20px;
+    color: #1A1F36;
 }
 
 
 .exit-btn {
-position: absolute;
-top: 50%;
-right: 0;
--ms-transform: translateY(-50%);
-transform: translateY(-50%);
-color: #707174;
-cursor: pointer;
-font-size: 16px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #707174;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .fa-question-circle {
-color: #707174;
+    color: #707174;
 }
 
 
-.fa-mail-bulk, .fa-tag, .booking-icon {
+.fa-mail-bulk,
+.fa-tag,
+.booking-icon {
     font-size: 60px;
 }
 
 
 
 #myChart {
-height: 300px;
-width: 300pxs;
+    height: 300px;
+    width: 300pxs;
 }
 
 
 
- .nav-bar {
-     position: fixed;
-     top: 0;
-     left: 0;
-     height: 100vh;
-     width: 280px;
-     background-color:#F7FAFC;
-     z-index: 99;
-     padding-top: 10px;
- }
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    background-color: #F7FAFC;
+    z-index: 99;
+    padding-top: 10px;
+}
 
- .dashboard-menu {
-     display: none;
- }
+.dashboard-menu {
+    display: none;
+}
 
- .nav-list li {
-color: #1A1F36;
-width: 260px;
-position: relative;
- }
+.nav-list li {
+    color: #1A1F36;
+    width: 260px;
+    position: relative;
+}
 
- .expand-icon {
-position: absolute;
-top: 50%;right: 10%;
--ms-transform: translateY(-50%);
-transform: translateY(-50%);
- }
+.expand-icon {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
 
- /* management home */
+/* management home */
 
 .info-box {
-position: relative;
-height: 100px;
-width: 100%;
+    position: relative;
+    height: 100px;
+    width: 100%;
 
 }
 
@@ -133,7 +137,7 @@ width: 100%;
 }
 
 .icon-box {
-border-right: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
 }
 
 .icon-box i {
@@ -143,7 +147,7 @@ border-right: 1px solid lightgrey;
 
 
 .number {
-color: green;
+    color: green;
 }
 
 .complete-center {
@@ -168,8 +172,10 @@ color: green;
 
 
 
-.remove-staff, .remove-service, .remove-service-category {
-cursor: pointer;
+.remove-staff,
+.remove-service,
+.remove-service-category {
+    cursor: pointer;
 }
 
 
@@ -181,14 +187,14 @@ cursor: pointer;
     line-height: 50px;
     background-color: rgb(36, 30, 65);
     color: #fff;
-  }
+}
 
-.add_coupon_button{
+.add_coupon_button {
     height: 50px;
     width: 150px;
     border-radius: 5px;
     color: #fff;
-    background-color:#4A94BF;
+    background-color: #4A94BF;
     line-height: 50px;
     cursor: pointer;
 }
@@ -209,7 +215,7 @@ cursor: pointer;
 }
 
 .email_btn {
-    
+
     height: 40px;
     line-height: 40px;
     text-align: center;
@@ -223,7 +229,7 @@ cursor: pointer;
 
 
 .border-thin {
-border: 1px solid rgba(175, 175, 175, 0.24);
+    border: 1px solid rgba(175, 175, 175, 0.24);
 }
 
 .banner-contain {
@@ -249,7 +255,8 @@ border: 1px solid rgba(175, 175, 175, 0.24);
 
 
 
-.green-tick, .text-green {
+.green-tick,
+.text-green {
     color: green;
 }
 
@@ -305,7 +312,7 @@ border: 1px solid rgba(175, 175, 175, 0.24);
     height: 40px;
     line-height: 40px;
     text-align: center;
-    background-color: rgb(26,31,54);
+    background-color: rgb(26, 31, 54);
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -319,7 +326,7 @@ border: 1px solid rgba(175, 175, 175, 0.24);
 }
 
 .open-mobile-settings {
-color: #1A1F36;
+    color: #1A1F36;
 }
 
 
@@ -331,24 +338,24 @@ color: #1A1F36;
 
 
 #id_in_stock {
-font-weight: bold;
+    font-weight: bold;
 }
 
 label {
-    font-weight: bold; 
+    font-weight: bold;
 }
 
 .call_btn {
-height: 40px;
-width: 200px;
-line-height: 40px;
-background-color: #2624A6;
-color: #fff;
-text-align: center;
+    height: 40px;
+    width: 200px;
+    line-height: 40px;
+    background-color: #2624A6;
+    color: #fff;
+    text-align: center;
 }
 
 a {
-color: inherit !important;
+    color: inherit !important;
 }
 
 .make-same-height {
@@ -357,7 +364,7 @@ color: inherit !important;
 
 .submit-form {
     display: block;
-    height: 40px !important; 
+    height: 40px !important;
     width: 150px !important;
     background-color: #FEB801 !important;
     color: rgb(75, 75, 75);
@@ -365,31 +372,40 @@ color: inherit !important;
     border: none;
     cursor: pointer;
     text-align: center;
-  }
+}
 
 
 .btn-file {
-position: relative;
-overflow: hidden;
-  }
+    position: relative;
+    overflow: hidden;
+}
 
 
 .btn-file input[type="file"] {
-position: absolute;
-top: 0;
-right: 0;
-min-width: 100%;
-min-height: 100%;
-opacity: 0;
-cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0;
+    cursor: pointer;
 
 
-}  
+}
 
-#myLineChart 
-{
+#myLineChart {
 
     min-height: 200px !important;
+}
+
+.delete-bookings {
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #DC3545;
+    color: #fff;
+    font-size: 14px;
 }
 
 @media(min-width: 992px) {
@@ -398,15 +414,14 @@ cursor: pointer;
         max-width: calc(100vw-320px);
     }
 
-    
-#myLineChart 
-{
 
-    min-height: none;
-}
-    
+    #myLineChart {
+
+        min-height: none;
+    }
+
     .dashboard-menu {
         display: block;
     }
-   
+
 }
