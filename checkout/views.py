@@ -321,7 +321,8 @@ def apply_coupon(request):
         'new_total': new_total,
         'coupon_code': coupon_code,
         'coupon_savings': coupon_savings,
-        'grand_total': grand_total
+        'grand_total': grand_total,
+        'discount': discount,
     }
 
     return JsonResponse(result)

@@ -27,7 +27,7 @@ $("#submitcoupon").click(function () {
             $("#contain-subtotal").text(result['new_total'])
             $('#contain-grand-total').text(result['grand_total'])
             $('#card_charge').text(result['grand_total'])
-            $('#coupon-savings').html("<h6><strong>Coupon Savings: </strong> €" + result['coupon_savings'] + "</h6>");
+            $('#coupon-savings').html("<h6><strong>Coupon Savings: </strong> €" + result['discount'] + "</h6>");
 
 
         } else {
