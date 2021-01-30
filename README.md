@@ -10,7 +10,7 @@ Beauty4U is a website designed for a hair and beauty salon. It offers the salon 
 
 1. [**User-Stories**](#User-Stories)
 2. [**Features-Implemented**](#Features-Implemented)
-3. [**Technologies-Used**](#Technologies Used)
+3. [**Technologies-Used**](#Technologies-Used)
 4. [**App-Breakdown**](#App-Breakdown)
 5. [**Testing**](#Testing)
 6. [**Deployment**](#deployment)
@@ -103,7 +103,7 @@ Beauty4U offers an easy to use contact us form so that customers can easily get 
 Wireframes are available <a href="https://github.com/davidosongschool/beauty4u/tree/master/wireframes">here</a>
 
 
-## Technologies Used
+## Technologies-Used
 
 ### Languages Used
 - HTML5, CSS3, PYTHON, JAVASCRIPT 
